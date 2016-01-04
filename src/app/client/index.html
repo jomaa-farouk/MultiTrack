@@ -1,0 +1,52 @@
+<html ng-app="mediastore">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <title>Media Store</title>
+
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+    <!--AngularJS-->
+    <script src="lib/angular/angular.min.js"></script>
+    <script src="lib/angular/angular-route.js"></script>
+
+    <!--JQuery-->
+    <!--<script src="lib/jquery/jquery-2.1.4.min.js"></script>-->
+
+    <!--Mediastore-->
+    <script src="common/app.js"></script>
+    <script src="common/services/services.js"></script>
+    <script src="common/directives/directives.js"></script>
+    <script src="common/controllers/controllers.js"></script>
+</head>
+<body>
+<div id="header" style="padding:0; height:5%">
+    <iframe src="" height="30"
+            style="width:100%; border: 0; padding: 0; overflow-x: hidden; display: block" class="frame"></iframe>
+</div>
+     <nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">MultiTrack</a>
+    </div>
+    <div>
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#">Home</a></li>
+        <li><a href="#">Page 1</a></li>
+        <li><a href="#">Page 2</a></li>
+        <li><a href="#">Page 3</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div ng-view></div>
+
+</body>
+</html>
