@@ -36,7 +36,7 @@ module.exports = function(app) {
    */
   findById = function(req, res) {
 
-    console.log("GET - /rating/:id");
+    console.log("GET - /ratings/:id");
     return Rating.findById(req.params.id, function(err, comment) {
 
       if(!rating) {
@@ -65,7 +65,7 @@ module.exports = function(app) {
    */
   addRating = function(req, res) {
 
-    console.log('POST - /rating');
+    console.log('POST - /ratings');
 
     var rating = new Rating({
       username:    req.body.username,
@@ -101,7 +101,7 @@ module.exports = function(app) {
    */
   updateRating = function(req, res) {
 
-    console.log("PUT - /rating/:id");
+    console.log("PUT - /ratings/:id");
     return Rating.findById(req.params.id, function(err, rating) {
 
       if(!rating) {
@@ -143,7 +143,7 @@ module.exports = function(app) {
    */
   deleteRating = function(req, res) {
 
-    console.log("DELETE - /rating/:id");
+    console.log("DELETE - /ratings/:id");
     return Rating.findById(req.params.id, function(err, rating) {
       if(!rating) {
         res.statusCode = 404;

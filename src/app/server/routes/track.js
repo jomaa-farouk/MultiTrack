@@ -36,7 +36,7 @@ module.exports = function(app) {
    */
   findById = function(req, res) {
 
-    console.log("GET - /track/:id");
+    console.log("GET - /tracks/:id");
     return Track.findById(req.params.id, function(err, track) {
 
       if(!track) {
@@ -65,7 +65,7 @@ module.exports = function(app) {
    */
   addTrack = function(req, res) {
 
-    console.log('POST - /track');
+    console.log('POST - /tracks');
 
     var track = new Track({
       trackName: req.body.trackName,
@@ -105,7 +105,7 @@ module.exports = function(app) {
    */
   updateTrack = function(req, res) {
 
-    console.log("PUT - /track/:id");
+    console.log("PUT - /tracks/:id");
     return Track.findById(req.params.id, function(err, track) {
 
       if(!track) {
@@ -151,7 +151,7 @@ module.exports = function(app) {
    */
   deleteTrack = function(req, res) {
 
-    console.log("DELETE - /track/:id");
+    console.log("DELETE - /tracks/:id");
     return Track.findById(req.params.id, function(err, track) {
       if(!track) {
         res.statusCode = 404;

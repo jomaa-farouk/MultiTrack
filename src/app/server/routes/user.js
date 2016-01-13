@@ -36,7 +36,7 @@ module.exports = function(app) {
    */
   findById = function(req, res) {
 
-    console.log("GET - /user/:id");
+    console.log("GET - /users/:id");
     return User.findById(req.params.id, function(err, user) {
 
       if(!user) {
@@ -65,7 +65,7 @@ module.exports = function(app) {
    */
   addUser = function(req, res) {
 
-    console.log('POST - /user');
+    console.log('POST - /users');
 
     var user = new User({
       username:    req.body.username,
@@ -102,7 +102,7 @@ module.exports = function(app) {
    */
   updateUser = function(req, res) {
 
-    console.log("PUT - /user/:id");
+    console.log("PUT - /users/:id");
     return User.findById(req.params.id, function(err, user) {
 
       if(!user) {
@@ -145,7 +145,7 @@ module.exports = function(app) {
    */
   deleteUser = function(req, res) {
 
-    console.log("DELETE - /user/:id");
+    console.log("DELETE - /users/:id");
     return User.findById(req.params.id, function(err, user) {
       if(!user) {
         res.statusCode = 404;

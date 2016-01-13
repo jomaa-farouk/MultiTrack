@@ -36,7 +36,7 @@ module.exports = function(app) {
    */
   findById = function(req, res) {
 
-    console.log("GET - /comment/:id");
+    console.log("GET - /comments/:id");
     return Comment.findById(req.params.id, function(err, comment) {
 
       if(!comment) {
@@ -65,7 +65,7 @@ module.exports = function(app) {
    */
   addComment = function(req, res) {
 
-    console.log('POST - /comment');
+    console.log('POST - /comments');
 
     var comment = new Comment({
       username:    req.body.username,
@@ -101,7 +101,7 @@ module.exports = function(app) {
    */
   updateComment = function(req, res) {
 
-    console.log("PUT - /comment/:id");
+    console.log("PUT - /comments/:id");
     return Comment.findById(req.params.id, function(err, comment) {
 
       if(!comment) {
@@ -143,7 +143,7 @@ module.exports = function(app) {
    */
   deleteComment = function(req, res) {
 
-    console.log("DELETE - /comment/:id");
+    console.log("DELETE - /comments/:id");
     return Comment.findById(req.params.id, function(err, comment) {
       if(!comment) {
         res.statusCode = 404;
