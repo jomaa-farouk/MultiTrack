@@ -1,24 +1,24 @@
 /**
- * User
+ * Rating
  * @module      :: Routes
  * @description :: Maps routes and actions
  */
 
-var User = require('../models/user.js');
+var Rating = require('../models/rating.js');
 
 module.exports = function(app) {
 
 
   /**
-   * Find and retrieves all Users
+   * Find and retrieves all ratings
    * @param {Object} req HTTP request object.
    * @param {Object} res HTTP response object.
    */
-  findAllUsers = function(req, res) {
-    console.log("GET - /users");
-    return User.find(function(err, users) {
+  findAllRatings = function(req, res) {
+    console.log("GET - /ratings");
+    return Rating.find(function(err, ratings) {
       if(!err) {
-        return res.send(users);
+        return res.send(ratings);
       } else {
         res.statusCode = 500;
         console.log('Internal error(%d): %s',res.statusCode,err.message);
@@ -30,22 +30,22 @@ module.exports = function(app) {
 
 
   /**
-   * Find and retrieves a single user by its ID
+   * Find and retrieves a single rating by its ID
    * @param {Object} req HTTP request object.
    * @param {Object} res HTTP response object.
    */
   findById = function(req, res) {
 
-    console.log("GET - /user/:id");
-    return User.findById(req.params.id, function(err, user) {
+    console.log("GET - /rating/:id");
+    return Rating.findById(req.params.id, function(err, comment) {
 
-      if(!user) {
+      if(!rating) {
         res.statusCode = 404;
         return res.send({ error: 'Not found' });
       }
 
       if(!err) {
-        return res.send({ status: 'OK', user:user });
+        return res.send({ status: 'OK', rating:rating });
       } else {
 
         res.statusCode = 500;
@@ -59,33 +59,32 @@ module.exports = function(app) {
 
 
   /**
-   * Creates a new user from the data request
+   * Creates a new rating from the data request
    * @param {Object} req HTTP request object.
    * @param {Object} res HTTP response object.
    */
-  addUser = function(req, res) {
+  addRating = function(req, res) {
 
-    console.log('POST - /user');
+    console.log('POST - /rating');
 
-    var user = new User({
+    var rating = new Rating({
       username:    req.body.username,
-      fullname:    req.body.fullname,
-      mail:        req.body.mail,
-      passwd:      req.body.passwd
+      mixName:    req.body.mixName,
+      mark: req.body.mark
     });
 
-    user.save(function(err) {
+   rating.save(function(err) {
 
       if(err) {
 
-        console.log('Error while saving User: ' + err);
+        console.log('Error while saving Rating: ' + err);
         res.send({ error:err });
         return;
 
       } else {
 
-        console.log("User created");
-        return res.send({ status: 'OK', user:user });
+        console.log("Rating created");
+        return res.send({ status: 'OK', rating:rating });
 
       }
 
@@ -96,29 +95,28 @@ module.exports = function(app) {
 
 
   /**
-   * Update a user by its ID
+   * Update a rating by its ID
    * @param {Object} req HTTP request object.
    * @param {Object} res HTTP response object.
    */
-  updateUser = function(req, res) {
+  updateRating = function(req, res) {
 
-    console.log("PUT - /user/:id");
-    return User.findById(req.params.id, function(err, user) {
+    console.log("PUT - /rating/:id");
+    return Rating.findById(req.params.id, function(err, rating) {
 
-      if(!user) {
+      if(!rating) {
         res.statusCode = 404;
         return res.send({ error: 'Not found' });
       }
 
       if (req.body.username != null) user.username= req.body.username;
-      if (req.body.fullname!= null) user.fullname= req.body.fullname;
-      if (req.body.mail!= null) user.mail = req.body.mail;
-      if (req.body.passwd != null) user.passwd = req.body.passwd;
+      if (req.body.mixName != null) user.mixName= req.body.mixName;
+      if (req.body.mark != null) user.mark=rq.body.mark;
 
-      return user.save(function(err) {
+      return rating.save(function(err) {
         if(!err) {
           console.log('Updated');
-          return res.send({ status: 'OK', user:user });
+          return res.send({ status: 'OK', rating:rating });
         } else {
           if(err.name == 'ValidationError') {
             res.statusCode = 400;
@@ -130,7 +128,7 @@ module.exports = function(app) {
           console.log('Internal error(%d): %s',res.statusCode,err.message);
         }
 
-        res.send(user);
+        res.send(rating);
 
       });
     });
@@ -139,22 +137,22 @@ module.exports = function(app) {
 
 
   /**
-   * Delete a user by its ID
+   * Delete a rating by its ID
    * @param {Object} req HTTP request object.
    * @param {Object} res HTTP response object.
    */
-  deleteUser = function(req, res) {
+  deleteRating = function(req, res) {
 
-    console.log("DELETE - /user/:id");
-    return User.findById(req.params.id, function(err, user) {
-      if(!user) {
+    console.log("DELETE - /rating/:id");
+    return Rating.findById(req.params.id, function(err, rating) {
+      if(!rating) {
         res.statusCode = 404;
         return res.send({ error: 'Not found' });
       }
 
-      return user.remove(function(err) {
+      return rating.remove(function(err) {
         if(!err) {
-          console.log('Removed user');
+          console.log('Removed rating');
           return res.send({ status: 'OK' });
         } else {
           res.statusCode = 500;
@@ -166,14 +164,14 @@ module.exports = function(app) {
   }
 
   //Link routes and actions
-  app.get('/users', findAllUsers);
-  app.get('/users/:id', findById);
-  app.post('/users', addUser);
-  app.put('/users/:id', updateUser);
-  app.delete('/users/:id', deleteUser);
+  app.get('/ratings', findAllRatings);
+  app.get('/ratings/:id', findById);
+  app.post('/ratings', addCRating);
+  app.put('/ratings/:id', updateRating);
+  app.delete('/ratings/:id', deleteRating);
 
 }
 
 
 
-//{ "username" : "mongoUser", "fullname" : "UserFullName", "mail" : "mg@gmail.com", "passwd" : "1234" }
+//{ "username" : "mongoUser", "mixName" : "michael jackson beat it mix 1", "mark" : "3.5" }

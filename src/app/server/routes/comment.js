@@ -1,24 +1,24 @@
 /**
- * User
+ * Comment
  * @module      :: Routes
  * @description :: Maps routes and actions
  */
 
-var User = require('../models/user.js');
+var Comment = require('../models/comment.js');
 
 module.exports = function(app) {
 
 
   /**
-   * Find and retrieves all Users
+   * Find and retrieves all Comments
    * @param {Object} req HTTP request object.
    * @param {Object} res HTTP response object.
    */
-  findAllUsers = function(req, res) {
-    console.log("GET - /users");
-    return User.find(function(err, users) {
+  findAllComments = function(req, res) {
+    console.log("GET - /comments");
+    return Comment.find(function(err, comments) {
       if(!err) {
-        return res.send(users);
+        return res.send(comments);
       } else {
         res.statusCode = 500;
         console.log('Internal error(%d): %s',res.statusCode,err.message);
@@ -30,22 +30,22 @@ module.exports = function(app) {
 
 
   /**
-   * Find and retrieves a single user by its ID
+   * Find and retrieves a single comment by its ID
    * @param {Object} req HTTP request object.
    * @param {Object} res HTTP response object.
    */
   findById = function(req, res) {
 
-    console.log("GET - /user/:id");
-    return User.findById(req.params.id, function(err, user) {
+    console.log("GET - /comment/:id");
+    return Comment.findById(req.params.id, function(err, comment) {
 
-      if(!user) {
+      if(!comment) {
         res.statusCode = 404;
         return res.send({ error: 'Not found' });
       }
 
       if(!err) {
-        return res.send({ status: 'OK', user:user });
+        return res.send({ status: 'OK', comment:comment });
       } else {
 
         res.statusCode = 500;
@@ -59,33 +59,32 @@ module.exports = function(app) {
 
 
   /**
-   * Creates a new user from the data request
+   * Creates a new comment from the data request
    * @param {Object} req HTTP request object.
    * @param {Object} res HTTP response object.
    */
-  addUser = function(req, res) {
+  addComment = function(req, res) {
 
-    console.log('POST - /user');
+    console.log('POST - /comment');
 
-    var user = new User({
+    var comment = new Comment({
       username:    req.body.username,
-      fullname:    req.body.fullname,
-      mail:        req.body.mail,
-      passwd:      req.body.passwd
+      content:    req.body.content,
+      mixName:    req.body.mixName
     });
 
-    user.save(function(err) {
+    comment.save(function(err) {
 
       if(err) {
 
-        console.log('Error while saving User: ' + err);
+        console.log('Error while saving Comment: ' + err);
         res.send({ error:err });
         return;
 
       } else {
 
-        console.log("User created");
-        return res.send({ status: 'OK', user:user });
+        console.log("Comment created");
+        return res.send({ status: 'OK', comment:comment });
 
       }
 
@@ -96,29 +95,28 @@ module.exports = function(app) {
 
 
   /**
-   * Update a user by its ID
+   * Update a comment by its ID
    * @param {Object} req HTTP request object.
    * @param {Object} res HTTP response object.
    */
-  updateUser = function(req, res) {
+  updateComment = function(req, res) {
 
-    console.log("PUT - /user/:id");
-    return User.findById(req.params.id, function(err, user) {
+    console.log("PUT - /comment/:id");
+    return Comment.findById(req.params.id, function(err, comment) {
 
-      if(!user) {
+      if(!comment) {
         res.statusCode = 404;
         return res.send({ error: 'Not found' });
       }
 
       if (req.body.username != null) user.username= req.body.username;
-      if (req.body.fullname!= null) user.fullname= req.body.fullname;
-      if (req.body.mail!= null) user.mail = req.body.mail;
-      if (req.body.passwd != null) user.passwd = req.body.passwd;
+      if (req.body.comment!= null) user.comment= req.body.comment;
+      if (req.body.mixName!= null) user.comment= req.body.mix;
 
-      return user.save(function(err) {
+      return comment.save(function(err) {
         if(!err) {
           console.log('Updated');
-          return res.send({ status: 'OK', user:user });
+          return res.send({ status: 'OK', comment:comment });
         } else {
           if(err.name == 'ValidationError') {
             res.statusCode = 400;
@@ -130,7 +128,7 @@ module.exports = function(app) {
           console.log('Internal error(%d): %s',res.statusCode,err.message);
         }
 
-        res.send(user);
+        res.send(comment);
 
       });
     });
@@ -139,22 +137,22 @@ module.exports = function(app) {
 
 
   /**
-   * Delete a user by its ID
+   * Delete a comment by its ID
    * @param {Object} req HTTP request object.
    * @param {Object} res HTTP response object.
    */
-  deleteUser = function(req, res) {
+  deleteComment = function(req, res) {
 
-    console.log("DELETE - /user/:id");
-    return User.findById(req.params.id, function(err, user) {
-      if(!user) {
+    console.log("DELETE - /comment/:id");
+    return Comment.findById(req.params.id, function(err, comment) {
+      if(!comment) {
         res.statusCode = 404;
         return res.send({ error: 'Not found' });
       }
 
-      return user.remove(function(err) {
+      return comment.remove(function(err) {
         if(!err) {
-          console.log('Removed user');
+          console.log('Removed comment');
           return res.send({ status: 'OK' });
         } else {
           res.statusCode = 500;
@@ -166,14 +164,14 @@ module.exports = function(app) {
   }
 
   //Link routes and actions
-  app.get('/users', findAllUsers);
-  app.get('/users/:id', findById);
-  app.post('/users', addUser);
-  app.put('/users/:id', updateUser);
-  app.delete('/users/:id', deleteUser);
+  app.get('/comments', findAllComments);
+  app.get('/comments/:id', findById);
+  app.post('/comments', addComment);
+  app.put('/comments/:id', updateComment);
+  app.delete('/comments/:id', deleteComment);
 
 }
 
 
 
-//{ "username" : "mongoUser", "fullname" : "UserFullName", "mail" : "mg@gmail.com", "passwd" : "1234" }
+//{ "username" : "mongoUser", "content" : "That's a good mix !" ,"mixName" : "michael jackson beat it mix 1"}
