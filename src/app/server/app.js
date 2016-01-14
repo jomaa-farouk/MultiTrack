@@ -17,22 +17,22 @@ app.use(bodyParser()); 						// pull information from html in POST
 app.use(methodOverride()); 					// simulate DELETE and PUT
 
 //Add the routes
-routes = require('./routes/user')(app);
+routes = require('./routes/routeManager')(app);
 
 
 // MongoDB configuration
-mongoose.connect('mongodb://localhost/user', function(err, res) {
+mongoose.connect('mongodb://localhost/MutliTrackDB', function(err, res) {
   if(err) {
-    console.log('error connecting to MongoDB Database. ' + err);
+    console.log('Error connecting to MongoDB Database. ' + err);
   } else {
     console.log('Connected to Database');
   }
 });
 
 app.listen(8080);
-console.log('Magic happens on port 8080'); 			// shoutout to the user
+console.log('Magic happens on port 8080'); 
 
 // First example router
 app.get('/', function(req, res) {
-  res.send("Welcome to our application !");
+  res.send("Welcome to our MutliTrack application !");
 });
