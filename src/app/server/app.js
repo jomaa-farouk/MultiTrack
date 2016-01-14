@@ -31,8 +31,8 @@ mongoose.connect('mongodb://localhost/user', function(err, res) {
 
 app.listen(8080);
 console.log('Magic happens on port 8080'); 			// shoutout to the user
-
-// First example router
+/**
+First example router
 app.get('/', function(req, res) {
   res.send("Welcome to our application !");
-});
+});**/
