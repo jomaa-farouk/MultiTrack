@@ -16,10 +16,10 @@ var Track = new Schema({
     require : true
   },
   pisteGuitar: {
-      type: "string"
+      type: String
   },
   pisteSong: {
-      type: "string"
+      type: String
   },
   singer:     {
     type    : String,
