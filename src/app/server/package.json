@@ -2,7 +2,7 @@
   "name": "server-side",
   "version": "0.0.1",
   "author": "server-author",
-  "description": "Node.js, MongoDB, Mongoose and Express Framework",
+  "description": "Node.js, MongoDB, Mongoose and Express Framework+ Unit Test with Mocha",
   "scripts": {
     "start": "node app.js"
   },
@@ -13,6 +13,10 @@
     "mongoose": "~3.8.12",
     "body-parser": "~1.3.0",
     "method-override": "~2.0.1",
-    "morgan": "~1.1.1"
+    "morgan": "~1.1.1",
+    "mongoskin": "~1.4.1",
+    "expect.js": "~0.3.1",
+    "mocha": "~1.18.2",
+    "superagent": "~0.17.0"
   }
 }

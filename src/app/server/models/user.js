@@ -25,7 +25,7 @@ var User = new Schema({
   },
   passwd:   {
     type: String,
-	require : true
+	  require : true
   }
 });
 
