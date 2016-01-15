@@ -26,9 +26,6 @@ module.exports = function(app) {
 
 /****************************************************************************************************************************/
 
-/****************************************************************************************************************************/
-
-
 
   /**
    * Find and retrieves all Users
@@ -196,8 +193,6 @@ module.exports = function(app) {
 
 /****************************************************************************************************************************/
 
-/****************************************************************************************************************************/
-
 
   /**
    * Find and retrieves all Comments
@@ -362,7 +357,7 @@ module.exports = function(app) {
 
 /****************************************************************************************************************************/
 
-/****************************************************************************************************************************/
+
 
 
 
@@ -531,7 +526,7 @@ module.exports = function(app) {
 
 /****************************************************************************************************************************/
 
-/****************************************************************************************************************************/
+
 
 
 
@@ -573,7 +568,7 @@ module.exports = function(app) {
       }
 
       if(!err) {
-        return res.send({ status: 'OK', track:tr });
+        return res.send({ status: 'OK', track:track});
       } else {
 
         res.statusCode = 500;
@@ -597,12 +592,12 @@ module.exports = function(app) {
 
     var track = new Track({
       trackName: req.body.trackName,
-      pisteGuitar: req.body.pisteGuitar,
-      pisteSong: req.body.pisteSong,
+      piste: req.body.piste,
       singer: req.body.singer,
       album: req.body.album,
       type: req.body.type,
-      description: req.body.description
+      description: req.body.description,
+      dateOfTrack: req.body.dateOfTrack
     });
 
     track.save(function(err) {
@@ -642,12 +637,13 @@ module.exports = function(app) {
       }
 
       if (req.body.trackName != null) track.trackNname= req.body.trackNname;
-      if (req.body.pisteGuitar!= null) track.pisteGuitar= req.body.pisteGuitar;
-      if (req.body.pisteSong!= null) track.pisteSong = req.body.pisteSong;
+      if (req.body.piste != null) track.pisteGuitar= req.body.piste;
       if (req.body.singer != null) track.singer = req.body.singer;
       if (req.body.album != null) track.album = req.body.album;
       if (req.body.type != null) track.type= req.body.type;
-      if (req.body.des!= null) track.description = req.body.description;
+      if (req.body.description != null) track.description = req.body.description;
+      if (req.body.dateOfTrack != null) track.dateOfTrack = req.body.dateOfTrack;
+
 
       return track.save(function(err) {
         if(!err) {
@@ -712,12 +708,15 @@ module.exports = function(app) {
 
 
 
+/****************************************************************************************************************************/
+/****************************************************************************************************************************/
+/****************************************************************************************************************************/
 
+/***********************************************     LINK ROUTES AND ACTIONS   **********************************************/
 
-
-
-
-  //Link routes and actions
+/****************************************************************************************************************************/
+/****************************************************************************************************************************/
+/****************************************************************************************************************************/
   
 
 
@@ -747,7 +746,7 @@ module.exports = function(app) {
 
   app.get('/tracks', findAllTracks);
   app.get('/tracks/:id', findTrackById);
-  app.post('/tracks', addTrack);
+  app.post('/tracks', addTrack);//{"trackName":"Michael jackson - Beat It","piste":'[{"pisteMp3":"bassee.mp3"},{"pisteMp3":"batterie.mp3"},{"pisteMp3":"guitare.mp3"},{"pisteMp3":"synthes.mp3"},{"pisteMp3":"voix.mp3"}]',"singer":"Micheal Jackson","album":"Beat It","type":"Pop","description":"Song of Micheal Jackson","dateOfTrack":"1992-10-21T13:28:06.419Z"}
   app.put('/tracks/:id', updateTrack);
   app.delete('/tracks/:id', deleteTrack);
 

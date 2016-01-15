@@ -15,28 +15,31 @@ var Track = new Schema({
     type    : String,
     require : true
   },
-  pisteGuitar: {
-      type: String
+  piste: {
+    type: Array
   },
-  pisteSong: {
-      type: String
-  },
-  singer:     {
+  singer: {
     type    : String,
     require : true
   },
   album:   {
     type: String,
-	require : true
+	  require : true
   },
   type:   {
     type: String,
-  require : true
+    require : true
   },
   description:   {
     type: String,
-  require : true
+    require : true
+  },
+  dateOfTrack: {
+    type: Date
   }
 });
+
+
+
 
 module.exports = mongoose.model('Track', Track);
