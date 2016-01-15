@@ -7,18 +7,7 @@
 	app.controller('UsersController', ['$scope', 'UserFactory', 'UsersFactory', '$location', 
 		function($scope, UserFactory, UsersFactory, $location){
 		var app = this;
-/**
-		$scope.users = [
-		{
-			id: "id0",
-			fullname: "Toto Titi",
-			email: "toto@titi.fr"
-		},{
-			id: "id1",
-			fullname: "Tata Titi",
-			email: "tata@titi.fr"
-		}];
-**/
+
 		$scope.editUser = function(uid){
 			$location.path('/user-detail/'+uid);
 		};
@@ -32,15 +21,17 @@
 			$location.path('/user-creation');
 		}
 
-		//$scope.users = UsersFactory.query();
+		$scope.users = UsersFactory.query();
+
 	}]);
 
 
 	app.controller('UserController', ['$scope', '$routeParams', 'UserFactory', '$location', 
 		function($scope, $routeParams, UserFactory, $location){
-
+		
 		$scope.updateUser = function(){
-			UserFactory.update($scope.user);
+			$id = $routeParams.id;
+			UserFactory.update({id: $id}, $scope.user);
 			$location.path('/users-list');
 		};
 
@@ -48,7 +39,7 @@
 			$location.path('/users-list');
 		};
 
-		$scope.user = UserFactory.show({id:$routeParams.id});
+		$scope.user = UserFactory.show({id: $routeParams.id});
 
 	}]);
 
@@ -62,3 +53,18 @@
 	}]);
 
 })();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//https://docs.angularjs.org/api/ngResource/service/$resource

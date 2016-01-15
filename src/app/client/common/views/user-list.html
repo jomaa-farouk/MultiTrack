@@ -8,12 +8,12 @@
 			<th>Actions</th>
 		</tr>
 		<tr ng-repeat="user in users">
-			<td>{{user.id}}</td>
+			<td>{{user._id}}</td>
 			<td>{{user.fullname}}</td>
-			<td>{{user.email}}</td>
+			<td>{{user.mail}}</td>
 			<td>
-				<a ng-click="editUser(user.id)" class="btn btn-xs btn-primary"><span class="glyphicon glyphicon-edit"></span>edit</a>
-				<a ng-click="deleteUser(user.id)" class="btn btn-xs btn-danger"><span class="glyphicon glyphicon-trash"></span>delete</a>
+				<a ng-click="editUser(user._id)" class="btn btn-xs btn-primary"><span class="glyphicon glyphicon-edit"></span>edit</a>
+				<a ng-click="deleteUser(user._id)" class="btn btn-xs btn-danger"><span class="glyphicon glyphicon-trash"></span>delete</a>
 			</td>
 			
 
