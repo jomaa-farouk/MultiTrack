@@ -30,7 +30,7 @@
 		function($scope, $routeParams, UserFactory, $location){
 		
 		$scope.updateUser = function(){
-			$id = $routeParams.id;
+			var $id = $routeParams.id;
 			UserFactory.update({id: $id}, $scope.user);
 			$location.path('/users-list');
 		};

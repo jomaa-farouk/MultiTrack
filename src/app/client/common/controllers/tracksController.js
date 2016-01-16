@@ -31,7 +31,7 @@
 		function($scope, TrackFactory, $routeParams, $location){
 
 			$scope.updateTrack = function(){
-				$id = $routeParams.id;
+				var $id = $routeParams.id;
 				TrackFactory.update({id:$id}, $scope.track);
 				$location.path('/');
 			};
