@@ -8,6 +8,8 @@
 
 		var app = this;
 
+		$scope.tracks = [];
+
 		$scope.hello = function(){
 			alert('hello');
 		};

@@ -11,7 +11,7 @@ var methodOverride = require('method-override');
 var mongoose       = require("mongoose");
 var app            = express();
 
-app.use(express.static(__dirname + '/public')); 	// set the static files location
+app.use(express.static('../client')); 	// set the static files location
 app.use(morgan('dev')); 					// log every request to the console
 app.use(bodyParser()); 						// pull information from html in POST
 app.use(methodOverride()); 					// simulate DELETE and PUT
@@ -30,9 +30,18 @@ mongoose.connect('mongodb://localhost/MultiTrackDB', function(err, res) {
 });
 
 app.listen(8080);
+//<<<<<<< HEAD
+console.log('Magic happens on port 8080'); 			// shoutout to the user
+/**
+First example router
+app.get('/', function(req, res) {
+  res.send("Welcome to our application !");
+});**/
+
 console.log('Magic happens on port 8080'); 
 
 // First example router
 app.get('/', function(req, res) {
-  res.send("Welcome to our MutliTrack application !");
+ 
+  res.sendFile("index.html");
 });

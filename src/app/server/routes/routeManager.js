@@ -37,7 +37,7 @@ module.exports = function(app) {
     console.log("GET - /users");
     return User.find(function(err, users) {
       if(!err) {
-        return res.send(users);
+        return res.json(users);
       } else {
         res.statusCode = 500;
         console.log('Internal error(%d): %s',res.statusCode,err.message);
@@ -123,7 +123,7 @@ module.exports = function(app) {
 
     console.log("PUT - /users/:id");
     return User.findById(req.params.id, function(err, user) {
-
+      
       if(!user) {
         res.statusCode = 404;
         return res.send({ error: 'Not found' });
