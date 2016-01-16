@@ -1,6 +1,6 @@
 Multitrack project
 
-Installation de MongoDB + Installation de NodeJS 
+Installation de MongoDB + Installation de NodeJS + Installation de Mocha
 
 1/ Lancer un premier terminal , taper mongod
 2/ Lancer un deuxième terminal, taper mongo 
