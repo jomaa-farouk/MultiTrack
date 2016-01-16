@@ -21,7 +21,7 @@ routes = require('./routes/routeManager')(app);
 
 
 // MongoDB configuration
-mongoose.connect('mongodb://localhost/MutliTrackDB', function(err, res) {
+mongoose.connect('mongodb://localhost/MultiTrackDB', function(err, res) {
   if(err) {
     console.log('Error connecting to MongoDB Database. ' + err);
   } else {

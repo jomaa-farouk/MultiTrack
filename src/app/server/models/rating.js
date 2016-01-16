@@ -7,6 +7,10 @@
 
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+var autoIncrement = require('mongoose-auto-increment');
+
+var connection = mongoose.createConnection("mongodb://localhost/MutliTrackDB");
+autoIncrement.initialize(connection);
 
 
 var Rating = new Schema({
@@ -29,4 +33,5 @@ var Rating = new Schema({
   }
 });
 
+Rating.plugin(autoIncrement.plugin, 'Rating');
 module.exports = mongoose.model('Rating', Rating);

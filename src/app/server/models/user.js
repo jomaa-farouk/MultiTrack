@@ -7,6 +7,10 @@
 
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+var autoIncrement = require('mongoose-auto-increment');
+
+var connection = mongoose.createConnection("mongodb://localhost/MutliTrackDB");
+autoIncrement.initialize(connection);
 
 
 var User = new Schema({
@@ -29,4 +33,6 @@ var User = new Schema({
   }
 });
 
+User.plugin(autoIncrement.plugin, 'User');
 module.exports = mongoose.model('User', User);
+
