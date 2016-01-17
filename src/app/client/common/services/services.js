@@ -8,8 +8,7 @@
 		
 		return $resource('/users', {}, {
 			query: { method: 'GET', isArray: true},
-			create: {method: 'POST'},
-			update: {method: 'PUT'}
+			create: {method: 'POST'}
 		});			
 	}]);
 
@@ -25,7 +24,6 @@
 
 	services.factory('TracksFactory', ['$resource', function($resource) {
 
-		// body...
 		return $resource('/tracks', {}, {
 
 			query : {method:'GET', isArray:true},
@@ -41,4 +39,12 @@
 			delete: {method:'DELETE', params:{id:'@id'}}
 		});
 	}]);
+
+	services.factory('MixsFactory', ['$resource', function($resource){
+
+		return $resource('/mixs/:id', null, {'update':{method:'PUT'}});
+
+	}]);	
+
+
 })();
