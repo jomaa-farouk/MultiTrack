@@ -927,14 +927,14 @@ module.exports = function(app) {
 
   app.get('/tracks', findAllTracks);
   app.get('/tracks/:id', findTrackById);
-  app.post('/tracks', addTrack);//{"trackName":"Michael jackson - Beat It","piste":'[{"pisteMp3":"bassee.mp3"},{"pisteMp3":"batterie.mp3"},{"pisteMp3":"guitare.mp3"},{"pisteMp3":"synthes.mp3"},{"pisteMp3":"voix.mp3"}]',"singer":"Micheal Jackson","album":"Beat It","type":"Pop","description":"Song of Micheal Jackson","dateOfTrack":"1992-10-21T13:28:06.419Z"}
+  app.post('/tracks', addTrack);//{"trackName":"Michael jackson - Beat It","piste":[{"pisteMp3":"bassee.mp3"},{"pisteMp3":"batterie.mp3"},{"pisteMp3":"guitare.mp3"},{"pisteMp3":"synthes.mp3"},{"pisteMp3":"voix.mp3"}],"singer":"Micheal Jackson","album":"Beat It","type":"Pop","description":"Song of Micheal Jackson","dateOfTrack":"1992-10-21T13:28:06.419Z"}
   app.put('/tracks/:id', updateTrack);
   app.delete('/tracks/:id', deleteTrack);
 
 
   app.get('/mixs', findAllMixs);
   app.get('/mixs/:id', findMixById);
-  app.post('/mixs', addMix);//{"username": "John", "mixName": "MixPop1", "description": "Mix Pop number 1", "frequencies":'[{"frequence":"10"},{"frequence":"15"},{"frequence":"1021"}]',"gain":'[{"gain":"150"},{"gain":"175"},{"gain":"102"}]',"balance":'[{"balance":"150"},{"balance":"175"},{"balance":"102"}]',"compressor":'[{"compressor":"150"},{"compressor":"175"},{"compressor":"102"}]'}
+  app.post('/mixs', addMix);//{"username": "John", "mixName": "MixPop1", "description": "Mix Pop number 1", "frequencies":[{"frequence":"10"},{"frequence":"15"},{"frequence":"1021"}],"gain":[{"gain":"150"},{"gain":"175"},{"gain":"102"}],"balance":[{"balance":"150"},{"balance":"175"},{"balance":"102"}],"compressor":[{"compressor":"150"},{"compressor":"175"},{"compressor":"102"}]}
   app.put('/mixs/:id', updateMix);
   app.delete('/mixs/:id', deleteMix);
 
