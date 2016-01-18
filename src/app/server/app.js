@@ -10,6 +10,7 @@ var bodyParser     = require('body-parser');
 var methodOverride = require('method-override');
 var mongoose       = require("mongoose");
 var app            = express();
+var path           = require('path');
 
 app.use(express.static('../client')); 	// set the static files location
 app.use(morgan('dev')); 					// log every request to the console
@@ -45,3 +46,17 @@ app.get('/', function(req, res) {
  
   res.sendFile("index.html");
 });
+
+
+app.get('/track/:directory/sound/:file', function(req, res) {
+
+  var testHtmlPath = path.resolve(__dirname, '..', '..', '..' , 'resource' , 'multitrack', req.params.directory , req.params.file);
+  res.sendfile(testHtmlPath);
+
+});
+
+
+
+
+
+

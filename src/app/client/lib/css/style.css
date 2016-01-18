@@ -1,0 +1,184 @@
+/* frequance table */
+div.controls:hover, div.controls1:hover  {
+  color:blue;
+  font-weight:bold;
+}
+div.controls label {
+  display: inline-block;
+  text-align: center;
+  width: 50px;
+}
+
+div.controls label, div.controls input, output {
+  vertical-align: middle;
+  padding: 0;
+  margin: 0;
+  font-family: "Open Sans",Verdana,Geneva,sans-serif,sans-serif;
+  font-size: 12px;
+}
+
+div.controls, div.controls1  {
+  display: block;
+  margin-bottom:10px;
+}
+
+div.controls {
+  margin: 20px;
+  border:1px solid;
+  border-radius:15px;
+  background-color:lightGrey;
+  padding:8px;
+  width:300px;
+  box-shadow: 10px 10px 5px grey;
+  text-align:center;
+  font-family: "Open Sans";
+  font-size: 12px;
+}
+
+
+  
+
+
+
+
+
+/* frequance table */
+div.controls1 label, output {
+  text-align: center;
+  width: 40px;
+    display: inline-block;
+
+}
+
+div.controls1 label, div.controls1 input, output {
+  vertical-align: middle;
+  padding: 0;
+  margin: 0;
+  font-family: "Open Sans",Verdana,Geneva,sans-serif,sans-serif;
+  font-size: 8px;
+}
+
+div.controls1 input {
+  width: 50px;
+    display: inline-block;
+
+}
+
+
+div.controls1 {
+  margin: 20px;
+  border:1px solid;
+  border-radius:15px;
+  background-color:lightGrey;
+  padding:8px;
+  width:140px;
+  box-shadow: 10px 10px 5px grey;
+  text-align:center;
+  font-family: "Open Sans";
+  font-size: 12px;
+}
+
+
+  
+
+
+/* canvas */
+canvas {
+    display: block;
+    width: 400px;
+    border:2px solid #7E8F7C;
+}
+
+
+
+            
+.mute         {
+            
+width: 23px;
+height: 23px;
+            background: url(../image/mute.png) no-repeat;
+                        cursor:pointer;
+            border: none;            
+    float: right;
+            }           
+            
+#mute         {
+            
+width: 23px;
+height: 23px;
+            background: url(../image/mute.png) no-repeat;
+                        cursor:pointer;
+            border: none;            
+            }
+            
+            
+/* mute button */
+.muteothers       {
+            
+width: 23px;
+margin-right : 8px;
+height: 23px;
+            background: url(../image/head.png) no-repeat;
+                        cursor:pointer;
+            border: none;            
+    float: right;
+            }
+        
+
+
+.gainslider       {
+  position: relative; /* or absolute */
+  left: 20%;
+
+            }
+            
+/* songlist */
+select {
+    padding:3px;
+    margin: 0;
+    -webkit-border-radius:4px;
+    -moz-border-radius:4px;
+    border-radius:4px;
+    -webkit-box-shadow: 0 3px 0 #ccc, 0 -1px #fff inset;
+    -moz-box-shadow: 0 3px 0 #ccc, 0 -1px #fff inset;
+    box-shadow: 0 3px 0 #ccc, 0 -1px #fff inset;
+    background: #f8f8f8;
+    color:#888;
+    border:none;
+    outline:none;
+    display: inline-block;
+    -webkit-appearance:none;
+    -moz-appearance:none;
+    appearance:none;
+    cursor:pointer;
+}
+
+/* Targetting Webkit browsers only. FF will show the dropdown arrow with so much padding. */
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+    select {padding-right:18px}
+}
+
+#labelList {position:relative}
+#labelList:after {
+    content:'<>';
+    font:11px "Consolas", monospace;
+    color:#aaa;
+    -webkit-transform:rotate(90deg);
+    -moz-transform:rotate(90deg);
+    -ms-transform:rotate(90deg);
+    transform:rotate(90deg);
+    right:8px; top:2px;
+    padding:0 0 2px;
+    border-bottom:1px solid #ddd;
+    position:absolute;
+    pointer-events:none;
+}
+#labelList:before {
+    content:'';
+    right:6px; top:0px;
+    width:20px; height:20px;
+    background:#f8f8f8;
+    position:absolute;
+    pointer-events:none;
+    display:block;
+}

@@ -1,21 +1,119 @@
-<div class="container">
-<h2>Home</h2>
-<h4>List Of Tracks ...</h4>
-<ul class="list-group">
-	<li class="list-group-item" ng-repeat="track in tracks">
-			<div class="span-6">TrackName:</div>{{track.trackName}}
-			<button ng-click="deleteTrack(track._id)">delete</button>
-	</li>
+<div class="container" data-ng-init="init()">
 
-</ul>
-<h4>List Of Mix ...</h4>
-<ul class="list-group">
-	<li class="list-group-item" ng-repeat="mix in mixs">
-			<div class="span-6">DateOfCreation</div> {{mix.dateOfCreation}}
+<div class="row">
+<div class="col-md-5">
+<audio id="player" crossorigin="anonymous" loop />
 
-	</li>
+<div id="songs">
+<label id="labelList">
+<select id ="select" ng-model="selectedTrack" ng-change="loadTrackList (selectedTrack)" 
+     data-ng-options="track.trackName for track in tracks" >
+</select>
+</label>
 
-</ul>
+<button id="play" style="cursor: pointer;" ng-click="play();" disabled=true>Play</button>
+<button id="pause" style="cursor: pointer;" ng-click="pause();">Pause</button>
+<button id="stop" style="cursor: pointer;" ng-click="stop();"disabled=true>Stop</button>
+<button id="mute" style="cursor: pointer;" ng-click="muteAll();"/>
+</div> 
+</div> 
+
+<div class="col-md-4">
+  <div class="progress progress-striped">
+    <div class="progress-bar"></div>
+  </div>
+        <div id="pourcentage" class="pull-right" ></div>
+<br><br>
+
+</div>
+
+
+<div class="col-md-offset-1 col-md-2" >
+<button data-toggle="modal" href="#infos" class="btn btn-primary">Upload track</button>
+<div class="modal fade" id="infos">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">x</button>
+        <h4 class="modal-title">Track informations</h4>
+      </div>
+      
+      <div class="modal-body">
+      formulaire
+      </div>
+      
+      <div class="modal-footer">
+        <button class="btn btn-info" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<br><br>
+
+</div>
+
+
+<div class="row" ng-show="trackSelected">
+<div class="col-md-5"><canvas id="myCanvas" width=300 height=100></canvas></div>
+<div class="col-md-4"><canvas id="myCanvas2" width=300 height=100></canvas></div>
+</div>
+ 
+
+
+
+
+<div class="row" ng-show="trackSelected">
+
+<div class="row">
+
+<div class="col-md-offset-3 col-md-4">
+<H2 align="center">Main Track</H2>
+<div class="controls" >
+
+    <div ng-repeat = "freq in frequencies">
+	<div class="row">
+	<div class="col-md-2"><label>{{freq}}</label></div>
+ <div class="col-md-7"><input id="input1" type="range" value="0" step="1" min="-30" max="30" ng-model="freq_value" ng-change = "changeFrequency (freq_value , 0 , $index)"></input></div>
+    <div ng-attr-id="{{ 'freq0' + $index }}" class="col-md-3"><output>0 dB</br></output></div>
+    </div> 
+    </div> 
+
+</div>
+
+
+</div>
+</div>
+
+  
+   <div class="row">
+
+	<div class="col-md-offset-3 col-md-1">
+	<label for="gainSlider">Gain</label>
+	<input type="range" min="0" max="1" step="0.01" value="1" id="gainSlider" ng-model="gain" ng-change="changeGain (gain , 0)"/>
+	</div>
+
+	<div class="col-md-1">
+	<label for="pannerSlider">Balance</label>
+	<input type="range" min="-1" max="1" step="0.1" value="0" id="pannerSlider" ng-model="panner" ng-change="changePanner (panner , 0)" />
+	</div>
+
+	<div class="col-md-2">
+	<button id="compressorButton" ng-click= "updateCompressor()">{{buttonCompressor}}</button>
+	</div>
+	</div>
+<br><br>
+	</div>
+
+
+<div class = "row" id="tracks_list" ng-show="trackSelected">
+</div> 
+
+
+<br><br>
+<button id="savemix" style="cursor: pointer;" onClick="savemix();" ng-show="trackSelected">Save Mixe</button>
+ 
+
 
 
 
