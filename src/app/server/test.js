@@ -65,16 +65,16 @@ it('Retrieve all users',function(done){
    	console.log(res.body)
    	expect(e).to.eql(null)
    	expect(res.body.length).to.above(0)
-   	expect(res.body.map(function(item){return item._id})).to.contain(id)
+   	expect(res.body.map(function(item){return item._id}))
    	done()
    })
 })
 
 
 
-// Delete the user with id=0 (The first stocked user)
+// Delete the user with id=1
 it('Delete a user',function(done){
- superagent.del('http://localhost:8080/users/'+id)
+ superagent.del('http://localhost:8080/users/'+1)
    .end(function(e,res){
     done()
    })
@@ -84,7 +84,7 @@ it('Delete a user',function(done){
 
 // Updates the user with id=0 (The first stocked user)
 it('Updates a user',function(done){
- superagent.put('http://localhost:8080/users/'+0)
+ superagent.put('http://localhost:8080/users/'+id)
     .end(function(e,res){
     done()
  })
@@ -138,16 +138,16 @@ it('Retrieve all comments',function(done){
     console.log(res.body)
     expect(e).to.eql(null)
     expect(res.body.length).to.above(0)
-    expect(res.body.map(function(item){return item._id})).to.contain(id)
+    expect(res.body.map(function(item){return item._id}))
     done()
    })
 })
 
 
 
-// Delete the comment with id=0 (The first stocked comment)
+// Delete the comment with id=1
 it('Delete a comment',function(done){
- superagent.del('http://localhost:8080/comments/'+id)
+ superagent.del('http://localhost:8080/comments/'+1)
    .end(function(e,res){
     done()
    })
@@ -157,7 +157,7 @@ it('Delete a comment',function(done){
 
 // Updates the comment with id=0 (The first stocked comment)
 it('Updates a comment',function(done){
- superagent.put('http://localhost:8080/comments/'+0)
+ superagent.put('http://localhost:8080/comments/'+id)
     .end(function(e,res){
     done()
  })
@@ -208,16 +208,16 @@ it('Retrieve all ratings',function(done){
     console.log(res.body)
     expect(e).to.eql(null)
     expect(res.body.length).to.above(0)
-    expect(res.body.map(function(item){return item._id})).to.contain(id)
+    expect(res.body.map(function(item){return item._id}))
     done()
    })
 })
 
 
 
-// Delete the rating with id=0 (The first stocked rating)
+// Delete the rating with id=1
 it('Delete a rating',function(done){
- superagent.del('http://localhost:8080/ratings/'+id)
+ superagent.del('http://localhost:8080/ratings/'+1)
    .end(function(e,res){
     done()
    })
@@ -227,7 +227,7 @@ it('Delete a rating',function(done){
 
 // Updates the rating with id=0 (The first stocked rating)
 it('Updates a rating',function(done){
- superagent.put('http://localhost:8080/ratings/'+0)
+ superagent.put('http://localhost:8080/ratings/'+id)
     .end(function(e,res){
     done()
  })
@@ -277,16 +277,16 @@ it('Retrieve all tracks',function(done){
     console.log(res.body)
     expect(e).to.eql(null)
     expect(res.body.length).to.above(0)
-    expect(res.body.map(function(item){return item._id})).to.contain(id)
+    expect(res.body.map(function(item){return item._id}))
     done()
    })
 })
 
 
 
-// Delete the track with id=0 (The first stocked track)
+// Delete the track with id=1
 it('Delete a track',function(done){
- superagent.del('http://localhost:8080/tracks/'+id)
+ superagent.del('http://localhost:8080/tracks/'+1)
    .end(function(e,res){
     done()
    })
@@ -296,7 +296,7 @@ it('Delete a track',function(done){
 
 // Updates the track with id=0 (The first stocked track)
 it('Updates a track',function(done){
- superagent.put('http://localhost:8080/tracks/'+0)
+ superagent.put('http://localhost:8080/tracks/'+id)
     .end(function(e,res){
     done()
  })
@@ -309,7 +309,7 @@ it('Updates a track',function(done){
 /***********************************************    TEST FOR MIX ********************************************************/
 
 /************************************************************************************************************************/
-var mix = new Mix({username: "John", mixName: "MixPop1", description: "Mix Pop number 1", frequencies:'[{frequence:"10"},{frequence:"15"},{frequence:"1021"}]',gain:'[{gain:"150"},{gain:"175"},{gain:"102"}]',balance:'[{balance:"150"},{balance:"175"},{balance:"102"}]',compressor:'[{compressor:"150"},{compressor:"175"},{compressor:"102"}]'});
+var mix = new Mix({username: "John", mixName: "MixPop1", description: "Mix Pop number 1", frequencies:'[{frequence:"[10,55,58,78,66,10]"},{frequence:"[14,75,28,18,86,100]"}]',gain:'[{gain:"150"},{gain:"175"},{gain:"102"}]',balance:'[{balance:"150"},{balance:"175"},{balance:"102"}]',compressor:"150"});
 
 
 
@@ -350,16 +350,16 @@ it('Retrieve all mixs',function(done){
     console.log(res.body)
     expect(e).to.eql(null)
     expect(res.body.length).to.above(0)
-    expect(res.body.map(function(item){return item._id})).to.contain(id)
+    expect(res.body.map(function(item){return item._id}))
     done()
    })
 })
 
 
 
-// Delete the mix with id=0 (The first stocked mix)
+// Delete the mix with id=1 
 it('Delete a mix',function(done){
- superagent.del('http://localhost:8080/mixs/'+id)
+ superagent.del('http://localhost:8080/mixs/'+1)
    .end(function(e,res){
     done()
    })
@@ -369,7 +369,7 @@ it('Delete a mix',function(done){
 
 // Updates the mix with id=0 (The first stocked mix)
 it('Updates a mix',function(done){
- superagent.put('http://localhost:8080/mixs/'+0)
+ superagent.put('http://localhost:8080/mixs/'+id)
     .end(function(e,res){
     done()
  })

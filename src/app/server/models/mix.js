@@ -37,7 +37,7 @@ var Mix = new Schema({
     type: Array
   },
   compressor:   {
-    type: Array
+    type: String
   },
   dateOfCreation: {
     type    : Date,

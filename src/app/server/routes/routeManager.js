@@ -934,7 +934,7 @@ module.exports = function(app) {
 
   app.get('/mixs', findAllMixs);
   app.get('/mixs/:id', findMixById);
-  app.post('/mixs', addMix);//{"username": "John", "mixName": "MixPop1", "description": "Mix Pop number 1", "frequencies":[{"frequence":"10"},{"frequence":"15"},{"frequence":"1021"}],"gain":[{"gain":"150"},{"gain":"175"},{"gain":"102"}],"balance":[{"balance":"150"},{"balance":"175"},{"balance":"102"}],"compressor":[{"compressor":"150"},{"compressor":"175"},{"compressor":"102"}]}
+  app.post('/mixs', addMix);//{"username": "John", "mixName": "MixPop1", "description": "Mix Pop number 1", "frequencies":[{"frequence":"[10,15,12,10,15]"},{"frequence":[105,152,122,10,15]"}],"gain":[{"gain":"150"},{"gain":"175"},{"gain":"102"}],"balance":[{"balance":"150"},{"balance":"175"},{"balance":"102"}],"compressor":"150"}
   app.put('/mixs/:id', updateMix);
   app.delete('/mixs/:id', deleteMix);
 

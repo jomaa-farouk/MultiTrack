@@ -26,20 +26,22 @@ mongoose.connect('mongodb://localhost/MultiTrackDB', function(err, res) {
   if(err) {
     console.log('Error connecting to MongoDB Database. ' + err);
   } else {
-    console.log('Connected to Database');
+    console.log('Connected to Database MultiTrackDB');
   }
 });
 
 app.listen(8080);
-//<<<<<<< HEAD
-console.log('Magic happens on port 8080'); 			// shoutout to the user
+
+
+console.log('Magic happens on port 8080'); 
+
+
 /**
 First example router
 app.get('/', function(req, res) {
   res.send("Welcome to our application !");
 });**/
 
-console.log('Magic happens on port 8080'); 
 
 // First example router
 app.get('/', function(req, res) {
