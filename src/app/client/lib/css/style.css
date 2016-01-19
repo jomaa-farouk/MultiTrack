@@ -1,4 +1,4 @@
-/* frequance table */
+/* track frequance table */
 div.controls:hover, div.controls1:hover  {
   color:blue;
   font-weight:bold;
@@ -42,7 +42,7 @@ div.controls {
 
 
 
-/* frequance table */
+/* piste frequance table */
 div.controls1 label, output {
   text-align: center;
   width: 40px;
@@ -85,7 +85,6 @@ div.controls1 {
 /* canvas */
 canvas {
     display: block;
-    width: 400px;
     border:2px solid #7E8F7C;
 }
 
@@ -124,13 +123,6 @@ height: 23px;
     float: right;
             }
         
-
-
-.gainslider       {
-  position: relative; /* or absolute */
-  left: 20%;
-
-            }
             
 /* songlist */
 select {

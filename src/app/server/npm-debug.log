@@ -1,0 +1,491 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'C:\\Program Files\\nodejs\\node.exe',
+1 verbose cli   'C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'install',
+1 verbose cli   'mongoose-auto-increment' ]
+2 info using npm@2.14.7
+3 info using node@v4.2.3
+4 verbose install initial load of C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\package.json
+5 warn package.json server-side@0.0.1 No README data
+6 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\accepts\package.json
+7 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\async\package.json
+8 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\bluebird\package.json
+9 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\body-parser\package.json
+10 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\bson\package.json
+11 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\buffer-crc32\package.json
+12 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\bytes\package.json
+13 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\commander\package.json
+14 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\cookie\package.json
+15 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\cookie-signature\package.json
+16 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\cookiejar\package.json
+17 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\core-util-is\package.json
+18 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\debug\package.json
+19 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\diff\package.json
+20 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\ee-first\package.json
+21 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\emitter-component\package.json
+22 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\es6-promise\package.json
+23 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\escape-html\package.json
+24 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\expect.js\package.json
+25 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\express\package.json
+26 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\extend\package.json
+27 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\finished\package.json
+28 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\formidable\package.json
+29 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\fresh\package.json
+30 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\glob\package.json
+31 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\graceful-fs\package.json
+32 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\growl\package.json
+33 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\hooks-fixed\package.json
+34 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\inherits\package.json
+35 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\ipaddr.js\package.json
+36 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\isarray\package.json
+37 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\jade\package.json
+38 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\kareem\package.json
+39 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\kerberos\package.json
+40 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\lru-cache\package.json
+41 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\merge-descriptors\package.json
+42 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\method-override\package.json
+43 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\methods\package.json
+44 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\mime\package.json
+45 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\mime-types\package.json
+46 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\minimatch\package.json
+47 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\mkdirp\package.json
+48 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\mocha\package.json
+49 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\mongodb\package.json
+50 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\mongodb-core\package.json
+51 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\mongoose\package.json
+52 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\mongoose-auto-increment\package.json
+53 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\mongoskin\package.json
+54 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\morgan\package.json
+55 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\mpath\package.json
+56 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\mpromise\package.json
+57 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\mquery\package.json
+58 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\ms\package.json
+59 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\muri\package.json
+60 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\nan\package.json
+61 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\negotiator\package.json
+62 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\parseurl\package.json
+63 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\path-to-regexp\package.json
+64 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\proxy-addr\package.json
+65 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\qs\package.json
+66 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\range-parser\package.json
+67 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\raw-body\package.json
+68 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\readable-stream\package.json
+69 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\reduce-component\package.json
+70 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\regexp-clone\package.json
+71 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\send\package.json
+72 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\serve-static\package.json
+73 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\sigmund\package.json
+74 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\sliced\package.json
+75 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\string_decoder\package.json
+76 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\superagent\package.json
+77 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\type-is\package.json
+78 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\utils-merge\package.json
+79 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\vary\package.json
+80 info package.json async@0.9.0 No license field.
+81 info package.json buffer-crc32@0.2.3 No license field.
+82 info package.json bytes@1.0.0 No license field.
+83 info package.json commander@2.0.0 No license field.
+84 info package.json cookie@0.1.2 No license field.
+85 info package.json cookie-signature@1.0.4 No license field.
+86 info package.json cookiejar@1.3.0 No repository field.
+87 info package.json cookiejar@1.3.0 No license field.
+88 info package.json debug@1.0.2 No license field.
+89 info package.json diff@1.0.7 No license field.
+90 info package.json escape-html@1.0.1 No license field.
+91 info package.json emitter-component@1.0.0 No repository field.
+92 info package.json emitter-component@1.0.0 No license field.
+93 info package.json formidable@1.0.14 No license field.
+94 info package.json extend@1.2.1 No license field.
+95 info package.json fresh@0.2.2 No license field.
+96 info package.json glob@3.2.3 license should be a valid SPDX license expression
+97 info package.json graceful-fs@2.0.3 license should be a valid SPDX license expression
+98 info package.json growl@1.7.0 No repository field.
+99 info package.json growl@1.7.0 No license field.
+100 info package.json ipaddr.js@0.1.2 No license field.
+101 info package.json expect.js@0.3.1 No license field.
+102 info package.json jade@0.26.3 No license field.
+103 info package.json kareem@1.0.1 license should be a valid SPDX license expression
+104 info package.json kerberos@0.0.17 license should be a valid SPDX license expression
+105 info package.json minimatch@0.2.14 license should be a valid SPDX license expression
+106 info package.json mocha@1.18.2 No license field.
+107 info package.json mongodb-core@1.2.19 license should be a valid SPDX license expression
+108 info package.json mongoose-auto-increment@5.0.1 No license field.
+109 info package.json ms@0.6.2 No license field.
+110 info package.json path-to-regexp@0.1.2 No license field.
+111 info package.json qs@0.6.6 No license field.
+112 info package.json range-parser@1.0.0 No license field.
+113 info package.json reduce-component@1.0.1 license should be a valid SPDX license expression
+114 info package.json string_decoder@0.10.31 string_decoder is also the name of a node core module.
+115 info package.json superagent@0.17.0 No license field.
+116 info package.json utils-merge@1.0.0 No license field.
+117 info package.json hooks-fixed@1.1.0 No license field.
+118 info package.json mime@1.2.11 No license field.
+119 verbose readDependencies loading dependencies from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\package.json
+120 verbose install mongoose-auto-increment is installed as 5.0.1
+121 silly cache add args [ 'mongoose-auto-increment', null ]
+122 verbose cache add spec mongoose-auto-increment
+123 silly cache add parsed spec Result {
+123 silly cache add   raw: 'mongoose-auto-increment',
+123 silly cache add   scope: null,
+123 silly cache add   name: 'mongoose-auto-increment',
+123 silly cache add   rawSpec: '',
+123 silly cache add   spec: '*',
+123 silly cache add   type: 'range' }
+124 silly addNamed mongoose-auto-increment@*
+125 verbose addNamed "*" is a valid semver range for mongoose-auto-increment
+126 silly addNameRange { name: 'mongoose-auto-increment', range: '*', hasData: false }
+127 silly mapToRegistry name mongoose-auto-increment
+128 silly mapToRegistry using default registry
+129 silly mapToRegistry registry https://registry.npmjs.org/
+130 silly mapToRegistry uri https://registry.npmjs.org/mongoose-auto-increment
+131 verbose addNameRange registry:https://registry.npmjs.org/mongoose-auto-increment not in flight; fetching
+132 verbose request uri https://registry.npmjs.org/mongoose-auto-increment
+133 verbose request no auth needed
+134 info attempt registry request try #1 at 20:01:34
+135 verbose request id e9174df151fd3b91
+136 verbose etag "EJ4OZ6XLVQ7IN0OZW3KHAEVTA"
+137 http request GET https://registry.npmjs.org/mongoose-auto-increment
+138 http 304 https://registry.npmjs.org/mongoose-auto-increment
+139 verbose headers { date: 'Mon, 18 Jan 2016 19:01:37 GMT',
+139 verbose headers   via: '1.1 varnish',
+139 verbose headers   'cache-control': 'max-age=300',
+139 verbose headers   etag: '"EJ4OZ6XLVQ7IN0OZW3KHAEVTA"',
+139 verbose headers   age: '0',
+139 verbose headers   connection: 'keep-alive',
+139 verbose headers   'x-served-by': 'cache-ams4132-AMS',
+139 verbose headers   'x-cache': 'HIT',
+139 verbose headers   'x-cache-hits': '1',
+139 verbose headers   'x-timer': 'S1453143697.844260,VS0,VE707',
+139 verbose headers   vary: 'Accept' }
+140 silly get cb [ 304,
+140 silly get   { date: 'Mon, 18 Jan 2016 19:01:37 GMT',
+140 silly get     via: '1.1 varnish',
+140 silly get     'cache-control': 'max-age=300',
+140 silly get     etag: '"EJ4OZ6XLVQ7IN0OZW3KHAEVTA"',
+140 silly get     age: '0',
+140 silly get     connection: 'keep-alive',
+140 silly get     'x-served-by': 'cache-ams4132-AMS',
+140 silly get     'x-cache': 'HIT',
+140 silly get     'x-cache-hits': '1',
+140 silly get     'x-timer': 'S1453143697.844260,VS0,VE707',
+140 silly get     vary: 'Accept' } ]
+141 verbose etag https://registry.npmjs.org/mongoose-auto-increment from cache
+142 verbose get saving mongoose-auto-increment to C:\Users\Farouk\AppData\Roaming\npm-cache\registry.npmjs.org\mongoose-auto-increment\.cache.json
+143 silly addNameRange number 2 { name: 'mongoose-auto-increment', range: '*', hasData: true }
+144 silly addNameRange versions [ 'mongoose-auto-increment',
+144 silly addNameRange   [ '1.0.0',
+144 silly addNameRange     '1.0.1',
+144 silly addNameRange     '1.1.0',
+144 silly addNameRange     '1.2.0',
+144 silly addNameRange     '1.1.1',
+144 silly addNameRange     '1.2.1',
+144 silly addNameRange     '1.2.2',
+144 silly addNameRange     '1.2.3',
+144 silly addNameRange     '1.3.0',
+144 silly addNameRange     '1.3.1',
+144 silly addNameRange     '2.0.0',
+144 silly addNameRange     '2.0.1',
+144 silly addNameRange     '2.0.2',
+144 silly addNameRange     '2.0.3',
+144 silly addNameRange     '2.0.4',
+144 silly addNameRange     '2.1.0',
+144 silly addNameRange     '2.1.1',
+144 silly addNameRange     '2.1.2',
+144 silly addNameRange     '2.1.3',
+144 silly addNameRange     '2.1.4',
+144 silly addNameRange     '3.0.0',
+144 silly addNameRange     '3.0.1',
+144 silly addNameRange     '3.0.2',
+144 silly addNameRange     '3.0.3',
+144 silly addNameRange     '3.0.4',
+144 silly addNameRange     '3.0.5',
+144 silly addNameRange     '3.0.6',
+144 silly addNameRange     '3.0.7',
+144 silly addNameRange     '3.0.8',
+144 silly addNameRange     '3.1.0',
+144 silly addNameRange     '3.2.0',
+144 silly addNameRange     '3.2.2',
+144 silly addNameRange     '3.2.3',
+144 silly addNameRange     '4.0.0',
+144 silly addNameRange     '3.2.4',
+144 silly addNameRange     '5.0.0',
+144 silly addNameRange     '5.0.1' ] ]
+145 silly addNamed mongoose-auto-increment@5.0.1
+146 verbose addNamed "5.0.1" is a plain semver version for mongoose-auto-increment
+147 silly cache afterAdd mongoose-auto-increment@5.0.1
+148 verbose afterAdd C:\Users\Farouk\AppData\Roaming\npm-cache\mongoose-auto-increment\5.0.1\package\package.json not in flight; writing
+149 verbose afterAdd C:\Users\Farouk\AppData\Roaming\npm-cache\mongoose-auto-increment\5.0.1\package\package.json written
+150 silly install resolved [ { name: 'mongoose-auto-increment',
+150 silly install resolved     version: '5.0.1',
+150 silly install resolved     description: 'This plugin allows you to auto-increment any field on any mongoose schema that you wish.',
+150 silly install resolved     repository:
+150 silly install resolved      { type: 'git',
+150 silly install resolved        url: 'git://github.com/codetunnel/mongoose-auto-increment.git' },
+150 silly install resolved     dependencies: { extend: '^3.0.0' },
+150 silly install resolved     peerDependencies: { mongoose: '^4.1.12' },
+150 silly install resolved     devDependencies: { async: '*', chai: '*', mocha: '*', mongoose: '^4.1.12' },
+150 silly install resolved     keywords:
+150 silly install resolved      [ 'mongoose',
+150 silly install resolved        'plugin',
+150 silly install resolved        'auto-increment',
+150 silly install resolved        'auto',
+150 silly install resolved        'increment',
+150 silly install resolved        'automatic',
+150 silly install resolved        'autoincrement',
+150 silly install resolved        'auto_increment',
+150 silly install resolved        'autoinc',
+150 silly install resolved        'auto-inc',
+150 silly install resolved        'auto_inc',
+150 silly install resolved        'pureautoinc',
+150 silly install resolved        'mongoose-pureautoinc' ],
+150 silly install resolved     author:
+150 silly install resolved      { name: 'Alex Ford',
+150 silly install resolved        email: 'alex.ford@codetunnel.com',
+150 silly install resolved        url: 'Chevex' },
+150 silly install resolved     contributors: [ [Object], [Object], [Object], [Object] ],
+150 silly install resolved     scripts: { test: 'node_modules/mocha/bin/mocha' },
+150 silly install resolved     bugs: { url: 'https://github.com/codetunnel/mongoose-auto-increment/issues' },
+150 silly install resolved     gitHead: '50bd2a642c7565cf0a9f2c368d437b83160ad0a6',
+150 silly install resolved     homepage: 'https://github.com/codetunnel/mongoose-auto-increment#readme',
+150 silly install resolved     _id: 'mongoose-auto-increment@5.0.1',
+150 silly install resolved     _shasum: '827e051d9cc371dabe8bff1a704431d341cb79df',
+150 silly install resolved     _from: 'mongoose-auto-increment@*',
+150 silly install resolved     _npmVersion: '3.3.8',
+150 silly install resolved     _nodeVersion: '4.2.1',
+150 silly install resolved     _npmUser: { name: 'chevex', email: 'alex.ford@codetunnel.com' },
+150 silly install resolved     dist:
+150 silly install resolved      { shasum: '827e051d9cc371dabe8bff1a704431d341cb79df',
+150 silly install resolved        tarball: 'http://registry.npmjs.org/mongoose-auto-increment/-/mongoose-auto-increment-5.0.1.tgz' },
+150 silly install resolved     maintainers: [ [Object] ],
+150 silly install resolved     directories: {},
+150 silly install resolved     _resolved: 'https://registry.npmjs.org/mongoose-auto-increment/-/mongoose-auto-increment-5.0.1.tgz',
+150 silly install resolved     readme: 'ERROR: No README data found!' } ]
+151 info install mongoose-auto-increment@5.0.1 into C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server
+152 info installOne mongoose-auto-increment@5.0.1
+153 verbose installOne of mongoose-auto-increment to C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server not in flight; installing
+154 verbose lock using C:\Users\Farouk\AppData\Roaming\npm-cache\_locks\mongoose-auto-increment-e83b4a6101c9b001.lock for C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\mongoose-auto-increment
+155 silly install write writing mongoose-auto-increment 5.0.1 to C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\mongoose-auto-increment
+156 verbose unbuild node_modules\mongoose-auto-increment
+157 info preuninstall mongoose-auto-increment@5.0.1
+158 info uninstall mongoose-auto-increment@5.0.1
+159 verbose unbuild rmStuff mongoose-auto-increment@5.0.1 from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules
+160 info postuninstall mongoose-auto-increment@5.0.1
+161 silly gentlyRm C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\mongoose-auto-increment is being purged from base C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server
+162 verbose gentlyRm don't care about contents; nuking C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\mongoose-auto-increment
+163 silly vacuum-fs purging C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\mongoose-auto-increment
+164 silly vacuum-fs quitting because other entries in C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules
+165 verbose tar unpack C:\Users\Farouk\AppData\Roaming\npm-cache\mongoose-auto-increment\5.0.1\package.tgz
+166 verbose tar unpacking to C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\mongoose-auto-increment
+167 silly gentlyRm C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\mongoose-auto-increment is being purged
+168 verbose gentlyRm don't care about contents; nuking C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\mongoose-auto-increment
+169 silly gunzTarPerm modes [ '777', '666' ]
+170 silly gunzTarPerm extractEntry package.json
+171 silly gunzTarPerm modified mode [ 'package.json', 420, 438 ]
+172 silly gunzTarPerm extractEntry .npmignore
+173 silly gunzTarPerm modified mode [ '.npmignore', 420, 438 ]
+174 silly gunzTarPerm extractEntry README.md
+175 silly gunzTarPerm modified mode [ 'README.md', 420, 438 ]
+176 silly gunzTarPerm extractEntry LICENSE
+177 silly gunzTarPerm modified mode [ 'LICENSE', 420, 438 ]
+178 silly gunzTarPerm extractEntry index.js
+179 silly gunzTarPerm modified mode [ 'index.js', 420, 438 ]
+180 silly gunzTarPerm extractEntry .travis.yml
+181 silly gunzTarPerm modified mode [ '.travis.yml', 420, 438 ]
+182 silly gunzTarPerm extractEntry CONTRIBUTING.md
+183 silly gunzTarPerm modified mode [ 'CONTRIBUTING.md', 420, 438 ]
+184 silly gunzTarPerm extractEntry test/test.js
+185 silly gunzTarPerm modified mode [ 'test/test.js', 420, 438 ]
+186 silly gunzTarPerm extractEntry test/mocha.opts
+187 silly gunzTarPerm modified mode [ 'test/mocha.opts', 420, 438 ]
+188 verbose write writing to C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\mongoose-auto-increment\package.json
+189 info preinstall mongoose-auto-increment@5.0.1
+190 verbose readDependencies loading dependencies from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\mongoose-auto-increment\package.json
+191 silly prepareForInstallMany adding extend@^3.0.0 from mongoose-auto-increment dependencies
+192 verbose readDependencies loading dependencies from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\mongoose-auto-increment\package.json
+193 silly cache add args [ 'extend@^3.0.0', null ]
+194 verbose cache add spec extend@^3.0.0
+195 silly cache add parsed spec Result {
+195 silly cache add   raw: 'extend@^3.0.0',
+195 silly cache add   scope: null,
+195 silly cache add   name: 'extend',
+195 silly cache add   rawSpec: '^3.0.0',
+195 silly cache add   spec: '>=3.0.0 <4.0.0',
+195 silly cache add   type: 'range' }
+196 silly addNamed extend@>=3.0.0 <4.0.0
+197 verbose addNamed ">=3.0.0 <4.0.0" is a valid semver range for extend
+198 silly addNameRange { name: 'extend', range: '>=3.0.0 <4.0.0', hasData: false }
+199 silly mapToRegistry name extend
+200 silly mapToRegistry using default registry
+201 silly mapToRegistry registry https://registry.npmjs.org/
+202 silly mapToRegistry uri https://registry.npmjs.org/extend
+203 verbose addNameRange registry:https://registry.npmjs.org/extend not in flight; fetching
+204 verbose request uri https://registry.npmjs.org/extend
+205 verbose request no auth needed
+206 info attempt registry request try #1 at 20:01:35
+207 verbose etag "28UZFVIXKMB9UDWMMLNGS4HQR"
+208 http request GET https://registry.npmjs.org/extend
+209 http 304 https://registry.npmjs.org/extend
+210 verbose headers { date: 'Mon, 18 Jan 2016 19:01:38 GMT',
+210 verbose headers   via: '1.1 varnish',
+210 verbose headers   'cache-control': 'max-age=300',
+210 verbose headers   etag: '"28UZFVIXKMB9UDWMMLNGS4HQR"',
+210 verbose headers   age: '24',
+210 verbose headers   connection: 'keep-alive',
+210 verbose headers   'x-served-by': 'cache-ams4129-AMS',
+210 verbose headers   'x-cache': 'HIT',
+210 verbose headers   'x-cache-hits': '2',
+210 verbose headers   'x-timer': 'S1453143698.943350,VS0,VE0',
+210 verbose headers   vary: 'Accept' }
+211 silly get cb [ 304,
+211 silly get   { date: 'Mon, 18 Jan 2016 19:01:38 GMT',
+211 silly get     via: '1.1 varnish',
+211 silly get     'cache-control': 'max-age=300',
+211 silly get     etag: '"28UZFVIXKMB9UDWMMLNGS4HQR"',
+211 silly get     age: '24',
+211 silly get     connection: 'keep-alive',
+211 silly get     'x-served-by': 'cache-ams4129-AMS',
+211 silly get     'x-cache': 'HIT',
+211 silly get     'x-cache-hits': '2',
+211 silly get     'x-timer': 'S1453143698.943350,VS0,VE0',
+211 silly get     vary: 'Accept' } ]
+212 verbose etag https://registry.npmjs.org/extend from cache
+213 verbose get saving extend to C:\Users\Farouk\AppData\Roaming\npm-cache\registry.npmjs.org\extend\.cache.json
+214 silly addNameRange number 2 { name: 'extend', range: '>=3.0.0 <4.0.0', hasData: true }
+215 silly addNameRange versions [ 'extend',
+215 silly addNameRange   [ '1.0.0',
+215 silly addNameRange     '1.1.0',
+215 silly addNameRange     '1.1.1',
+215 silly addNameRange     '1.1.3',
+215 silly addNameRange     '1.2.0',
+215 silly addNameRange     '1.2.1',
+215 silly addNameRange     '1.3.0',
+215 silly addNameRange     '2.0.0',
+215 silly addNameRange     '2.0.1',
+215 silly addNameRange     '3.0.0' ] ]
+216 silly addNamed extend@3.0.0
+217 verbose addNamed "3.0.0" is a plain semver version for extend
+218 silly cache afterAdd extend@3.0.0
+219 verbose afterAdd C:\Users\Farouk\AppData\Roaming\npm-cache\extend\3.0.0\package\package.json not in flight; writing
+220 verbose afterAdd C:\Users\Farouk\AppData\Roaming\npm-cache\extend\3.0.0\package\package.json written
+221 silly install resolved [ { name: 'extend',
+221 silly install resolved     author:
+221 silly install resolved      { name: 'Stefan Thomas',
+221 silly install resolved        email: 'justmoon@members.fsf.org',
+221 silly install resolved        url: 'http://www.justmoon.net' },
+221 silly install resolved     version: '3.0.0',
+221 silly install resolved     description: 'Port of jQuery.extend for node.js and the browser',
+221 silly install resolved     main: 'index',
+221 silly install resolved     scripts:
+221 silly install resolved      { test: 'npm run lint && node test/index.js && npm run coverage-quiet',
+221 silly install resolved        coverage: 'covert test/index.js',
+221 silly install resolved        'coverage-quiet': 'covert test/index.js --quiet',
+221 silly install resolved        lint: 'npm run jscs && npm run eslint',
+221 silly install resolved        jscs: 'jscs *.js */*.js',
+221 silly install resolved        eslint: 'eslint *.js */*.js' },
+221 silly install resolved     contributors: [ [Object] ],
+221 silly install resolved     keywords: [ 'extend', 'clone', 'merge' ],
+221 silly install resolved     repository:
+221 silly install resolved      { type: 'git',
+221 silly install resolved        url: 'git+https://github.com/justmoon/node-extend.git' },
+221 silly install resolved     dependencies: {},
+221 silly install resolved     devDependencies:
+221 silly install resolved      { tape: '^4.0.0',
+221 silly install resolved        covert: '^1.1.0',
+221 silly install resolved        jscs: '^1.13.1',
+221 silly install resolved        eslint: '^0.24.0' },
+221 silly install resolved     license: 'MIT',
+221 silly install resolved     gitHead: '148e7270cab2e9413af2cd0cab147070d755ed6d',
+221 silly install resolved     bugs: { url: 'https://github.com/justmoon/node-extend/issues' },
+221 silly install resolved     homepage: 'https://github.com/justmoon/node-extend#readme',
+221 silly install resolved     _id: 'extend@3.0.0',
+221 silly install resolved     _shasum: '5a474353b9f3353ddd8176dfd37b91c83a46f1d4',
+221 silly install resolved     _from: 'extend@>=3.0.0 <4.0.0',
+221 silly install resolved     _npmVersion: '2.11.3',
+221 silly install resolved     _nodeVersion: '2.3.1',
+221 silly install resolved     _npmUser: { name: 'ljharb', email: 'ljharb@gmail.com' },
+221 silly install resolved     dist:
+221 silly install resolved      { shasum: '5a474353b9f3353ddd8176dfd37b91c83a46f1d4',
+221 silly install resolved        tarball: 'http://registry.npmjs.org/extend/-/extend-3.0.0.tgz' },
+221 silly install resolved     maintainers: [ [Object], [Object] ],
+221 silly install resolved     directories: {},
+221 silly install resolved     _resolved: 'https://registry.npmjs.org/extend/-/extend-3.0.0.tgz',
+221 silly install resolved     readme: 'ERROR: No README data found!' } ]
+222 info install extend@3.0.0 into C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\mongoose-auto-increment
+223 info installOne extend@3.0.0
+224 verbose installOne of extend to C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\mongoose-auto-increment not in flight; installing
+225 verbose lock using C:\Users\Farouk\AppData\Roaming\npm-cache\_locks\extend-c623ae27873f381b.lock for C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\mongoose-auto-increment\node_modules\extend
+226 silly install write writing extend 3.0.0 to C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\mongoose-auto-increment\node_modules\extend
+227 verbose unbuild node_modules\mongoose-auto-increment\node_modules\extend
+228 silly gentlyRm C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\mongoose-auto-increment\node_modules\extend is being purged from base C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server
+229 verbose gentlyRm don't care about contents; nuking C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\mongoose-auto-increment\node_modules\extend
+230 verbose tar unpack C:\Users\Farouk\AppData\Roaming\npm-cache\extend\3.0.0\package.tgz
+231 verbose tar unpacking to C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\mongoose-auto-increment\node_modules\extend
+232 silly gentlyRm C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\mongoose-auto-increment\node_modules\extend is being purged
+233 verbose gentlyRm don't care about contents; nuking C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\mongoose-auto-increment\node_modules\extend
+234 silly gunzTarPerm modes [ '777', '666' ]
+235 silly gunzTarPerm extractEntry package.json
+236 silly gunzTarPerm modified mode [ 'package.json', 420, 438 ]
+237 silly gunzTarPerm extractEntry .npmignore
+238 silly gunzTarPerm modified mode [ '.npmignore', 420, 438 ]
+239 silly gunzTarPerm extractEntry README.md
+240 silly gunzTarPerm modified mode [ 'README.md', 420, 438 ]
+241 silly gunzTarPerm extractEntry LICENSE
+242 silly gunzTarPerm modified mode [ 'LICENSE', 420, 438 ]
+243 silly gunzTarPerm extractEntry index.js
+244 silly gunzTarPerm modified mode [ 'index.js', 420, 438 ]
+245 silly gunzTarPerm extractEntry CHANGELOG.md
+246 silly gunzTarPerm modified mode [ 'CHANGELOG.md', 420, 438 ]
+247 silly gunzTarPerm extractEntry .jscs.json
+248 silly gunzTarPerm modified mode [ '.jscs.json', 420, 438 ]
+249 silly gunzTarPerm extractEntry component.json
+250 silly gunzTarPerm modified mode [ 'component.json', 420, 438 ]
+251 silly gunzTarPerm extractEntry .eslintrc
+252 silly gunzTarPerm modified mode [ '.eslintrc', 420, 438 ]
+253 silly gunzTarPerm extractEntry .travis.yml
+254 silly gunzTarPerm modified mode [ '.travis.yml', 420, 438 ]
+255 verbose write writing to C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\mongoose-auto-increment\node_modules\extend\package.json
+256 info preinstall extend@3.0.0
+257 verbose readDependencies loading dependencies from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\mongoose-auto-increment\node_modules\extend\package.json
+258 verbose readDependencies loading dependencies from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\mongoose-auto-increment\node_modules\extend\package.json
+259 silly install resolved []
+260 verbose about to build C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\mongoose-auto-increment\node_modules\extend
+261 info build C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\mongoose-auto-increment\node_modules\extend
+262 info linkStuff extend@3.0.0
+263 silly linkStuff extend@3.0.0 has C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\mongoose-auto-increment\node_modules as its parent node_modules
+264 verbose linkBins extend@3.0.0
+265 verbose linkMans extend@3.0.0
+266 verbose rebuildBundles extend@3.0.0
+267 info install extend@3.0.0
+268 info postinstall extend@3.0.0
+269 verbose unlock done using C:\Users\Farouk\AppData\Roaming\npm-cache\_locks\extend-c623ae27873f381b.lock for C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\mongoose-auto-increment\node_modules\extend
+270 verbose about to build C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\mongoose-auto-increment
+271 info build C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\mongoose-auto-increment
+272 info linkStuff mongoose-auto-increment@5.0.1
+273 silly linkStuff mongoose-auto-increment@5.0.1 has C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules as its parent node_modules
+274 verbose linkBins mongoose-auto-increment@5.0.1
+275 verbose linkMans mongoose-auto-increment@5.0.1
+276 verbose rebuildBundles mongoose-auto-increment@5.0.1
+277 verbose rebuildBundles [ 'extend' ]
+278 info install mongoose-auto-increment@5.0.1
+279 info postinstall mongoose-auto-increment@5.0.1
+280 verbose unlock done using C:\Users\Farouk\AppData\Roaming\npm-cache\_locks\mongoose-auto-increment-e83b4a6101c9b001.lock for C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\mongoose-auto-increment
+281 verbose validateInstall loading C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\package.json for validation
+282 verbose stack Error: The package mongodb@2.0.46 does not satisfy its siblings' peerDependencies requirements!
+282 verbose stack     at C:\Program Files\nodejs\node_modules\npm\lib\install.js:125:32
+282 verbose stack     at C:\Program Files\nodejs\node_modules\npm\lib\install.js:268:7
+282 verbose stack     at C:\Program Files\nodejs\node_modules\npm\node_modules\read-installed\read-installed.js:142:5
+282 verbose stack     at C:\Program Files\nodejs\node_modules\npm\node_modules\read-installed\read-installed.js:263:14
+282 verbose stack     at cb (C:\Program Files\nodejs\node_modules\npm\node_modules\slide\lib\async-map.js:47:24)
+282 verbose stack     at C:\Program Files\nodejs\node_modules\npm\node_modules\read-installed\read-installed.js:263:14
+282 verbose stack     at cb (C:\Program Files\nodejs\node_modules\npm\node_modules\slide\lib\async-map.js:47:24)
+282 verbose stack     at C:\Program Files\nodejs\node_modules\npm\node_modules\read-installed\read-installed.js:263:14
+282 verbose stack     at asyncMap (C:\Program Files\nodejs\node_modules\npm\node_modules\slide\lib\async-map.js:27:18)
+282 verbose stack     at next (C:\Program Files\nodejs\node_modules\npm\node_modules\read-installed\read-installed.js:234:5)
+283 verbose cwd C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server
+284 error Windows_NT 6.1.7601
+285 error argv "C:\\Program Files\\nodejs\\node.exe" "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "install" "mongoose-auto-increment"
+286 error node v4.2.3
+287 error npm  v2.14.7
+288 error code EPEERINVALID
+289 error peerinvalid The package mongodb@2.0.46 does not satisfy its siblings' peerDependencies requirements!
+290 verbose exit [ 1, true ]

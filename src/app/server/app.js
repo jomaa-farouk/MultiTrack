@@ -52,13 +52,18 @@ app.get('/', function(req, res) {
 
 app.get('/track/:directory/sound/:file', function(req, res) {
 
-  var testHtmlPath = path.resolve(__dirname, '..', '..', '..' , 'resource' , 'multitrack', req.params.directory , req.params.file);
-  res.sendfile(testHtmlPath);
+  var myPath = path.resolve(__dirname, '..', '..', '..' , 'resource' , 'multitrack', req.params.directory , req.params.file);
+  res.sendfile(myPath);
 
 });
 
 
+app.get('/impulse/:impulseName', function(req, res) {
 
+  var myPath = path.resolve(__dirname, '..', '..', '..' , 'resource' , 'impulses', req.params.impulseName );
+  res.sendfile(myPath);
+
+});
 
 
 

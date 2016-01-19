@@ -14,7 +14,17 @@
 <button id="play" style="cursor: pointer;" ng-click="play();" disabled=true>Play</button>
 <button id="pause" style="cursor: pointer;" ng-click="pause();">Pause</button>
 <button id="stop" style="cursor: pointer;" ng-click="stop();"disabled=true>Stop</button>
+
+<div class="row">
+<div class="col-md-offset-5 col-md-4">
+<label for="gainSlider">Gain</label>
+<input type="range" min="0" max="1" step="0.01" value="1" id="gainSlider" ng-model="gain" ng-change="changeGain (gain , 0)"/>
+</div>
+<div class="col-md-2">
 <button id="mute" style="cursor: pointer;" ng-click="muteAll();"/>
+</div>
+</div>
+  
 </div> 
 </div> 
 
@@ -53,22 +63,37 @@
 
 </div>
 
+<br><br>
 
-<div class="row" ng-show="trackSelected">
-<div class="col-md-5"><canvas id="myCanvas" width=300 height=100></canvas></div>
-<div class="col-md-4"><canvas id="myCanvas2" width=300 height=100></canvas></div>
+<div class="row">
+
+<div class="col-md-2" ng-show="trackSelected">
+<canvas id="myCanvas" width=250 height=200></canvas>
 </div>
  
 
 
 
-
+<div class="col-md-7" ng-show="trackSelected">
+<div class="row"> <br><br><br><br> </div>
 <div class="row" ng-show="trackSelected">
+
+   <div class="row">
+
+  <div class="col-md-offset-4 col-md-3">
+
+  <label for="pannerSlider">Balance</label>
+  <input type="range" min="-1" max="1" step="0.1" value="0" id="pannerSlider" ng-model="panner" ng-change="changePanner (panner , 0)" />
+  </div>
+
+  <div class="col-md-3 col-md-offset-1">
+  <button id="compressorButton" ng-click= "updateCompressor()" align="right">{{buttonCompressor}}</button>
+  </div>
+  </div>
 
 <div class="row">
 
-<div class="col-md-offset-3 col-md-4">
-<H2 align="center">Main Track</H2>
+<div class="col-md-offset-4 col-md-4">
 <div class="controls" >
 
     <div ng-repeat = "freq in frequencies">
@@ -86,27 +111,35 @@
 </div>
 
   
-   <div class="row">
 
-	<div class="col-md-offset-3 col-md-1">
-	<label for="gainSlider">Gain</label>
-	<input type="range" min="0" max="1" step="0.01" value="1" id="gainSlider" ng-model="gain" ng-change="changeGain (gain , 0)"/>
-	</div>
 
-	<div class="col-md-1">
-	<label for="pannerSlider">Balance</label>
-	<input type="range" min="-1" max="1" step="0.1" value="0" id="pannerSlider" ng-model="panner" ng-change="changePanner (panner , 0)" />
-	</div>
 
-	<div class="col-md-2">
-	<button id="compressorButton" ng-click= "updateCompressor()">{{buttonCompressor}}</button>
-	</div>
-	</div>
+
+ <div class="row"> <div class="col-md-7 col-md-offset-4">
+
+    <div ng-repeat = "impulse in impulses">
+<div class="col-md-3"><label for="convolverSlider' + $index + '" style="font-size:10px">{{impulse}} (Dry/Wet)</label>
+<input type="range" min="0" max="1" step="0.1" value="0" ng-attr-id="{{ 'convolverSlider' + $index }}" ng-model="impulse_value" ng-change="changeImpulse ($index)" /></div>
+    </div>
+ </div> </div>
+
+
+
 <br><br>
 	</div>
 
+</div>
 
-<div class = "row" id="tracks_list" ng-show="trackSelected">
+<div class="col-md-2 col-md-offset-1" ng-show="trackSelected">
+<canvas id="myCanvas2" width=250 height=200></canvas>
+</div>
+
+<br><br>
+
+</div>
+
+<div class = "row" id="tracks_list" ng-show="trackSelected" >
+
 </div> 
 
 

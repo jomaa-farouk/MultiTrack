@@ -76,6 +76,9 @@
 		//$scope.tracks = TracksFactory.query();
 		$scope.tracks = [ {"trackName":"Michael jackson - Beat It","piste":[{"pisteMp3":"basse.mp3"},{"pisteMp3":"batterie.mp3"},{"pisteMp3":"guitare.mp3"},{"pisteMp3":"synthes.mp3"},{"pisteMp3":"voix.mp3"}],"singer":"Micheal Jackson","album":"Beat It","type":"Pop","description":"Song of Micheal Jackson","dateOfTrack":"1992-10-21T13:28:06.419Z"},{"trackName":"Metallica - One","piste":[{"pisteMp3":"guitar.mp3"},{"pisteMp3":"rhythm.mp3"},{"pisteMp3":"song.mp3"}],"singer":"","album":"","type":"","description":"","dateOfTrack":""}];
 	
+
+
+
 /////// added 17/01 by Farouk:
 
 
@@ -84,29 +87,44 @@ var audioContext;
 
 var gainSlider, gainNode, pannerSlider, pannerNode, bplay, bpause, player, compressorNode, compressorButton, bstop ;
 var canvas, canvas2, canvasContext, canvasContext2, width, height, width2, height2, bufferLength, dataArray, bufferLength2, dataArray2;
-var compressorOn = false;
-var analyser, analyser2;
+var analyser, analyser2, gradient, analyserLeft, analyserRight, dataArrayLeft, dataArrayRight, splitter;
+
 
 var bufferSourcet = [];
 var decodedSoundt = [];
 var soundURLt = [];
 
 var stereoNodet = [];
-var filters = [];
-var filtersPistes = [];
 var gainNodesT = [];
 
+var filters = [];
+var filtersPistes = [];
+
 var casqueT = [];
+var stoppressed = false;  
 
 $scope.frequencies = ['60Hz' , '170Hz' , '350Hz' , '1000Hz' , '3500Hz' , '10000Hz' ];
-$scope.freq_values = [];
+
+$scope.impulses = ['dance hall','mythology','sports verb', 'wobble room'];
+
+var decodedImpulset = [];
+var convolverGaint =[];
+var directGaint  = [];
+var convolverNodet = [];
+
 $scope.trackSelected = false;
+
+$scope.gain = 1;
+
+$scope.impulse_value = 0;
 
 
 
 $scope.init = function(){
   // get the AudioContext0
   audioContext = new ctx();
+  pannerNode = audioContext.createStereoPanner();
+
 
   player = document.getElementById('player');
   gainSlider = document.getElementById('gainSlider');
@@ -116,8 +134,14 @@ $scope.init = function(){
   bstop = document.getElementById('stop');
   compressorButton = document.getElementById('compressorButton');
   
+  $scope.impulses.forEach (function(impulse , i) {
+  var  impulseURL = 'http://localhost:8080/impulse/' + impulse + '.wav';
 
-    initCanvas ();
+  loadImpulse(impulseURL, i);
+
+  });
+
+  initCanvas ();
 
 
       // starts the animation at 60 frames/s
@@ -136,6 +160,7 @@ function initCanvas ()
    height = canvas.height;
    canvasContext = canvas.getContext('2d');
 
+
    canvas2 = document.getElementById("myCanvas2");
    width2 = canvas2.width;
    height2 = canvas2.height;
@@ -147,7 +172,7 @@ function initCanvas ()
    analyser = audioContext.createAnalyser();
    // set visualizer options, for lower precision change 1024 to 512,
    // 256, 128, 64 etc. bufferLength will be equal to fftSize/2
-   analyser.fftSize = 1024;
+   analyser.fftSize = 512;
    bufferLength = analyser.frequencyBinCount;
    dataArray = new Uint8Array(bufferLength);
 
@@ -159,6 +184,31 @@ function initCanvas ()
   analyser2.fftSize = 256;
   bufferLength2 = analyser2.frequencyBinCount;
   dataArray2 = new Uint8Array(bufferLength2);
+  
+
+  gradient = canvasContext.createLinearGradient(0,0,0, height);
+  gradient.addColorStop(1,'#000000');
+  gradient.addColorStop(0.75,'#ff0000');
+  gradient.addColorStop(0.25,'#ffff00');
+  gradient.addColorStop(0,'#ffffff');
+
+  analyserLeft = audioContext.createAnalyser();
+  analyserLeft.fftSize = 256;
+  var bufferLengthLeft = analyserLeft.frequencyBinCount;
+  dataArrayLeft = new Uint8Array(bufferLengthLeft);
+  
+  analyserRight = audioContext.createAnalyser();
+  analyserRight.fftSize = 256;
+  var bufferLengthRight = analyserRight.frequencyBinCount;
+  dataArrayRight = new Uint8Array(bufferLengthRight);
+
+  splitter = audioContext.createChannelSplitter();
+ 
+  // connect one of the outputs from the splitter to
+  // the analyser
+  splitter.connect(analyserLeft,0,0);
+  splitter.connect(analyserRight,1,0);
+
 }
 
 
@@ -167,21 +217,19 @@ timer(0);
 $scope.trackSelected = true;
 
 	stopGraph (true);
-	initCanvas ();
-    bstop.disabled = true;
+	//initCanvas ();
+  bstop.disabled = true;
 
 var div_tracks = document.getElementById('tracks_list');
 soundURLt = [];
 var  base = 'http://localhost:8080/track/' + selectedTrack.trackName + '/sound/';
 
-var content = '<div class="row">';
+var content = '<div class="row" >';
 
 selectedTrack.piste.forEach (function(songName , i) {
 
 casqueT [i] = 0;
-
 soundURLt[i] =  base + songName.pisteMp3  ; 
-
 
 content+='<div class="col-md-2"><H4 align="center">'+songName.pisteMp3;
 content+='<button class="mute" id="mute'+i+'" style="cursor: pointer;" ng-click = "mute ('+i+')">&nbsp;&nbsp;</button> ';
@@ -227,6 +275,8 @@ initBuffer(true) ;
 
 function initBuffer(load) {
 
+if (load == true) $scope.percentage = 0;
+
 for (var i = 0; i < soundURLt.length; i++) {
     bufferSourcet[i] = audioContext.createBufferSource();
 	
@@ -237,6 +287,7 @@ for (var i = 0; i < soundURLt.length; i++) {
 }
 
 }
+
 
 function loadSoundUsingAjax(url , i) {
   var request = new XMLHttpRequest();
@@ -251,9 +302,15 @@ function loadSoundUsingAjax(url , i) {
     // Let's decode it. This is also asynchronous
     audioContext.decodeAudioData(request.response, function(buffer) {
       console.log("Sound decoded");
-          timer( (100/ (soundURLt.length) ) * (i) + ( (100/ (soundURLt.length) ) ));
+   
+
+      $scope.percentage += (100/ (soundURLt.length) );
+      timer(parseInt( $scope.percentage ) );
 
 	  decodedSoundt [i] = buffer;
+    bufferSourcet[i].buffer = decodedSoundt[i];
+    bufferSourcet[i].start();
+
    
 	  // we enable the button
      if (i == soundURLt.length-1)
@@ -278,7 +335,6 @@ function loadSoundUsingAjax(url , i) {
 
 
 $scope.changeGain = function(gain , i){
-console.log (gain+'test'+i);
     if (i==0) gainNode.gain.value = gain;
      else
      	gainNodesT[i-1].gain.value = gain;
@@ -286,16 +342,14 @@ console.log (gain+'test'+i);
 
 
 $scope.changePanner = function(panner , i){
-console.log (panner + 'hi' + i);
     if (i==0) pannerNode.pan.value = panner;
      else
      	stereoNodet[i-1].pan.value= panner;
-
 };
 
 $scope.changeFrequency = function(freq_value , row , index){
    var output = document.getElementById("freq"+row+index);
-   	console.log ("freq"+row+index);
+
     output.innerHTML = '<output>'+freq_value+' dB</output>';
 
     if (row==0) filters[index].gain.value = freq_value;
@@ -306,105 +360,120 @@ $scope.buttonCompressor = 'Turn Compressor ON';
 $scope.ompressorSelected = false;
 
 $scope.updateCompressor = function () {
-console.log ('hi');
-	$scope.compressor = !$scope.compressor ;
-   var compressorButton = document.getElementById("compressorButton");
+
+var compressorButton = document.getElementById("compressorButton");
 $scope.ompressorSelected = !$scope.ompressorSelected;
+
 if ( $scope.ompressorSelected == false )
 {
 $scope.buttonCompressor = 'Turn Compressor ON';
-
-        compressorNode.disconnect(audioContext.destination);
-        analyser2.disconnect(compressorNode);
-        analyser2.connect(audioContext.destination);
-
-
+compressorNode.disconnect(audioContext.destination);
+analyser2.disconnect(compressorNode);
+analyser2.connect(audioContext.destination);
 }
+
 else
 {	$scope.buttonCompressor = 'Turn Compressor OFF';
-        analyser2.disconnect(audioContext.destination);
-        analyser2.connect(compressorNode);
-        compressorNode.connect(audioContext.destination);
-
+analyser2.disconnect(audioContext.destination);
+analyser2.connect(compressorNode);
+compressorNode.connect(audioContext.destination);
 }
 };
 
 
 $scope.play = function(){
 
-    buildAudioGraph();
-    bplay.disabled = true;
-    bpause.disabled = false;
-    bstop.disabled = false;
+for (var i = 0; i < soundURLt.length; i++) {
+    
+    if (stoppressed) {
+    bufferSourcet[i].buffer = decodedSoundt[i];
+    bufferSourcet[i].start();
+    }
 
+else
+{ 
+    bufferSourcet[i] = audioContext.createBufferSource();
+    bufferSourcet[i].buffer = decodedSoundt[i];
+    bufferSourcet[i].start();
+}    
+
+}
+
+buildAudioGraph();
+stoppressed = false;
+bplay.disabled = true;
+bpause.disabled = false;
+bstop.disabled = false;
 
 };
 
 
 $scope.stop = function(){
-  
-	stopGraph (false);
-	initBuffer(false) ;
-    bplay.disabled = false;
-    bpause.disabled = true;
-    bstop.disabled = true;
-  
-  };
+stoppressed = true;
+stopGraph (false);
+initBuffer(false) ;
+bplay.disabled = false;
+bpause.disabled = true;
+bstop.disabled = true;
+ };
 
 
 function stopGraph (destroy) {
 
+if (stoppressed && destroy)
+{
  for (var i = 0; i < bufferSourcet.length; i++) {
    bufferSourcet[i].stop();
+}
 }
 
 if (destroy == true)
  {
+ 
  bufferSourcet = [];
  decodedSoundt = [] ;
  soundURLt = [];
  
-  stereoNodet = [];
-  filtersPistes = [];
-  gainNodesT = [];
+ stereoNodet = [];
+ filtersPistes = [];
+ gainNodesT = [];
 
  }
-
 }
+
+  $scope.firstTime = true;
+
 function buildAudioGraph( ) {
 
   // create source and gain node
   gainNode = audioContext.createGain();
-  pannerNode = audioContext.createStereoPanner();
   var stereoModify;
   
   for (var i = 0; i < bufferSourcet.length; i++) {
-   bufferSourcet[i].buffer = decodedSoundt[i];
-   bufferSourcet[i].start();
+    
    stereoNodet[i] = audioContext.createStereoPanner();
    bufferSourcet[i].connect ( stereoNodet[i]);
-   gainNodesT[i] = audioContext.createGain();
-   //stereoNodet[i].connect (gainNode);
-   
+   gainNodesT[i] = audioContext.createGain(); 
   }
   
     // create the equalizer. It's a set of biquad Filters
    // Set filters
-    [60, 170, 350, 1000, 3500, 10000].forEach(function(freq, i) {
+   filters = [];
+    $scope.frequencies.forEach(function(freq, i) {
       var eq = audioContext.createBiquadFilter();
-      eq.frequency.value = freq;
+      eq.frequency.value = parseFloat(freq);
       eq.type = "peaking";
       eq.gain.value = 0;
       filters.push(eq);
     });
 	
-		 for (var j = 0; j < bufferSourcet.length; j++) {
+	for (var j = 0; j < bufferSourcet.length; j++) {
 		  filtersPistes[j] = new Array();
 
-	[60, 170, 350, 1000, 3500, 10000].forEach(function(freq, i) {
+	    $scope.frequencies.forEach(function(freq, i) {
 	
       var eq = audioContext.createBiquadFilter();
-      eq.frequency.value = freq;
+      eq.frequency.value = parseFloat(freq);
       eq.type = "peaking";
       eq.gain.value = 0;
       filtersPistes[j].push(eq);
@@ -440,97 +509,212 @@ function buildAudioGraph( ) {
       filters[i].connect(filters[i+1]);
     }
 
-	  compressorNode = audioContext.createDynamicsCompressor();
+	compressorNode = audioContext.createDynamicsCompressor();
 
 	// connect the last filter to the speakers
-   filters[filters.length - 1].connect(pannerNode);
+  filters[filters.length - 1].connect(pannerNode);
 
-	
+if ($scope.firstTime)
+{
+  $scope.firstTime = false;
 
-  pannerNode.connect(analyser);
+  for (var i=0 ; i<convolverNodet.length ; i++)
+    {
+
+      // direct/dry route source -> directGain -> destination
+  pannerNode.connect(directGaint[i]);
+  directGaint[i].connect(analyser);
+
+
+  // wet route with convolver: source -> convolver
+  // -> convolverGain -> destination
+  pannerNode.connect(convolverNodet[i]);
+  convolverNodet[i].connect(convolverGaint[i]);
+  convolverGaint[i].connect(analyser);
+
+    // connect the source to the analyser and the splitter
+  pannerNode.connect(splitter);
+
+
+
+  }
+
+	//pannerNode.connect(analyser);
   analyser.connect(analyser2);
   analyser2.connect(audioContext.destination);
-
+}
 }
 
 
 function visualize() {
-  // 1 - clear the canvas
-  // like this: canvasContext.clearRect(0, 0, width, height);
-  // Or use rgba fill to give a slight blur effect
-  canvasContext.fillStyle = 'rgba(0, 0, 0, 0.5)';
-  canvasContext.fillRect(0, 0, width, height);
-  // 2 - Get the analyser data - for waveforms we need time domain data
-  analyser.getByteTimeDomainData(dataArray);
+
+  //herrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr
  
-  // 3 - draws the waveform
-  canvasContext.lineWidth = 2;
-  canvasContext.strokeStyle = 'lightBlue';
- 
-  // the waveform is in one single path, first let's
-  // clear any previous path that could be in the buffer
-  canvasContext.beginPath();
-  var sliceWidth = width / bufferLength;
-  var x = 0;
- 
-  for(var i = 0; i < bufferLength; i++) {
-    // dataArray values are between 0 and 255,
-    // normalize v, now between 0 and 1
-    var v = dataArray[i] / 255;
-    // y will be in [0, canvas height], in pixels
-    var y = v * height;
- 
-    if(i === 0) {
-      canvasContext.moveTo(x, y);
-    } else {
-      canvasContext.lineTo(x, y);
-    }
- 
-    x += sliceWidth;
-  }
- 
-  canvasContext.lineTo(canvas.width, canvas.height/2);
-  // draw the path at once
-  canvasContext.stroke();
+  clearCanvas();
+  
+  drawVolumeMeters();
+  drawWaveform();
+
+
   // once again call the visualize function at 60 frames/s
   requestAnimationFrame(visualize);
 }
 
 
+function drawWaveform() {
+  canvasContext.save();
+  // Get the analyser data
+  analyser.getByteTimeDomainData(dataArray);
+
+  canvasContext.lineWidth = 3;
+  canvasContext.strokeStyle = 'lightBlue';
+
+  // all the waveform is in one single path, first let's
+  // clear any previous path that could be in the buffer
+  canvasContext.beginPath();
+  
+  var sliceWidth = width / bufferLength;
+  var x = 0;
+  
+      // values go from 0 to 256 and the canvas heigt is 100. Let's rescale
+      // before drawing. This is the scale factor
+      var heightScale = height/128;
+
+  for(var i = 0; i < bufferLength; i++) {
+     // dataArray[i] between 0 and 255
+     var v = dataArray[i] / 255;
+     var y = v * height;
+    
+     if(i === 0) {
+        canvasContext.moveTo(x, y);
+     } else {
+        canvasContext.lineTo(x, y);
+     }
+
+     x += sliceWidth;
+  }
+
+  canvasContext.lineTo(canvas.width, canvas.height/2);
+  
+  // draw the path at once
+  canvasContext.stroke();    
+  canvasContext.restore();
+}
+
+
+function clearCanvas() {
+   canvasContext.save();
+  
+   // clear the canvas
+   // like this: canvasContext.clearRect(0, 0, width, height);
+  
+   // Or use rgba fill to give a slight blur effect
+  canvasContext.fillStyle = 'rgba(0, 0, 0, 0.5)';
+  canvasContext.fillRect(0, 0, width, height);
+  
+  canvasContext.restore();
+}
+
+
+function drawVolumeMeters() {
+  canvasContext.save();
+  
+  // set the fill style to a nice gradient
+  canvasContext.fillStyle=gradient;
+  
+  // left channel
+  analyserLeft.getByteFrequencyData(dataArrayLeft);
+  var averageLeft = getAverageVolume(dataArrayLeft);
+  
+  // draw the vertical meter for left channel
+  canvasContext.fillRect(0,height-averageLeft,25,height);
+  
+  // right channel
+  analyserRight.getByteFrequencyData(dataArrayRight);
+  var averageRight = getAverageVolume(dataArrayRight);
+  
+  // draw the vertical meter for left channel
+  canvasContext.fillRect(26,height-averageRight,25,height);
+
+  
+  canvasContext.restore();
+}
+
+function getAverageVolume(array) {
+        var values = 0;
+        var average;
+ 
+        var length = array.length;
+ 
+        // get all the frequency amplitudes
+        for (var i = 0; i < length; i++) {
+            values += array[i];
+        }
+ 
+        average = values / length;
+        return average;
+    }
+
 function visualize2() {
 
-  // clear the canvas
-  canvasContext2.clearRect(0, 0, width2, height2);
-  
-  // Or use rgba fill to give a slight blur effect
-  //canvasContext.fillStyle = 'rgba(0, 0, 0, 0.5)';
-  //canvasContext.fillRect(0, 0, width, height);
+    canvasContext2.save();
+    canvasContext2.fillStyle = "rgba(0, 0, 0, 0.05)";
+    canvasContext2.fillRect (0, 0, width2, height2);
   
   // Get the analyser data
   analyser2.getByteFrequencyData(dataArray2);
 
-   var barWidth = width2 / bufferLength2;
-      var barHeight;
-      var x = 0;
-   
-      // values go from 0 to 256 and the canvas heigt is 100. Let's rescale
-      // before drawing. This is the scale factor
-      var heightScale = height2/128;
+
+    var nbFreq = dataArray2.length;
+    
+    var SPACER_WIDTH = 5;
+    var BAR_WIDTH = 2;
+    var OFFSET = 100;
+    var CUTOFF = 23;
+    var HALF_HEIGHT = height2/2;
+    var numBars = 1.7*Math.round(width2 / SPACER_WIDTH);
+    var magnitude;
   
-      for(var i = 0; i < bufferLength2; i++) {
-        barHeight = dataArray2[i];
+    canvasContext2.lineCap = 'round';
 
+    for (var i = 0; i < numBars; ++i) {
+       magnitude = 0.3*dataArray2[Math.round((i * nbFreq) / numBars)];
+        
+       canvasContext2.fillStyle = "hsl( " + Math.round((i*360)/numBars) + ", 100%, 50%)";
+       canvasContext2.fillRect(i * SPACER_WIDTH, HALF_HEIGHT, BAR_WIDTH, -magnitude);
+       canvasContext2.fillRect(i * SPACER_WIDTH, HALF_HEIGHT, BAR_WIDTH, magnitude);
 
-        canvasContext2.fillStyle = 'rgb(' + (barHeight+100) + ',50,50)';
-        barHeight *= heightScale;
-        canvasContext2.fillRect(x, height2-barHeight/2, barWidth, barHeight/2);
+    }
 
-        // 2 is the number of pixels between bars
-        x += barWidth + 1;
-      }
+        // Draw animated white lines top
+    canvasContext2.strokeStyle = "white";
+    canvasContext2.beginPath();
+
+    for (i = 0; i < numBars; ++i) {
+        magnitude = 0.3*dataArray2[Math.round((i * nbFreq) / numBars)];
+          if(i > 0) {
+            //console.log("line lineTo "  + i*SPACER_WIDTH + ", " + -magnitude);
+            canvasContext2.lineTo(i*SPACER_WIDTH, HALF_HEIGHT-magnitude);
+        } else {
+            //console.log("line moveto "  + i*SPACER_WIDTH + ", " + -magnitude);
+            canvasContext2.moveTo(i*SPACER_WIDTH, HALF_HEIGHT-magnitude);
+        }
+    }
+
+    for (i = 0; i < numBars; ++i) {
+        magnitude = 0.3*dataArray2[Math.round((i * nbFreq) / numBars)];
+          if(i > 0) {
+            //console.log("line lineTo "  + i*SPACER_WIDTH + ", " + -magnitude);
+            canvasContext2.lineTo(i*SPACER_WIDTH, HALF_HEIGHT+magnitude);
+        } else {
+            //console.log("line moveto "  + i*SPACER_WIDTH + ", " + -magnitude);
+            canvasContext2.moveTo(i*SPACER_WIDTH, HALF_HEIGHT+magnitude);
+        }
+    }    
   
-  // call again the visualize function at 60 frames/s
-  requestAnimationFrame(visualize2);
+    canvasContext2.stroke();
+    canvasContext2.restore();
+    requestAnimationFrame(visualize2);
   
 }
 
@@ -543,80 +727,115 @@ $scope.muteAll = function () {
   { 
   gainNode.gain.value = 0;
   button.style.backgroundImage="url('./lib/image/sound.png')";
-
- }
+  }
+ 
  else 
-{
-     gainNode.gain.value = gainSlider.value;
+  {
+   gainNode.gain.value = gainSlider.value;
 	 button.style.backgroundImage="url('./lib/image/mute.png')";
 }
 	
-  };
+};
 
-
-
-
-  
-    $scope.mute = function (i) {
+    
+  $scope.mute = function (i) {
 	
-	console.log (i);
 var button = document.getElementById('mute'+i);
 var gainSlideri = document.getElementById('gainSlider'+i);
 if   ( gainNodesT[i].gain.value != 0 )
   { 
   gainNodesT[i].gain.value = 0;
   button.style.backgroundImage="url('./lib/image/sound.png')";
-
  }
+
  else 
 {
-     gainNodesT[i].gain.value = gainSlideri.value;
+   gainNodesT[i].gain.value = gainSlideri.value;
 	 button.style.backgroundImage="url('./lib/image/mute.png')";
-
 }	
-  };
+ };
   
-      $scope.muteothers = function (i) {
-           casqueT [i] += 1;
-
-       var button = document.getElementById('muteothers'+i);
+  $scope.muteothers = function (i) {
+     
+      casqueT [i] += 1;
+      var button = document.getElementById('muteothers'+i);
 
 	   if (casqueT[i] % 2 != 0)
 	{
 	
-	
 	button.style.backgroundImage="url('./lib/image/headn.png')";
 
 	for (var j = 0; j < gainNodesT.length  ; j++)
-{
-if (j != i)
-{
+  {
+  if (j != i)
+  {
   gainNodesT[j].gain.value = 0;
   button = document.getElementById('muteothers'+j);
   button.style.backgroundImage="url('./lib/image/head.png')";
   if (casqueT[j] % 2 != 0) casqueT [j] += 1;
-
-
   }
-else
+  else
   gainNodesT[j].gain.value = gainNodesT[i].gain.value;
-}
-	
-	
-	}
-
-	else 
- 	
-{	button.style.backgroundImage="url('./lib/image/head.png')";
-
-	 for (var j = 0; j < gainNodesT.length  ; j++)
-{
+  }}
+  
+  else 
+ 	{	
+  button.style.backgroundImage="url('./lib/image/head.png')";
+  for (var j = 0; j < gainNodesT.length  ; j++)
+  {
   gainNodesT[j].gain.value = 1;
-}
-}	 
+  }}	 
 
   };
 
+
+
+
+
+function loadImpulse(url, i ) {
+   var ajaxRequest = new XMLHttpRequest();
+   ajaxRequest.open('GET', url, true);
+   ajaxRequest.responseType = 'arraybuffer'; // for binary transfer
+ 
+   ajaxRequest.onload = function() {
+      // The impulse has been loaded
+      var impulseData = ajaxRequest.response;
+      // let's decode it.
+      audioContext.decodeAudioData(impulseData, function(buffer) {
+         // The impulse has been decoded
+         decodedImpulset[i] = buffer;
+         // Let's call the callback function, we're done!
+         buildImpulseNode(i);
+     });
+   };
+   ajaxRequest.onerror = function(e) {
+      console.log("Error with loading audio data" + e.err);
+   };
+   ajaxRequest.send();
+}
+
+function buildImpulseNode(i)
+{
+  convolverNodet[i] = audioContext.createConvolver();
+  // Set the buffer property of the convolver node with the decoded impulse
+  convolverNodet[i].buffer = decodedImpulset[i];
+ 
+  convolverGaint[i] = audioContext.createGain();
+  convolverGaint[i].gain.value = 0;
+ 
+  directGaint[i] = audioContext.createGain();
+  directGaint[i].gain.value = 1;
+}
+
+
+$scope.changeImpulse = function(index)
+{
+
+var impulse = document.getElementById ('convolverSlider' + index);
+    convolverGaint[index].gain.value = impulse.value;
+    directGaint[index].gain.value = 1 - convolverGaint[index].gain.value;
+
+};
 
 	}]);
 })();
