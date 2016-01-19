@@ -628,7 +628,7 @@ module.exports = function(app) {
         return res.send({ error: 'Not found' });
       }
 
-      if (req.body.trackName != null) track.trackNname= req.body.trackNname;
+      if (req.body.trackName != null) track.trackName= req.body.trackName;
       if (req.body.piste != null) track.pisteGuitar= req.body.piste;
       if (req.body.singer != null) track.singer = req.body.singer;
       if (req.body.album != null) track.album = req.body.album;
@@ -800,7 +800,7 @@ module.exports = function(app) {
       }
 
       if (req.body.username != null) mix.username= req.body.username;
-      if (req.body.mixname!= null) mix.mixname= req.body.mixname;
+      if (req.body.mixName!= null) mix.mixName= req.body.mixName;
       if (req.body.description!= null) mix.description= req.body.description;
       if (req.body.frequencies!= null) mix.frequencies = req.body.frequencies;
       if (req.body.gain!= null) mix.gain= req.body.gain;
