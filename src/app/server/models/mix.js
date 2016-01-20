@@ -39,6 +39,9 @@ var Mix = new Schema({
   compressor:   {
     type: String
   },
+  impulses:   {
+    type: Array
+  },
   dateOfCreation: {
     type    : Date,
     default : Date.now

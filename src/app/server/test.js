@@ -309,7 +309,7 @@ it('Updates a track',function(done){
 /***********************************************    TEST FOR MIX ********************************************************/
 
 /************************************************************************************************************************/
-var mix = new Mix({username: "John", mixName: "MixPop1", description: "Mix Pop number 1", frequencies:'[{frequence:"[10,55,58,78,66,10]"},{frequence:"[14,75,28,18,86,100]"}]',gain:'[{gain:"150"},{gain:"175"},{gain:"102"}]',balance:'[{balance:"150"},{balance:"175"},{balance:"102"}]',compressor:"150"});
+var mix = new Mix({username: "John", mixName: "MixPop1", description: "Mix Pop number 1", frequencies:'[{frequence:"[10,55,58,78,66,10]"},{frequence:"[14,75,28,18,86,100]"}]',gain:'[{gain:"150"},{gain:"175"},{gain:"102"}]',balance:'[{balance:"150"},{balance:"175"},{balance:"102"}]',compressor:"150"},impulses:'[{impulse:"150"},{impulse:"175"},{impulse:"102"}]');
 
 
 

@@ -36,13 +36,6 @@ app.listen(8080);
 console.log('Magic happens on port 8080'); 
 
 
-/**
-First example router
-app.get('/', function(req, res) {
-  res.send("Welcome to our application !");
-});**/
-
-
 // First example router
 app.get('/', function(req, res) {
  

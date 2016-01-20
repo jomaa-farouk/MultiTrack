@@ -518,7 +518,7 @@ module.exports = function(app) {
 
 /****************************************************************************************************************************/
 
-/***********************************************    HANDLE TRACKS  *******************************************************/
+/***********************************************    HANDLE TRACKS  **********************************************************/
 
 /****************************************************************************************************************************/
 
@@ -934,7 +934,7 @@ module.exports = function(app) {
 
   app.get('/mixs', findAllMixs);
   app.get('/mixs/:id', findMixById);
-  app.post('/mixs', addMix);//{"username": "John", "mixName": "MixPop1", "description": "Mix Pop number 1", "frequencies":[{"frequence":"[10,15,12,10,15]"},{"frequence":"[105,152,122,10,15]"}],"gain":[{"gain":"150"},{"gain":"175"},{"gain":"102"}],"balance":[{"balance":"150"},{"balance":"175"},{"balance":"102"}],"compressor":"150"}
+  app.post('/mixs', addMix);//{"username": "John", "mixName": "MixPop1", "description": "Mix Pop number 1", "frequencies":[{"frequence":"[10,15,12,10,15]"},{"frequence":"[105,152,122,10,15]"}],"gain":[{"gain":"150"},{"gain":"175"},{"gain":"102"}],"balance":[{"balance":"150"},{"balance":"175"},{"balance":"102"}],"compressor":"150","impulses":[{"impulse":"150"},{"impulse":"175"},{"impulse":"102"}]}
   app.put('/mixs/:id', updateMix);
   app.delete('/mixs/:id', deleteMix);
 
