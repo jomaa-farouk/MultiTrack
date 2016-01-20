@@ -6,22 +6,36 @@
 
 <div id="songs">
 <label id="labelList">
-<select id ="select" ng-model="selectedTrack" ng-change="loadTrackList (selectedTrack)" 
-     data-ng-options="track.trackName for track in tracks" >
+<select id ="select"   ng-model="selectedTrack" ng-change="loadTrackList (selectedTrack)">
+         <option id ="option"
+    ng-repeat="track in tracks" 
+    value="{{track}}" 
+    title= '{{track.description}} 
+    Singer : {{track.singer}}
+    Album : {{track.album}}
+    Type : {{track.type}}
+    Released : {{track.dateOfTrack.substring(0, 10)}}'>
+    {{track.trackName}}
+    </option>
+
+
 </select>
 </label>
 
-<button id="play" style="cursor: pointer;" ng-click="play();" disabled=true>Play</button>
-<button id="pause" style="cursor: pointer;" ng-click="pause();">Pause</button>
-<button id="stop" style="cursor: pointer;" ng-click="stop();"disabled=true>Stop</button>
 
+<button class="btn btn-primary glyphicon glyphicon-play" id="play" style="cursor: pointer;" ng-click="play();" disabled=true></button>
+<button class="btn btn-primary glyphicon glyphicon-pause" id="pause" style="cursor: pointer;" ng-click="pause();" disabled=true></button>
+<button class="btn btn-primary glyphicon glyphicon-stop" id="stop" style="cursor: pointer;" ng-click="stop();"disabled=true></button>
+<br><br>
 <div class="row">
-<div class="col-md-offset-5 col-md-4">
-<label for="gainSlider">Gain</label>
-<input type="range" min="0" max="1" step="0.01" value="1" id="gainSlider" ng-model="gain" ng-change="changeGain (gain , 0)"/>
+<div class="col-md-offset-5 col-md-2">
+<label for="gainSlider">Volume</label>
 </div>
-<div class="col-md-2">
-<button id="mute" style="cursor: pointer;" ng-click="muteAll();"/>
+<div class="col-md-3">
+<input class="range" type="range" min="0" max="1" step="0.01" value="1" id="gainSlider" ng-model="gain" ng-change="changeGain (gain , 0)" disabled=true/>
+</div>
+<div class="col-md-1">
+<button id="mute" style="cursor: pointer;" ng-click="muteAll();" disabled=true/>
 </div>
 </div>
   
@@ -39,7 +53,7 @@
 
 
 <div class="col-md-offset-1 col-md-2" >
-<button data-toggle="modal" href="#infos" class="btn btn-primary">Upload track</button>
+<button id="upload" data-toggle="modal" href="#infos" class="btn btn-primary">Upload track</button>
 <div class="modal fade" id="infos">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -83,11 +97,11 @@
   <div class="col-md-offset-4 col-md-3">
 
   <label for="pannerSlider">Balance</label>
-  <input type="range" min="-1" max="1" step="0.1" value="0" id="pannerSlider" ng-model="panner" ng-change="changePanner (panner , 0)" />
+  <input class="range" type="range" min="-1" max="1" step="0.1" value="0" id="pannerSlider" ng-model="panner" ng-change="changePanner (panner , 0)" />
   </div>
 
   <div class="col-md-3 col-md-offset-1">
-  <button id="compressorButton" ng-click= "updateCompressor()" align="right">{{buttonCompressor}}</button>
+  <button class="btn btn-primary" id="compressorButton" ng-click= "updateCompressor()" align="right">{{buttonCompressor}}</button>
   </div>
   </div>
 
@@ -99,7 +113,7 @@
     <div ng-repeat = "freq in frequencies">
 	<div class="row">
 	<div class="col-md-2"><label>{{freq}}</label></div>
- <div class="col-md-7"><input id="input1" type="range" value="0" step="1" min="-30" max="30" ng-model="freq_value" ng-change = "changeFrequency (freq_value , 0 , $index)"></input></div>
+ <div class="col-md-7"><input ng-attr-id="{{ 'freq_input' + $index }}" type="range" value="0" step="1" min="-30" max="30" ng-model="freq_value" ng-change = "changeFrequency (freq_value , 0 , $index)"></input></div>
     <div ng-attr-id="{{ 'freq0' + $index }}" class="col-md-3"><output>0 dB</br></output></div>
     </div> 
     </div> 
@@ -119,7 +133,7 @@
 
     <div ng-repeat = "impulse in impulses">
 <div class="col-md-3"><label for="convolverSlider' + $index + '" style="font-size:10px">{{impulse}} (Dry/Wet)</label>
-<input type="range" min="0" max="1" step="0.1" value="0" ng-attr-id="{{ 'convolverSlider' + $index }}" ng-model="impulse_value" ng-change="changeImpulse ($index)" /></div>
+<input class="range" type="range" min="0" max="1" step="0.1" value="0" ng-attr-id="{{ 'convolverSlider' + $index }}" ng-model="impulse_value" ng-change="changeImpulse ($index)" /></div>
     </div>
  </div> </div>
 
@@ -144,7 +158,7 @@
 
 
 <br><br>
-<button id="savemix" style="cursor: pointer;" onClick="savemix();" ng-show="trackSelected">Save Mixe</button>
+<button class="btn btn-primary" id="savemix" style="cursor: pointer;" ng-show="trackSelected" ng-click="saveNewMix();">Save Mixe</button>
  
 
 
