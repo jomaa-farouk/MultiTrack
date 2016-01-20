@@ -760,7 +760,8 @@ module.exports = function(app) {
      frequencies: req.body.frequencies, 
      gain: req.body.gain,
      balance: req.body.balance,
-     compressor:   req.body.compressor
+     compressor:   req.body.compressor,
+     impulses: req.body.impulses
     });
 
     mix.save(function(err) {
@@ -806,6 +807,7 @@ module.exports = function(app) {
       if (req.body.gain!= null) mix.gain= req.body.gain;
       if (req.body.balance!= null) mix.balance= req.body.balance;
       if (req.body.compressor!= null) mix.compressor= req.body.compressor;
+      if (req.body.impulses!= null) mix.impulses= req.body.impulses;
 
       return mix.save(function(err) {
         if(!err) {
