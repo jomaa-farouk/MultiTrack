@@ -55,7 +55,7 @@
 
 
 		$scope.findTrackById = function(trackId){
-			TracksFactory.show({params:trackId}).$promise.then(
+			TrackFactory.show({params:trackId}).$promise.then(
 				function(response){
 					$scope.showTrack = true;
 					$scope.track = response;
@@ -73,8 +73,9 @@
 		};
 
 		$scope.mixs = MixsFactory.query();
-		//$scope.tracks = TracksFactory.query();
-		$scope.tracks = [ {"trackName":"Michael jackson - Beat It","piste":[{"pisteMp3":"basse.mp3"},{"pisteMp3":"batterie.mp3"},{"pisteMp3":"guitare.mp3"},{"pisteMp3":"synthes.mp3"},{"pisteMp3":"voix.mp3"}],"singer":"Micheal Jackson","album":"Beat It","type":"Pop","description":"Song of Micheal Jackson","dateOfTrack":"1992-10-21T13:28:06.419Z"},{"trackName":"Metallica - One","piste":[{"pisteMp3":"guitar.mp3"},{"pisteMp3":"rhythm.mp3"},{"pisteMp3":"song.mp3"}],"singer":"","album":"","type":"","description":"","dateOfTrack":""}];
+		$scope.tracks = TracksFactory.query();
+
+	//	$scope.tracks = [ {"trackName":"Michael jackson - Beat It","piste":[{"pisteMp3":"basse.mp3"},{"pisteMp3":"batterie.mp3"},{"pisteMp3":"guitare.mp3"},{"pisteMp3":"synthes.mp3"},{"pisteMp3":"voix.mp3"}],"singer":"Micheal Jackson","album":"Beat It","type":"Pop","description":"Song of Micheal Jackson","dateOfTrack":"1992-10-21T13:28:06.419Z"},{"trackName":"Metallica - One","piste":[{"pisteMp3":"guitar.mp3"},{"pisteMp3":"rhythm.mp3"},{"pisteMp3":"song.mp3"}],"singer":"","album":"","type":"","description":"","dateOfTrack":""}];
 	
 
 
@@ -85,7 +86,16 @@
 var ctx = window.AudioContext || window.webkitAudioContext;
 var audioContext;
 
-var gainSlider, gainNode, pannerSlider, pannerNode, bplay, bpause, player, compressorNode, compressorButton, bstop ;
+var gainSlider, gainNode, pannerSlider, pannerNode, bplay, bpause, player, compressorNode, compressorButton, bstop, list, bmute;
+var freq_input0, freq_input1, freq_input2, freq_input3, freq_input4, freq_input5, convSlider0, convSlider1, convSlider2, convSlider3;
+var bupload, bsavemix;
+
+var freq_pistes_input = new Array ();
+var gain_pistes_input = new Array ();
+var stereo_pistes_input = new Array ();
+var mutePistes_input = new Array ();
+var playOnly_input = new Array ();
+
 var canvas, canvas2, canvasContext, canvasContext2, width, height, width2, height2, bufferLength, dataArray, bufferLength2, dataArray2;
 var analyser, analyser2, gradient, analyserLeft, analyserRight, dataArrayLeft, dataArrayRight, splitter;
 
@@ -133,7 +143,11 @@ $scope.init = function(){
   bpause = document.getElementById('pause');
   bstop = document.getElementById('stop');
   compressorButton = document.getElementById('compressorButton');
-  
+  list = document.getElementById('select');
+  bmute = document.getElementById('mute');
+  bupload = document.getElementById('upload');
+  bsavemix = document.getElementById('savemix');
+
   $scope.impulses.forEach (function(impulse , i) {
   var  impulseURL = 'http://localhost:8080/impulse/' + impulse + '.wav';
 
@@ -211,10 +225,33 @@ function initCanvas ()
 
 }
 
+$scope.loadTrackList = function(Track){
 
-$scope.loadTrackList = function(selectedTrack){
-timer(0);
 $scope.trackSelected = true;
+
+freq_input0 = document.getElementById('freq_input0');
+freq_input1 = document.getElementById('freq_input1');
+freq_input2 = document.getElementById('freq_input2');
+freq_input3 = document.getElementById('freq_input3');
+freq_input4 = document.getElementById('freq_input4');
+freq_input5 = document.getElementById('freq_input5');
+
+convSlider0 = document.getElementById('convolverSlider0');
+convSlider1 = document.getElementById('convolverSlider1');
+convSlider2 = document.getElementById('convolverSlider2');
+convSlider3 = document.getElementById('convolverSlider3');
+
+mutePistes_input = new Array ();
+playOnly_input = new Array ();
+gain_pistes_input = new Array ();
+stereo_pistes_input = new Array ();
+freq_pistes_input = new Array ();
+
+timer(0);
+var array = JSON.parse("[" + Track + "]");
+var selectedTrack = array[0];
+
+
 
 	stopGraph (true);
 	//initCanvas ();
@@ -229,7 +266,7 @@ var content = '<div class="row" >';
 selectedTrack.piste.forEach (function(songName , i) {
 
 casqueT [i] = 0;
-soundURLt[i] =  base + songName.pisteMp3  ; 
+soundURLt[i] =  base + songName.pisteMp3 ; 
 
 content+='<div class="col-md-2"><H4 align="center">'+songName.pisteMp3;
 content+='<button class="mute" id="mute'+i+'" style="cursor: pointer;" ng-click = "mute ('+i+')">&nbsp;&nbsp;</button> ';
@@ -242,7 +279,7 @@ $scope.frequencies.forEach (function(freq , j) {
 
 var s = "";
 s+='<label>'+freq+'</label>';
-s+='<input  type="range" value="0" step="1" min="-30" max="30" ng-model="freq_val'+k+j+'" ng-change="changeFrequency(freq_val'+k+j+' ,'+k+' ,'+j+')"></input>';
+s+='<input  id="freq_value'+k+j+'" type="range" value="0" step="1" min="-30" max="30" ng-model="freq_val'+k+j+'" ng-change="changeFrequency(freq_val'+k+j+' ,'+k+' ,'+j+')"></input>';
 s+='<output id="freq'+k+j+'">0 dB<br></output>';
 
 
@@ -252,9 +289,9 @@ content=content+s;
 
 content+='</div> </div> <div class="row">';
 content+='<div class="col-md-6"><label for="gainSlider">Gain</label>';
-content+='<input type="range" min="0" max="1" step="0.01" value="1" id="gainSlider'+i+'" ng-model="gain'+k+'" ng-change="changeGain (gain'+k+' , '+k+')"/>';
+content+='<input class="range" type="range" min="0" max="1" step="0.01" value="1" id="gainSlider'+i+'" ng-model="gain'+k+'" ng-change="changeGain (gain'+k+' , '+k+')"/>';
 content+='</div><div class="col-md-6"><label for="pannerSlider">Balance</label>';
-content+='<input type="range" min="-1" max="1" step="0.1" value="0" id="pannerSlider'+i+'" ng-model="panner'+k+'" ng-change="changePanner (panner'+k+' , '+k+')" />';
+content+='<input class="range" type="range" min="-1" max="1" step="0.1" value="0" id="pannerSlider'+i+'" ng-model="panner'+k+'" ng-change="changePanner (panner'+k+' , '+k+')" />';
 
 content+='</div> </div> </div>';
 
@@ -267,6 +304,23 @@ freq_tabo.innerHTML = content;
 div_tracks.innerHTML = null;
 div_tracks.appendChild (freq_tabo);
 $compile(freq_tabo)($scope);
+
+var l;
+selectedTrack.piste.forEach (function(songName , i) {
+
+mutePistes_input.push (document.getElementById('mute'+i));
+playOnly_input.push (document.getElementById('muteothers'+i));
+gain_pistes_input.push (document.getElementById('gainSlider'+i));
+stereo_pistes_input.push (document.getElementById('pannerSlider'+i));
+  
+  l = i+1;
+
+$scope.frequencies.forEach (function(freq , j) { 
+freq_pistes_input.push (document.getElementById("freq_value"+l+j));
+});
+
+desactivateAll ();
+});
 
 initBuffer(true) ;
 
@@ -299,6 +353,7 @@ function loadSoundUsingAjax(url , i) {
   // Decode asynchronously
   request.onload = function() {
     console.log("Sound loaded");    
+
     // Let's decode it. This is also asynchronous
     audioContext.decodeAudioData(request.response, function(buffer) {
       console.log("Sound decoded");
@@ -313,9 +368,11 @@ function loadSoundUsingAjax(url , i) {
 
    
 	  // we enable the button
-     if (i == soundURLt.length-1)
+     if ($scope.percentage == 100)
 	  {
 	 bplay.disabled = false;
+   list.disabled = false;
+
       }   
  	}, function(e) {
       console.log("error");});
@@ -385,25 +442,18 @@ $scope.play = function(){
 
 for (var i = 0; i < soundURLt.length; i++) {
     
-    if (stoppressed) {
-    bufferSourcet[i].buffer = decodedSoundt[i];
-    bufferSourcet[i].start();
-    }
-
-else
-{ 
     bufferSourcet[i] = audioContext.createBufferSource();
     bufferSourcet[i].buffer = decodedSoundt[i];
     bufferSourcet[i].start();
-}    
-
+    
 }
 
 buildAudioGraph();
 stoppressed = false;
+
+   activateAll ();
+
 bplay.disabled = true;
-bpause.disabled = false;
-bstop.disabled = false;
 
 };
 
@@ -417,15 +467,19 @@ bpause.disabled = true;
 bstop.disabled = true;
  };
 
+ $scope.pause = function(){
+console.log ('stop') ;
+};
+
+
 
 function stopGraph (destroy) {
 
-if (stoppressed && destroy)
+if (!(stoppressed && destroy))
 {
  for (var i = 0; i < bufferSourcet.length; i++) {
-   bufferSourcet[i].stop();
-}
-}
+  bufferSourcet[i].stop();
+}}
 
 if (destroy == true)
  {
@@ -837,5 +891,131 @@ var impulse = document.getElementById ('convolverSlider' + index);
 
 };
 
-	}]);
+
+function desactivateAll ()
+{
+
+  gainSlider.disabled = true;
+  pannerSlider.disabled = true;
+  bplay.disabled = true;
+  bpause.disabled = true;
+  bpause.disabled = true;
+  bstop.disabled = true;
+  compressorButton.disabled = true;
+  list.disabled = true;
+  mute.disabled = true;
+
+  freq_input0.disabled = true;
+  freq_input1.disabled = true;
+  freq_input2.disabled = true;
+  freq_input3.disabled = true;
+  freq_input4.disabled = true;
+  freq_input5.disabled = true;
+
+  convSlider0.disabled = true;
+  convSlider1.disabled = true;
+  convSlider2.disabled = true;
+  convSlider3.disabled = true;
+
+  mutePistes_input.forEach (function(mute , i) {
+  mute.disabled = true;
+  });
+
+  playOnly_input.forEach (function(play , i) {
+  play.disabled = true;
+  });
+
+  freq_pistes_input.forEach (function(freq , i) {
+  freq.disabled = true;
+  });
+
+  stereo_pistes_input.forEach (function(stereo , i) {
+  stereo.disabled = true;
+  });
+
+  gain_pistes_input.forEach (function(gain , i) {
+  gain.disabled = true;
+  });
+
+  bupload.disabled = true;
+  bsavemix.disabled = true;
+}
+
+function activateAll ()
+{
+
+  gainSlider.disabled = false;
+  pannerSlider.disabled = false;
+  bplay.disabled = false;
+  bpause.disabled = false;
+  bstop.disabled = false;
+  compressorButton.disabled = false;
+  list.disabled = false;
+  mute.disabled = false;
+
+  freq_input0.disabled = false;
+  freq_input1.disabled = false;
+  freq_input2.disabled = false;
+  freq_input3.disabled = false;
+  freq_input4.disabled = false;
+  freq_input5.disabled = false;
+  
+  convSlider0.disabled = false;
+  convSlider1.disabled = false;
+  convSlider2.disabled = false;
+  convSlider3.disabled = false;
+
+  mutePistes_input.forEach (function(mute , i) {
+  mute.disabled = false;
+  });
+
+  playOnly_input.forEach (function(play , i) {
+  play.disabled = false;
+  });
+
+  freq_pistes_input.forEach (function(freq , i) {
+  freq.disabled = false;
+  });
+
+  stereo_pistes_input.forEach (function(stereo , i) {
+  stereo.disabled = false;
+  });
+
+  gain_pistes_input.forEach (function(gain , i) {
+  gain.disabled = false;
+  });
+
+  bupload.disabled = false;
+  bsavemix.disabled = false;
+
+}
+
+	
+$scope.saveNewMix = function(){
+
+ var mix = {
+        "username": "test",
+        "mixName" : "test",
+        "description" : "test",
+        "gain": [],
+        "balance": [],
+        "compressor": "ON",
+        "frequencies": [],
+        "impulse": []
+    };
+
+var myJSONText = JSON.stringify(mix, replace);
+console.log (myJSONText);
+
+ };
+
+ function replace(key, value) {
+    if (typeof value === 'number' && !isFinite(value)) {
+        return String(value);
+    }
+    return value;
+}
+
+
+  }]);
 })();
