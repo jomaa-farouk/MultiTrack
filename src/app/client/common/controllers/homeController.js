@@ -75,12 +75,6 @@
 		$scope.mixs = MixsFactory.query();
 		$scope.tracks = TracksFactory.query();
 
-	//	$scope.tracks = [ {"trackName":"Michael jackson - Beat It","piste":[{"pisteMp3":"basse.mp3"},{"pisteMp3":"batterie.mp3"},{"pisteMp3":"guitare.mp3"},{"pisteMp3":"synthes.mp3"},{"pisteMp3":"voix.mp3"}],"singer":"Micheal Jackson","album":"Beat It","type":"Pop","description":"Song of Micheal Jackson","dateOfTrack":"1992-10-21T13:28:06.419Z"},{"trackName":"Metallica - One","piste":[{"pisteMp3":"guitar.mp3"},{"pisteMp3":"rhythm.mp3"},{"pisteMp3":"song.mp3"}],"singer":"","album":"","type":"","description":"","dateOfTrack":""}];
-	
-
-
-
-/////// added 17/01 by Farouk:
 
 
 var ctx = window.AudioContext || window.webkitAudioContext;
@@ -114,7 +108,6 @@ var casqueT = [];
 var stoppressed = false;  
 
 $scope.frequencies = ['60Hz' , '170Hz' , '350Hz' , '1000Hz' , '3500Hz' , '10000Hz' ];
-
 $scope.impulses = ['dance hall','mythology','sports verb', 'wobble room'];
 
 var decodedImpulset = [];
@@ -128,11 +121,14 @@ $scope.gain = 1;
 
 $scope.impulse_value = 0;
 
+// Object that draws a sample waveform in a canvas  
+var waveformDrawer = new WaveformDrawer();  
 
 
 $scope.init = function(){
   // get the AudioContext0
   audioContext = new ctx();
+
   pannerNode = audioContext.createStereoPanner();
 
 
@@ -161,7 +157,6 @@ $scope.init = function(){
       // starts the animation at 60 frames/s
   requestAnimationFrame(visualize);
   requestAnimationFrame(visualize2);
-
 
 };
 
@@ -225,9 +220,11 @@ function initCanvas ()
 
 }
 
+
 $scope.loadTrackList = function(Track){
 
 $scope.trackSelected = true;
+
 
 freq_input0 = document.getElementById('freq_input0');
 freq_input1 = document.getElementById('freq_input1');
@@ -252,26 +249,26 @@ var array = JSON.parse("[" + Track + "]");
 var selectedTrack = array[0];
 
 
-
 	stopGraph (true);
 	//initCanvas ();
   bstop.disabled = true;
 
 var div_tracks = document.getElementById('tracks_list');
+
 soundURLt = [];
 var  base = 'http://localhost:8080/track/' + selectedTrack.trackName + '/sound/';
 
-var content = '<div class="row" >';
+var content = '<div class="row"><div class="col-md-offset-2">';
 
 selectedTrack.piste.forEach (function(songName , i) {
 
 casqueT [i] = 0;
 soundURLt[i] =  base + songName.pisteMp3 ; 
 
-content+='<div class="col-md-2"><H4 align="center">'+songName.pisteMp3;
+content+='<div class="row" ><div class="col-md-3"><H4>'+songName.pisteMp3;
 content+='<button class="mute" id="mute'+i+'" style="cursor: pointer;" ng-click = "mute ('+i+')">&nbsp;&nbsp;</button> ';
 content+='<button class="muteothers" id="muteothers'+i+'" style="cursor: pointer;" ng-click = "muteothers ('+i+')"></button>'+'</H4>';
-content+='<div class="controls1"><div class="row">';
+content+='<div class="controls1"><div class="row"> <div class="col-md-offset-1">';
 
 var k = i+1;
 
@@ -287,24 +284,23 @@ content=content+s;
 
 });
 
-content+='</div> </div> <div class="row">';
-content+='<div class="col-md-6"><label for="gainSlider">Gain</label>';
+content+='</div> </div> </div> <div class="row">';
+content+='<div class="col-md-6"><label for="gainSlider">Volume</label>';
 content+='<input class="range" type="range" min="0" max="1" step="0.01" value="1" id="gainSlider'+i+'" ng-model="gain'+k+'" ng-change="changeGain (gain'+k+' , '+k+')"/>';
-content+='</div><div class="col-md-6"><label for="pannerSlider">Balance</label>';
+content+='</div><div class="col-md-6"><label for="pannerSlider">Stereo</label>';
 content+='<input class="range" type="range" min="-1" max="1" step="0.1" value="0" id="pannerSlider'+i+'" ng-model="panner'+k+'" ng-change="changePanner (panner'+k+' , '+k+')" />';
 
-content+='</div> </div> </div>';
+content+='</div> </div> </div> <div class="col-md-5 col-md-offset-2"> <br><br><canvas id="canvasOnde'+i+'" width=400 height=150></canvas> </div> </div> <br><br>';
 
 });
 
-content+=' </div>';
+content+='</div> </div>';
 
 var freq_tabo = document.createElement('div');			
 freq_tabo.innerHTML = content;
 div_tracks.innerHTML = null;
 div_tracks.appendChild (freq_tabo);
 $compile(freq_tabo)($scope);
-
 var l;
 selectedTrack.piste.forEach (function(songName , i) {
 
@@ -344,6 +340,7 @@ for (var i = 0; i < soundURLt.length; i++) {
 
 
 function loadSoundUsingAjax(url , i) {
+
   var request = new XMLHttpRequest();
   
   request.open('GET', url, true);
@@ -368,10 +365,11 @@ function loadSoundUsingAjax(url , i) {
 
    
 	  // we enable the button
-     if ($scope.percentage == 100)
+     if (parseInt( $scope.percentage ) == 100)
 	  {
 	 bplay.disabled = false;
    list.disabled = false;
+   drawTrack (decodedSoundt);
 
       }   
  	}, function(e) {
@@ -384,11 +382,10 @@ function loadSoundUsingAjax(url , i) {
 }
 
 
-  function timer(n) {
-    $(".progress-bar").css("width", n + "%");
-        $("#pourcentage").text(n + "%");
-
-    }
+function timer(n) {
+   $(".progress-bar").css("width", n + "%");
+     $("#pourcentage").text(n + "%");
+  }
 
 
 $scope.changeGain = function(gain , i){
@@ -404,6 +401,7 @@ $scope.changePanner = function(panner , i){
      	stereoNodet[i-1].pan.value= panner;
 };
 
+
 $scope.changeFrequency = function(freq_value , row , index){
    var output = document.getElementById("freq"+row+index);
 
@@ -414,14 +412,14 @@ $scope.changeFrequency = function(freq_value , row , index){
 };
 
 $scope.buttonCompressor = 'Turn Compressor ON';
-$scope.ompressorSelected = false;
+$scope.compressorSelected = false;
 
 $scope.updateCompressor = function () {
 
 var compressorButton = document.getElementById("compressorButton");
-$scope.ompressorSelected = !$scope.ompressorSelected;
+$scope.compressorSelected = !$scope.compressorSelected;
 
-if ( $scope.ompressorSelected == false )
+if ( $scope.compressorSelected == false )
 {
 $scope.buttonCompressor = 'Turn Compressor ON';
 compressorNode.disconnect(audioContext.destination);
@@ -495,7 +493,7 @@ if (destroy == true)
  }
 }
 
-  $scope.firstTime = true;
+$scope.firstTime = true;
 
 function buildAudioGraph( ) {
 
@@ -792,7 +790,7 @@ $scope.muteAll = function () {
 };
 
     
-  $scope.mute = function (i) {
+$scope.mute = function (i) {
 	
 var button = document.getElementById('mute'+i);
 var gainSlideri = document.getElementById('gainSlider'+i);
@@ -809,7 +807,7 @@ if   ( gainNodesT[i].gain.value != 0 )
 }	
  };
   
-  $scope.muteothers = function (i) {
+$scope.muteothers = function (i) {
      
       casqueT [i] += 1;
       var button = document.getElementById('muteothers'+i);
@@ -841,9 +839,6 @@ if   ( gainNodesT[i].gain.value != 0 )
   }}	 
 
   };
-
-
-
 
 
 function loadImpulse(url, i ) {
@@ -991,30 +986,94 @@ function activateAll ()
 }
 
 	
-$scope.saveNewMix = function(){
+$scope.saveNewMix = function(mixe){
 
  var mix = {
         "username": "test",
-        "mixName" : "test",
-        "description" : "test",
+        "trackName" : "",
+        "mixName" : "",
+        "description" : "",
         "gain": [],
         "balance": [],
-        "compressor": "ON",
+        "compressor": "",
         "frequencies": [],
         "impulse": []
     };
+
+var newMix = angular.copy(mixe);
+
+mix.mixName = newMix.mixName;
+mix.description = newMix.description;
+mix.trackName = JSON.parse("[" + $scope.selectedTrack + "]")[0].trackName;
+
+for (var i=0 ; i<=soundURLt.length ; i++)
+{
+
+var obj = {"frequency" : []};
+var array = new Array();
+
+   if (i==0)
+   { 
+    mix.gain.push (gainNode.gain.value);
+    mix.balance.push (pannerNode.pan.value);
+    
+    $scope.frequencies.forEach (function (freq, j) {
+    array.push(filters[j].gain.value);
+    });
+    
+    obj.frequency = array;
+    mix.frequencies.push (obj);
+   }
+  
+    else
+   {
+    mix.gain.push (gainNodesT[i-1].gain.value);
+    mix.balance.push (stereoNodet[i-1].pan.value);
+
+   $scope.frequencies.forEach (function (freq, j) {
+    array.push(filtersPistes[i-1][j].gain.value);
+    });
+
+    obj.frequency = array;
+    mix.frequencies.push (obj);
+
+  }
+}
+
+if ($scope.compressorSelected == false)
+mix.compressor = "OFF";
+else
+mix.compressor = "ON";
+
+$scope.impulses.forEach (function (impulse, i) {
+mix.impulse.push (convolverGaint[i].gain.value);
+});
 
 var myJSONText = JSON.stringify(mix, replace);
 console.log (myJSONText);
 
  };
 
- function replace(key, value) {
+function replace(key, value) {
     if (typeof value === 'number' && !isFinite(value)) {
         return String(value);
     }
     return value;
 }
+
+
+function drawTrack(decodedBuffer)  {
+
+    decodedBuffer.forEach (function(gain , i) {
+    
+    var canvas = document.getElementById ('canvasOnde'+i);
+    waveformDrawer.init(decodedBuffer[i], canvas, 'green');  
+    // First parameter = Y position (top left corner)  
+    // second = height of the sample drawing  
+    waveformDrawer.drawWave(0, canvas.height);  
+})
+}  
+
 
 
   }]);

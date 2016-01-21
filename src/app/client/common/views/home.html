@@ -1,7 +1,13 @@
 <div class="container" data-ng-init="init()">
 
+<br>
 <div class="row">
+
 <div class="col-md-5">
+
+  <div class="row">
+
+    <div class="col-md-7">
 <audio id="player" crossorigin="anonymous" loop />
 
 <div id="songs">
@@ -21,14 +27,23 @@
 
 </select>
 </label>
+</div> 
+</div> 
 
 
-<button class="btn btn-primary glyphicon glyphicon-play" id="play" style="cursor: pointer;" ng-click="play();" disabled=true></button>
+<div class="col-md-4">
+&nbsp;<button class="btn btn-primary glyphicon glyphicon-play" id="play" style="cursor: pointer;" ng-click="play();" disabled=true></button>
 <button class="btn btn-primary glyphicon glyphicon-pause" id="pause" style="cursor: pointer;" ng-click="pause();" disabled=true></button>
 <button class="btn btn-primary glyphicon glyphicon-stop" id="stop" style="cursor: pointer;" ng-click="stop();"disabled=true></button>
-<br><br>
+</div>
+
+</div> 
+
+<br>
 <div class="row">
-<div class="col-md-offset-5 col-md-2">
+
+
+<div class="col-md-2 col-md-offset-5">
 <label for="gainSlider">Volume</label>
 </div>
 <div class="col-md-3">
@@ -38,11 +53,14 @@
 <button id="mute" style="cursor: pointer;" ng-click="muteAll();" disabled=true/>
 </div>
 </div>
-  
-</div> 
-</div> 
 
-<div class="col-md-4">
+<br><br>
+
+
+</div>
+
+<div class="col-md-4" >
+
   <div class="progress progress-striped">
     <div class="progress-bar"></div>
   </div>
@@ -52,32 +70,21 @@
 </div>
 
 
-<div class="col-md-offset-1 col-md-2" >
-<button id="upload" data-toggle="modal" href="#infos" class="btn btn-primary">Upload track</button>
-<div class="modal fade" id="infos">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">x</button>
-        <h4 class="modal-title">Track informations</h4>
-      </div>
+<div class="col-md-1 col-md-offset-1" >
+
+  <button id="upload" data-toggle="modal" href="./common/views/track.html" data-target="#uploadPage" class="btn btn-primary glyphicon glyphicon-upload">&nbsp;Upload track</button>
       
-      <div class="modal-body">
-      formulaire
+      <div class="modal fade" id="uploadPage">
+        <div class="modal-dialog">  
+          <div class="modal-content"></div>  
+        </div> 
       </div>
-      
-      <div class="modal-footer">
-        <button class="btn btn-info" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-</div>
-<br><br>
+
 
 </div>
 
-<br><br>
+</div>
+
 
 <div class="row">
 
@@ -96,7 +103,7 @@
 
   <div class="col-md-offset-4 col-md-3">
 
-  <label for="pannerSlider">Balance</label>
+  <label for="pannerSlider">Stereo</label>
   <input class="range" type="range" min="-1" max="1" step="0.1" value="0" id="pannerSlider" ng-model="panner" ng-change="changePanner (panner , 0)" />
   </div>
 
@@ -151,17 +158,47 @@
 <br><br>
 
 </div>
-
+<br>
 <div class = "row" id="tracks_list" ng-show="trackSelected" >
 
 </div> 
 
 
 <br><br>
-<button class="btn btn-primary" id="savemix" style="cursor: pointer;" ng-show="trackSelected" ng-click="saveNewMix();">Save Mixe</button>
  
+ <div class="row" ng-show="trackSelected" >
 
+<form class="form-horizontal col-md-4">
+  
+  <div class="form-group">
+    <legend>Save your mix</legend>
+  </div>
+  
+  <div class="row">
+    <div class="form-group">
+      <label for="mixName" class="col-md-4 control-label">Mix name : </label>
+      <div class="col-md-8">
+        <input type="text" class="form-control" id="mixName" placeholder="Mix name"  ng-model="mix.mixName" required >
+      </div>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="form-group">
+      <label for="description" class="col-md-4 control-label">Description : </label>
+      <div class="col-md-8">
+        <input type="textarea" class="form-control" id="description" placeholder="Description"  ng-model="mix.description" required >
+      </div>
+    </div>
+  </div>
+ 
+  <div class="form-group">
+    <button id="savemix" type="submit" class="pull-right btn btn-primary glyphicon glyphicon-save" ng-click="saveNewMix(mix);">&nbsp;Save&nbsp;</button>
+  </div>
+  
+   </form>
 
-
+</div>
+  
 
 </div>
