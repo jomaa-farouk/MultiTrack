@@ -993,9 +993,10 @@ function activateAll ()
 
 }
 
-	
-$scope.saveNewMix = function(mixe){
 
+	
+$scope.saveNewMix = function(){
+/**
  var mix = {
         "username": "test",
         "trackName" : "",
@@ -1006,13 +1007,18 @@ $scope.saveNewMix = function(mixe){
         "compressor": "",
         "frequencies": [],
         "impulse": []
-    };
+    };**/
 
-var newMix = angular.copy(mixe);
+//var newMix = angular.copy(mixe);
+//$scope.mixe.trackName;
+//mix.mixName = newMix.mixName;
+//mix.description = newMix.description;
 
-mix.mixName = newMix.mixName;
-mix.description = newMix.description;
-mix.trackName = JSON.parse("[" + $scope.selectedTrack + "]")[0].trackName;
+$scope.mix.trackName = JSON.parse("[" + $scope.selectedTrack + "]")[0].trackName;
+    $scope.mix.gain = [];
+    $scope.mix.frequencies = [];
+    $scope.mix.balance = [];
+    $scope.mix.impulse = [];
 
 for (var i=0 ; i<=soundURLt.length ; i++)
 {
@@ -1022,43 +1028,46 @@ var array = new Array();
 
    if (i==0)
    { 
-    mix.gain.push (gainNode.gain.value);
-    mix.balance.push (pannerNode.pan.value);
+    $scope.mix.gain.push (gainNode.gain.value);
+    $scope.mix.balance.push (pannerNode.pan.value);
     
     $scope.frequencies.forEach (function (freq, j) {
     array.push(filters[j].gain.value);
     });
     
     obj.frequency = array;
-    mix.frequencies.push (obj);
+    $scope.mix.frequencies.push (obj);
    }
   
     else
    {
-    mix.gain.push (gainNodesT[i-1].gain.value);
-    mix.balance.push (stereoNodet[i-1].pan.value);
+    $scope.mix.gain.push (gainNodesT[i-1].gain.value);
+    $scope.mix.balance.push (stereoNodet[i-1].pan.value);
 
    $scope.frequencies.forEach (function (freq, j) {
     array.push(filtersPistes[i-1][j].gain.value);
     });
 
     obj.frequency = array;
-    mix.frequencies.push (obj);
+    $scope.mix.frequencies.push (obj);
 
   }
 }
 
 if ($scope.compressorSelected == false)
-mix.compressor = "OFF";
+$scope.mix.compressor = "OFF";
 else
-mix.compressor = "ON";
+$scope.mix.compressor = "ON";
 
 $scope.impulses.forEach (function (impulse, i) {
-mix.impulse.push (convolverGaint[i].gain.value);
+$scope.mix.impulse.push (convolverGaint[i].gain.value);
 });
 
-var myJSONText = JSON.stringify(mix, replace);
-console.log (myJSONText);
+//var myJSONText = JSON.stringify($scope.mix, replace);
+
+$scope.addMix();
+
+//console.log ($scope.mix);
 
  };
 
