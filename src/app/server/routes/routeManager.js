@@ -756,6 +756,7 @@ module.exports = function(app) {
     var mix = new Mix({
      username:  req.body.username,
      mixName:   req.body.mixName,
+     trackName: req.body.trackName,
      description: req.body.description,
      frequencies: req.body.frequencies, 
      gain: req.body.gain,
@@ -802,6 +803,7 @@ module.exports = function(app) {
 
       if (req.body.username != null) mix.username= req.body.username;
       if (req.body.mixName!= null) mix.mixName= req.body.mixName;
+      if (req.body.trackName!= null) mix.mixName= req.body.trackName;
       if (req.body.description!= null) mix.description= req.body.description;
       if (req.body.frequencies!= null) mix.frequencies = req.body.frequencies;
       if (req.body.gain!= null) mix.gain= req.body.gain;
@@ -936,7 +938,7 @@ module.exports = function(app) {
 
   app.get('/mixs', findAllMixs);
   app.get('/mixs/:id', findMixById);
-  app.post('/mixs', addMix);//{"username": "John", "mixName": "MixPop1", "description": "Mix Pop number 1", "frequencies":[{"frequence":"[10,15,12,10,15]"},{"frequence":"[105,152,122,10,15]"}],"gain":[{"gain":"150"},{"gain":"175"},{"gain":"102"}],"balance":[{"balance":"150"},{"balance":"175"},{"balance":"102"}],"compressor":"150","impulses":[{"impulse":"150"},{"impulse":"175"},{"impulse":"102"}]}
+  app.post('/mixs', addMix);//{"username": "John", "mixName": "MixPop1", "trackName": "MixPop1", "description": "Mix Pop number 1", "frequencies":[{"frequence":"[10,15,12,10,15]"},{"frequence":"[105,152,122,10,15]"}],"gain":[{"gain":"150"},{"gain":"175"},{"gain":"102"}],"balance":[{"balance":"150"},{"balance":"175"},{"balance":"102"}],"compressor":"150","impulses":[{"impulse":"150"},{"impulse":"175"},{"impulse":"102"}]}
   app.put('/mixs/:id', updateMix);
   app.delete('/mixs/:id', deleteMix);
 

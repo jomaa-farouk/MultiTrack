@@ -23,6 +23,10 @@ var Mix = new Schema({
     type    : String,
     require : true
   },
+  trackName:    {
+    type    : String,
+    require : true
+  },
   description:     {
     type    : String,
     require : true
