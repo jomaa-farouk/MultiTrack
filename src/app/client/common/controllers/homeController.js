@@ -35,10 +35,11 @@
 
 		// on recupere un mix par id 
 		$scope.getMix = function(mixId){
-			MixsFactory.get({id:mixId}).$promise.then(
+			MixsFactory.get(mixId).$promise.then(
 				function(response){
 					$scope.showMix = true;
 					$scope.mix = response;
+          console.log ($scope.mix);
 				},
 				function(response){
 					$scope.message = 'Error: '+response.status+' '+response.statusText;
@@ -1091,6 +1092,12 @@ function drawTrack(decodedBuffer)  {
 })
 }  
 
+$scope.test = function (id) {
+
+$scope.getMix (id);
+console.log ($scope.mix);
+
+}
 
 
   }]);
