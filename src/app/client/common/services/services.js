@@ -42,7 +42,10 @@
 
 	services.factory('MixsFactory', ['$resource', function($resource){
 
-		return $resource('/mixs/:id', null, {'update':{method:'PUT'}});
+		return $resource('/mixs', null, {
+			query : {method:'GET', isArray:true},
+			create: {method:'POST'}
+		});
 
 	}]);	
 

@@ -25,6 +25,14 @@
 			);
 		};
 
+    $scope.addTrack = function(){
+      TracksFactory.create($scope.track);
+    };
+
+    $scope.addMix = function(){
+      MixsFactory.create($scope.mix);
+    };
+
 		// on recupere un mix par id 
 		$scope.getMix = function(mixId){
 			MixsFactory.get({id:mixId}).$promise.then(
