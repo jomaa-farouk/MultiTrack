@@ -35,7 +35,7 @@
 
 		// on recupere un mix par id 
 		$scope.getMix = function(mixId){
-			MixsFactory.get(mixId).$promise.then(
+			MixsFactory.get({id:mixId}).$promise.then(
 				function(response){
 					$scope.showMix = true;
 					$scope.mix = response;
@@ -997,32 +997,15 @@ function activateAll ()
 
 	
 $scope.saveNewMix = function(){
-/**
- var mix = {
-        "username": "test",
-        "trackName" : "",
-        "mixName" : "",
-        "description" : "",
-        "gain": [],
-        "balance": [],
-        "compressor": "",
-        "frequencies": [],
-        "impulse": []
-    };**/
 
-//var newMix = angular.copy(mixe);
-//$scope.mixe.trackName;
-//mix.mixName = newMix.mixName;
-//mix.description = newMix.description;
-
-$scope.mix.trackName = JSON.parse("[" + $scope.selectedTrack + "]")[0].trackName;
+    $scope.mix.trackName = JSON.parse("[" + $scope.selectedTrack + "]")[0].trackName;
+    
     $scope.mix.gain = [];
     $scope.mix.frequencies = [];
     $scope.mix.balance = [];
     $scope.mix.impulse = [];
 
-for (var i=0 ; i<=soundURLt.length ; i++)
-{
+for (var i=0 ; i<=soundURLt.length ; i++) {
 
 var obj = {"frequency" : []};
 var array = new Array();
