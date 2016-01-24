@@ -5,11 +5,24 @@
 	var app = angular.module('home.controller', []);
 
 
-	app.controller('HomeController', ['$scope', '$compile', 'MixsFactory', 'TrackFactory', 'TracksFactory', 
-		function($scope, $compile, MixsFactory, TrackFactory,TracksFactory){
+	app.controller('HomeController', ['$scope', '$compile', 'MixFactory', 'MixsFactory', 'TrackFactory', 'TracksFactory', 
+		function($scope, $compile, MixFactory, MixsFactory, TrackFactory,TracksFactory){
 
 
 		var app = this;
+    //$scope.mix = MixFactory.show({id:5});
+    $scope.selectedTrack = "Michael jackson - Beat It";
+    $scope.trackmixs = [];
+    $scope.findMixByTrackName = function(){
+      
+      $scope.mixs.forEach(function(mixx, i){
+        if(mixx.trackName===$scope.selectedTrack){
+          $scope.trackmixs.push(mixx);
+        }
+      });
+      console.log($scope.trackmixs);
+    }
+
 
 		/********************      MIXS              *****************************/
 		$scope.getAllMixs = function(){
@@ -18,6 +31,7 @@
 					$scope.message = 'Loading ...';
 					$scope.showMixs = true;
 					$scope.mixs = response;
+          console.log($scope.mixs);
 				},
 				function(response){
 					$scope.message = 'Error: '+response.status+' '+response.statusText;
@@ -34,7 +48,13 @@
     };
 
 		// on recupere un mix par id 
-		$scope.getMix = function(mixId){
+		$scope.getMix = function(){
+      //var $id=5;
+        $scope.mix = MixFactory.show({id:6});
+        alert($scope.mix._id);
+
+
+      /**
 			MixsFactory.get(mixId).$promise.then(
 				function(response){
 					$scope.showMix = true;
@@ -44,7 +64,7 @@
 				function(response){
 					$scope.message = 'Error: '+response.status+' '+response.statusText;
 				}
-			);
+			);**/
 		};
 
 		/********************     TRACKS              ********************/
