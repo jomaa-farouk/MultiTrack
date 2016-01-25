@@ -220,6 +220,25 @@ select {
   background: #2497E3;
 }
 
+
+/*labesl*/
+.label {
+  color: #0092CD;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.pistetitle {
+  color: #DE1B1B;
+  font-weight: bold;
+}
+
+#pourcentage {
+  color: #B71427;
+  font-size: 15px;
+  font-weight: bold;
+
+}
           
 /* mute button */
 .mute  {

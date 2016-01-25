@@ -41,7 +41,7 @@
 <br>
 <div class="row">
 <div class="col-md-2 col-md-offset-5">
-<label for="gainSlider">Volume</label>
+<label for="gainSlider" class="label">Volume</label>
 </div>
 <div class="col-md-3">
 <input class="range" type="range" min="0" max="1" step="0.01" value="1" id="gainSlider" ng-model="gain" ng-change="changeGain (gain , 0)" disabled=true/>
@@ -98,7 +98,7 @@
 
   <div class="col-md-offset-4 col-md-3">
 
-  <label for="pannerSlider">Stereo</label>
+  <label for="pannerSlider" class="label">Stereo</label>
   <input class="range" type="range" min="-1" max="1" step="0.1" value="0" id="pannerSlider" ng-model="panner" ng-change="changePanner (panner , 0)" />
   </div>
 
@@ -113,8 +113,8 @@
 <div class="controls" >
 
     <div ng-repeat = "freq in frequencies">
-	<div class="row">
-	<div class="col-md-2"><label>{{freq}}</label></div>
+  <div class="row">
+  <div class="col-md-2"><label>{{freq}}</label></div>
  <div class="col-md-7"><input ng-attr-id="{{ 'freq_input' + $index }}" type="range" value="0" step="1" min="-30" max="30" ng-model="freq_value" ng-change = "changeFrequency (freq_value , 0 , $index)"></input></div>
     <div ng-attr-id="{{ 'freq0' + $index }}" class="col-md-3"><output>0 dB</br></output></div>
     </div> 
@@ -129,7 +129,7 @@
  <div class="row"> <div class="col-md-7 col-md-offset-4">
 
     <div ng-repeat = "impulse in impulses">
-<div class="col-md-3"><label for="convolverSlider' + $index + '" style="font-size:10px">{{impulse}} (Dry/Wet)</label>
+<div class="col-md-3"><label for="convolverSlider' + $index + '" style="font-size:10px" class="label">{{impulse}} <br> (Dry/Wet)</label>
 <input class="range" type="range" min="0" max="1" step="0.1" value="0" ng-attr-id="{{ 'convolverSlider' + $index }}" ng-model="impulse_value" ng-change="changeImpulse ($index)" /></div>
     </div>
  </div> </div>
@@ -137,7 +137,7 @@
 
 
 <br><br>
-	</div>
+  </div>
 
 </div>
 
@@ -156,15 +156,15 @@
  
  <div class="row" ng-show="trackSelected" >
 
-<form class="form-horizontal col-md-4">
+<form class="form-horizontal col-md-4" name="savemixform" id="saveform">
   
   <div class="form-group">
-    <legend>Save your mix</legend>
+    <legend class="pistetitle">Save your mix</legend>
   </div>
   
   <div class="row">
     <div class="form-group">
-      <label for="mixName" class="col-md-4 control-label">Mix name : </label>
+      <label for="mixName" class="col-md-4 control-label label" >Mix name : </label>
       <div class="col-md-8">
         <input type="text" class="form-control" id="mixName" placeholder="Mix name"  ng-model="mix.mixName" required >
       </div>
@@ -173,7 +173,7 @@
   
   <div class="row">
     <div class="form-group">
-      <label for="description" class="col-md-4 control-label">Description : </label>
+      <label for="description" class="col-md-4 control-label label">Description : </label>
       <div class="col-md-8">
         <input type="textarea" class="form-control" id="description" placeholder="Description"  ng-model="mix.description" required >
       </div>
@@ -185,6 +185,43 @@
   </div>
   
    </form>
+
+
+   <div class = "col-md-offset-4 col-md-4"> 
+  <ul>
+  
+      <li ng-repeat="mix in trackmixs">
+        {{ mix.mixName }} ;  {{ mix.description }}  ; 
+        <button id="mixdetails" type="submit" class="btn btn-primary" ng-click="">Load</button>
+  
+  <button class="btn btn-primary" data-toggle="modal" data-target="#f1">More</button>
+  
+  <div class="modal fade" id="f1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">x</button>
+        <h4 class="modal-title">Commentaires + ratings :</h4>
+      </div>
+
+        <div class="modal-body">
+       Commentaire + ratings
+        </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-info" data-dismiss="modal">Annuler</button>
+      </div>
+      
+      </div>
+    </div>
+  </div>
+ <br> <br>
+    </li>
+
+</ul>
+   </div>
+
 </div>
 
 </div>

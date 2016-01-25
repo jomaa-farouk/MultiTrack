@@ -1,88 +1,123 @@
 'use strict';
 
 (function() {
-	// body...
-	var app = angular.module('home.controller', []);
+  // body...
+  var app = angular.module('home.controller', []);
 
 
-	app.controller('HomeController', ['$scope', '$compile', 'MixsFactory', 'TrackFactory', 'TracksFactory', 
-		function($scope, $compile, MixsFactory, TrackFactory,TracksFactory){
+  app.controller('HomeController', ['$scope', '$compile', 'MixFactory', 'MixsFactory', 'TrackFactory', 'TracksFactory', 
+    function($scope, $compile, MixFactory, MixsFactory, TrackFactory,TracksFactory){
 
 
-		var app = this;
+    var app = this;
 
-		/********************      MIXS              *****************************/
-		$scope.getAllMixs = function(){
-			MixsFactory.query(
-				function(response){
-					$scope.message = 'Loading ...';
-					$scope.showMixs = true;
-					$scope.mixs = response;
-				},
-				function(response){
-					$scope.message = 'Error: '+response.status+' '+response.statusText;
-				}
-			);
-		};
+    /********************      MIXS              *****************************/
+    $scope.getAllMixs = function(){
+      MixsFactory.query(
+        function(response){
+          $scope.message = 'Loading ...';
+          $scope.showMixs = true;
+          $scope.mixs = response;
+          console.log ('hi' + $scope.mixs.length);
+        },
+        function(response){
+          $scope.message = 'Error: '+response.status+' '+response.statusText;
+        }
+      );
+    };
+
+    $scope.findMixByTrackName = function(){
+      $scope.trackmixs = [];
+      $scope.mixs.forEach(function(mixx, i){
+        if(mixx.trackName===JSON.parse("[" + $scope.selectedTrack + "]")[0].trackName){
+          $scope.trackmixs.push(mixx);
+        }
+      });
+     console.log('hello' + $scope.trackmixs.length);
+
+    }
+
+
+    $scope.addMix = function(){
+      MixsFactory.create($scope.mix);
+
+setTimeout(function () {
+        $scope.$apply(function () {
+$scope.getAllMixs();
+        });
+    }, 1000);
+
+setTimeout(function () {
+        $scope.$apply(function () {
+$scope.findMixByTrackName ();
+        });
+    }, 3000);
+    
+    //setTimeout($scope.getAllMixs, 1000); //wait 3 seconds before continuing
+    //setTimeout($scope.findMixByTrackName, 3000); //wait 3 seconds before continuing
+    
+    };
+
+    // on recupere un mix par id 
+    $scope.getMix = function(){
+      //var $id=5;
+        $scope.mix = MixFactory.show({id:6});
+        alert($scope.mix._id);
+
+
+      /**
+      MixsFactory.get(mixId).$promise.then(
+        function(response){
+          $scope.showMix = true;
+          $scope.mix = response;
+          console.log ($scope.mix);
+        },
+        function(response){
+          $scope.message = 'Error: '+response.status+' '+response.statusText;
+        }
+      );**/
+    };
+
+    /********************     TRACKS              ********************/
+
+    $scope.findAllTracks = function(){
+
+      $scope.TracksFactory.query(
+        function(response){
+          $scope.showTracks = true;
+          $scope.tracks = response;
+        },
+        function(response){
+          $scope.message = 'Erro: '+response.status+' '+response.statusText;
+        }
+      );
+    };
 
     $scope.addTrack = function(){
       TracksFactory.create($scope.track);
     };
 
-    $scope.addMix = function(){
-      MixsFactory.create($scope.mix);
+    $scope.findTrackById = function(trackId){
+      TrackFactory.show({params:trackId}).$promise.then(
+        function(response){
+          $scope.showTrack = true;
+          $scope.track = response;
+        },
+        function(response){
+          $scope.message = 'Error: '+response.status+' '+response.statusText;
+        }
+      );
     };
 
-		// on recupere un mix par id 
-		$scope.getMix = function(mixId){
-			MixsFactory.get({id:mixId}).$promise.then(
-				function(response){
-					$scope.showMix = true;
-					$scope.mix = response;
-          console.log ($scope.mix);
-				},
-				function(response){
-					$scope.message = 'Error: '+response.status+' '+response.statusText;
-				}
-			);
-		};
 
-		/********************     TRACKS              ********************/
-
-		$scope.findAllTracks = function(){
-
-			$scope.TracksFactory.query(
-				function(response){
-					$scope.showTracks = true;
-					$scope.tracks = response;
-				},
-				function(response){
-					$scope.message = 'Erro: '+response.status+' '+response.statusText;
-				}
-			);
-		};
+    $scope.deleteTrack = function(trackId){
+      TrackFactory.delete({id: trackId});
+      $scope.tracks = TracksFactory.query();
+    };
 
 
-		$scope.findTrackById = function(trackId){
-			TrackFactory.show({params:trackId}).$promise.then(
-				function(response){
-					$scope.showTrack = true;
-					$scope.track = response;
-				},
-				function(response){
-					$scope.message = 'Error: '+response.status+' '+response.statusText;
-				}
-			);
-		};
-
-
-		$scope.deleteTrack = function(trackId){
-			TrackFactory.delete({id: trackId});
-			$scope.tracks = TracksFactory.query();
-		};
-
-		$scope.mixs = MixsFactory.query();
-		$scope.tracks = TracksFactory.query();
+    $scope.mixs = MixsFactory.query();
+    $scope.tracks = TracksFactory.query();
 
 
 
@@ -125,6 +160,7 @@ var directGaint  = [];
 var convolverNodet = [];
 
 $scope.trackSelected = false;
+$scope.trackmixs = [];
 
 $scope.gain = 1;
 
@@ -139,7 +175,6 @@ $scope.init = function(){
   audioContext = new ctx();
 
   pannerNode = audioContext.createStereoPanner();
-
 
   player = document.getElementById('player');
   gainSlider = document.getElementById('gainSlider');
@@ -234,6 +269,10 @@ $scope.loadTrackList = function(Track){
 
 $scope.trackSelected = true;
 
+console.log ('hi' + $scope.mixs.length);
+
+$scope.findMixByTrackName ();
+
 
 freq_input0 = document.getElementById('freq_input0');
 freq_input1 = document.getElementById('freq_input1');
@@ -258,8 +297,8 @@ var array = JSON.parse("[" + Track + "]");
 var selectedTrack = array[0];
 
 
-	stopGraph (true);
-	//initCanvas ();
+  stopGraph (true);
+  //initCanvas ();
   bstop.disabled = true;
 
 var div_tracks = document.getElementById('tracks_list');
@@ -274,7 +313,7 @@ selectedTrack.piste.forEach (function(songName , i) {
 casqueT [i] = 0;
 soundURLt[i] =  base + songName.pisteMp3 ; 
 
-content+='<div class="row" ><div class="col-md-3"><H4>'+songName.pisteMp3;
+content+='<div class="row" ><div class="col-md-3"><H4 class="pistetitle">'+songName.pisteMp3;
 content+='<button class="mute" id="mute'+i+'" style="cursor: pointer;" ng-click = "mute ('+i+')">&nbsp;&nbsp;</button> ';
 content+='<button class="muteothers" id="muteothers'+i+'" style="cursor: pointer;" ng-click = "muteothers ('+i+')"></button>'+'</H4>';
 content+='<div class="controls1"><div class="row"> <div class="col-md-offset-1">';
@@ -294,9 +333,9 @@ content=content+s;
 });
 
 content+='</div> </div> </div> <div class="row">';
-content+='<div class="col-md-6"><label for="gainSlider">Volume</label>';
+content+='<div class="col-md-6"><label for="gainSlider" class="label">Volume</label>';
 content+='<input class="range" type="range" min="0" max="1" step="0.01" value="1" id="gainSlider'+i+'" ng-model="gain'+k+'" ng-change="changeGain (gain'+k+' , '+k+')"/>';
-content+='</div><div class="col-md-6"><label for="pannerSlider">Stereo</label>';
+content+='</div><div class="col-md-6"><label for="pannerSlider" class="label">Stereo</label>';
 content+='<input class="range" type="range" min="-1" max="1" step="0.1" value="0" id="pannerSlider'+i+'" ng-model="panner'+k+'" ng-change="changePanner (panner'+k+' , '+k+')" />';
 
 content+='</div> </div> </div> <div class="col-md-5 col-md-offset-2"> <br><br><canvas id="canvasOnde'+i+'" width=400 height=150></canvas> </div> </div> <br><br>';
@@ -305,7 +344,7 @@ content+='</div> </div> </div> <div class="col-md-5 col-md-offset-2"> <br><br><c
 
 content+='</div> </div>';
 
-var freq_tabo = document.createElement('div');			
+var freq_tabo = document.createElement('div');      
 freq_tabo.innerHTML = content;
 div_tracks.innerHTML = null;
 div_tracks.appendChild (freq_tabo);
@@ -338,9 +377,9 @@ if (load == true) $scope.percentage = 0;
 
 for (var i = 0; i < soundURLt.length; i++) {
     bufferSourcet[i] = audioContext.createBufferSource();
-	
-	if (load == true)
-	{
+  
+  if (load == true)
+  {
     loadSoundUsingAjax(soundURLt[i] , i);
     }
 }
@@ -368,20 +407,20 @@ function loadSoundUsingAjax(url , i) {
       $scope.percentage += (100/ (soundURLt.length) );
       timer(parseInt( $scope.percentage ) );
 
-	  decodedSoundt [i] = buffer;
+    decodedSoundt [i] = buffer;
     bufferSourcet[i].buffer = decodedSoundt[i];
     bufferSourcet[i].start();
 
    
-	  // we enable the button
+    // we enable the button
      if (parseInt( $scope.percentage ) == 100)
-	  {
-	 bplay.disabled = false;
+    {
+   bplay.disabled = false;
    list.disabled = false;
    drawTrack (decodedSoundt);
 
       }   
- 	}, function(e) {
+  }, function(e) {
       console.log("error");});
   };
   
@@ -400,14 +439,14 @@ function timer(n) {
 $scope.changeGain = function(gain , i){
     if (i==0) gainNode.gain.value = gain;
      else
-     	gainNodesT[i-1].gain.value = gain;
+      gainNodesT[i-1].gain.value = gain;
 };
 
 
 $scope.changePanner = function(panner , i){
     if (i==0) pannerNode.pan.value = panner;
      else
-     	stereoNodet[i-1].pan.value= panner;
+      stereoNodet[i-1].pan.value= panner;
 };
 
 
@@ -437,7 +476,7 @@ analyser2.connect(audioContext.destination);
 }
 
 else
-{	$scope.buttonCompressor = 'Turn Compressor OFF';
+{ $scope.buttonCompressor = 'Turn Compressor OFF';
 analyser2.disconnect(audioContext.destination);
 analyser2.connect(compressorNode);
 compressorNode.connect(audioContext.destination);
@@ -527,12 +566,12 @@ function buildAudioGraph( ) {
       eq.gain.value = 0;
       filters.push(eq);
     });
-	
-	for (var j = 0; j < bufferSourcet.length; j++) {
-		  filtersPistes[j] = new Array();
+  
+  for (var j = 0; j < bufferSourcet.length; j++) {
+      filtersPistes[j] = new Array();
 
-	    $scope.frequencies.forEach(function(freq, i) {
-	
+      $scope.frequencies.forEach(function(freq, i) {
+  
       var eq = audioContext.createBiquadFilter();
       eq.frequency.value = parseFloat(freq);
       eq.type = "peaking";
@@ -540,39 +579,39 @@ function buildAudioGraph( ) {
       filtersPistes[j].push(eq);
 
     });
-	}
-	
-	
-	
-	for (var j = 0; j < filtersPistes.length ; j++) {
+  }
+  
+  
+  
+  for (var j = 0; j < filtersPistes.length ; j++) {
 
-	    for (var i = 0; i < filtersPistes[j].length - 1 ; i++) {
-		  
-	  if (i == 0)
-	  { stereoNodet[j].connect (filtersPistes[j][i]);
-	    filtersPistes[j][i].connect(filtersPistes[j][i+1]); 
-	  }	  
+      for (var i = 0; i < filtersPistes[j].length - 1 ; i++) {
+      
+    if (i == 0)
+    { stereoNodet[j].connect (filtersPistes[j][i]);
+      filtersPistes[j][i].connect(filtersPistes[j][i+1]); 
+    }   
       else
-	  {     filtersPistes[j][i].connect(filtersPistes[j][i+1]);   
-	  }	  
+    {     filtersPistes[j][i].connect(filtersPistes[j][i+1]);   
+    }   
 
     }
-	
-	   filtersPistes[j][filtersPistes[j].length - 1].connect(gainNodesT[j]) ;
-	   gainNodesT[j].connect(gainNode) ;
-	   
+  
+     filtersPistes[j][filtersPistes[j].length - 1].connect(gainNodesT[j]) ;
+     gainNodesT[j].connect(gainNode) ;
+     
 
-	}
-	
+  }
+  
   // Connect filters in serie
    gainNode.connect(filters[0]);
    for(var i = 0; i < filters.length - 1; i++) {
       filters[i].connect(filters[i+1]);
     }
 
-	compressorNode = audioContext.createDynamicsCompressor();
+  compressorNode = audioContext.createDynamicsCompressor();
 
-	// connect the last filter to the speakers
+  // connect the last filter to the speakers
   filters[filters.length - 1].connect(pannerNode);
 
 if ($scope.firstTime)
@@ -600,7 +639,7 @@ if ($scope.firstTime)
 
   }
 
-	//pannerNode.connect(analyser);
+  //pannerNode.connect(analyser);
   analyser.connect(analyser2);
   analyser2.connect(audioContext.destination);
 }
@@ -793,14 +832,14 @@ $scope.muteAll = function () {
  else 
   {
    gainNode.gain.value = gainSlider.value;
-	 button.style.backgroundImage="url('./lib/image/mute.png')";
+   button.style.backgroundImage="url('./lib/image/mute.png')";
 }
-	
+  
 };
 
     
 $scope.mute = function (i) {
-	
+  
 var button = document.getElementById('mute'+i);
 var gainSlideri = document.getElementById('gainSlider'+i);
 if   ( gainNodesT[i].gain.value != 0 )
@@ -812,8 +851,8 @@ if   ( gainNodesT[i].gain.value != 0 )
  else 
 {
    gainNodesT[i].gain.value = gainSlideri.value;
-	 button.style.backgroundImage="url('./lib/image/mute.png')";
-}	
+   button.style.backgroundImage="url('./lib/image/mute.png')";
+} 
  };
   
 $scope.muteothers = function (i) {
@@ -821,12 +860,12 @@ $scope.muteothers = function (i) {
       casqueT [i] += 1;
       var button = document.getElementById('muteothers'+i);
 
-	   if (casqueT[i] % 2 != 0)
-	{
-	
-	button.style.backgroundImage="url('./lib/image/headn.png')";
+     if (casqueT[i] % 2 != 0)
+  {
+  
+  button.style.backgroundImage="url('./lib/image/headn.png')";
 
-	for (var j = 0; j < gainNodesT.length  ; j++)
+  for (var j = 0; j < gainNodesT.length  ; j++)
   {
   if (j != i)
   {
@@ -840,12 +879,12 @@ $scope.muteothers = function (i) {
   }}
   
   else 
- 	{	
+  { 
   button.style.backgroundImage="url('./lib/image/head.png')";
   for (var j = 0; j < gainNodesT.length  ; j++)
   {
   gainNodesT[j].gain.value = 1;
-  }}	 
+  }}   
 
   };
 
@@ -995,7 +1034,7 @@ function activateAll ()
 }
 
 
-	
+  
 $scope.saveNewMix = function(){
 
     $scope.mix.trackName = JSON.parse("[" + $scope.selectedTrack + "]")[0].trackName;
@@ -1003,7 +1042,7 @@ $scope.saveNewMix = function(){
     $scope.mix.gain = [];
     $scope.mix.frequencies = [];
     $scope.mix.balance = [];
-    $scope.mix.impulse = [];
+    $scope.mix.impulses = [];
 
 for (var i=0 ; i<=soundURLt.length ; i++) {
 
@@ -1044,14 +1083,12 @@ else
 $scope.mix.compressor = "ON";
 
 $scope.impulses.forEach (function (impulse, i) {
-$scope.mix.impulse.push (convolverGaint[i].gain.value);
+$scope.mix.impulses.push (convolverGaint[i].gain.value);
 });
 
 //var myJSONText = JSON.stringify($scope.mix, replace);
 
 $scope.addMix();
-
-//console.log ($scope.mix);
 
  };
 
@@ -1074,13 +1111,6 @@ function drawTrack(decodedBuffer)  {
     waveformDrawer.drawWave(0, canvas.height);  
 })
 }  
-
-$scope.test = function (id) {
-
-$scope.getMix (id);
-console.log ($scope.mix);
-
-}
 
 
   }]);
