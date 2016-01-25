@@ -10,15 +10,15 @@
 			
 
 			$scope.editTrack = function(trackId) {
-				$location.path('/track-detail/'+trackId);
+				$location.path('/track-edit/'+trackId);
 			};
 
 			$scope.deleteTrack = function(trackId) {
 				TrackFactory.delete({id:trackId});
-				$location.path('/');
+				$scope.tracks = TracksFactory.query();
 			};
 
-			$scope.addTrack = function() {
+			$scope.createNewTrack = function() {
 				$location.path('/track-creation');
 			};
 
@@ -31,13 +31,12 @@
 		function($scope, TrackFactory, $routeParams, $location){
 
 			$scope.updateTrack = function(){
-				var $id = $routeParams.id;
-				TrackFactory.update({id:$id}, $scope.track);
-				$location.path('/');
+				TrackFactory.update({id:$routeParams.id}, $scope.track);
+				$location.path('/track-list');
 			};
 
 			$scope.cancel = function(){
-				$location.path('/');
+				$location.path('/track-list');
 			};
 
 			$scope.track = TrackFactory.show({id:$routeParams.id});
@@ -47,12 +46,11 @@
 	app.controller('TrackCreation', ['$scope', 'TracksFactory', '$location', 
 		function($scope, TracksFactory, $location) {
 		// body...
-			$scope.addNewTrack = function() {
+			$scope.createNewTrack = function() {
 				// body...
 				TracksFactory.create($scope.track);
-				$location.path('/');
+				$location.path('/track-list');
 			};
-
 		}
 	]);
 })();
