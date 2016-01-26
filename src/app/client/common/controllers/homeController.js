@@ -5,11 +5,42 @@
   var app = angular.module('home.controller', []);
 
 
-  app.controller('HomeController', ['$scope', '$compile', 'MixFactory', 'MixsFactory', 'TrackFactory', 'TracksFactory', 
-    function($scope, $compile, MixFactory, MixsFactory, TrackFactory,TracksFactory){
+  app.controller('HomeController', ['$scope', '$compile', 'MixFactory', 'MixsFactory', 
+    'TrackFactory', 'TracksFactory', 'CommentFactory', 'CommentsFactory', 
+    'RatingFactory', 'RatingsFactory',
+    function($scope, $compile, MixFactory, MixsFactory, TrackFactory, TracksFactory, CommentFactory, CommentsFactory, RatingFactory, RatingsFactory){
 
 
     var app = this;
+
+    $scope.getCommentsByMixName = function(mixName){
+        alert("hihihi");
+    };
+
+    $scope.getRatingsByMixName = function(mixName){
+        alert("hihihi");
+    };
+
+
+    $scope.addRating = function(){
+      RatingsFactory.create($scope.rating);
+      $scope.ratings = RatingsFactory.query();
+    }
+
+    $scope.deleteRating = function(rId){
+      RatingFactory.delete({id:rId});
+      $scope.ratings = RatingsFactory.query();
+    }
+
+    $scope.addComment = function(){
+      CommentsFactory.create($scope.comment);
+      $scope.comments = CommentsFactory.query();
+    }
+
+    $scope.deleteComment = function(rId){
+      CommentFactory.delete({id:rId});
+      $scope.ratings = RatingsFactory.query();
+    }
 
     /********************      MIXS              *****************************/
     $scope.getAllMixs = function(){
