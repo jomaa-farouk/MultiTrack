@@ -13,12 +13,22 @@
 
     var app = this;
 
-    $scope.getCommentsByMixName = function(mixName){
-        alert("hihihi");
+    $scope.getCommentsByMixName = function(){
+        $scope.commentsmix = [];
+        $scope.comments.forEach(function(thisComment, idx){
+            if(thisComment.mixName === $scope.selectedMixName){
+              $scope.commentsmix.push(thisComment);
+            }
+        });
     };
 
-    $scope.getRatingsByMixName = function(mixName){
-        alert("hihihi");
+    $scope.getRatingsByMixName = function(){
+        $scope.ratingsmix = [];
+        $scope.ratings.forEach(function(thisRating, idx){
+          if(thisRating.mixName === $scope.selectedMixName){
+              $scope.ratingsmix.push(thisRating);
+          }
+        });
     };
 
 
@@ -1142,7 +1152,8 @@ function drawTrack(decodedBuffer)  {
     waveformDrawer.drawWave(0, canvas.height);  
 })
 }  
-
+  $scope.comments = CommentsFactory.query();
+  $scope.ratings = RatingsFactory.query();
 
   }]);
 })();

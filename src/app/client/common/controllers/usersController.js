@@ -8,6 +8,14 @@
 		function($scope, UserFactory, UsersFactory, $location){
 		var app = this;
 
+		/**
+		$scope.connected = false;
+
+		if(!$scope.connected){
+			$location.path('/login');
+		}**/
+
+
 		$scope.editUser = function(uid){
 			$location.path('/user-detail/'+uid);
 		};

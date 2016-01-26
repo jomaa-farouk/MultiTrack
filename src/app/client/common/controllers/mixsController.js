@@ -8,6 +8,13 @@
 	app.controller('MixsController', ['$scope', 'MixFactory', 'MixsFactory', '$location',
 		function($scope, MixFactory, MixsFactory, $location){
 
+			/**
+			$scope.connected = false;
+
+			if(!$scope.connected){
+				$location.path('/login');
+			}**/
+
 			$scope.editMix = function(mixId){
 				$location.path('/mix-edit/'+mixId);
 			};
