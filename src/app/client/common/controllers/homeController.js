@@ -59,7 +59,6 @@
           $scope.message = 'Loading ...';
           $scope.showMixs = true;
           $scope.mixs = response;
-          console.log ('hi' + $scope.mixs.length);
         },
         function(response){
           $scope.message = 'Error: '+response.status+' '+response.statusText;
@@ -74,8 +73,6 @@
           $scope.trackmixs.push(mixx);
         }
       });
-     console.log('hello' + $scope.trackmixs.length);
-
     }
 
 
@@ -165,7 +162,7 @@ $scope.findMixByTrackName ();
 var ctx = window.AudioContext || window.webkitAudioContext;
 var audioContext;
 
-var gainSlider, gainNode, pannerSlider, pannerNode, bplay, bpause, player, compressorNode, compressorButton, bstop, list, bmute;
+var gainSlider, pannerSlider, bplay, bpause, player, compressorNode, compressorButton, bstop, list, bmute;
 var freq_input0, freq_input1, freq_input2, freq_input3, freq_input4, freq_input5, convSlider0, convSlider1, convSlider2, convSlider3;
 var bupload, bsavemix;
 
@@ -177,17 +174,17 @@ var playOnly_input = new Array ();
 
 var canvas, canvas2, canvasContext, canvasContext2, width, height, width2, height2, bufferLength, dataArray, bufferLength2, dataArray2;
 var analyser, analyser2, gradient, analyserLeft, analyserRight, dataArrayLeft, dataArrayRight, splitter;
-
+$scope.gain = [];
 
 var bufferSourcet = [];
 var decodedSoundt = [];
 var soundURLt = [];
 
-var stereoNodet = [];
-var gainNodesT = [];
+$scope.stereoNodet = [];
+$scope.gainNodesT = [];
 
-var filters = [];
-var filtersPistes = [];
+$scope.filters = [];
+$scope.filtersPistes = [];
 
 var casqueT = [];
 var stoppressed = false;  
@@ -210,12 +207,16 @@ $scope.impulse_value = 0;
 // Object that draws a sample waveform in a canvas  
 var waveformDrawer = new WaveformDrawer();  
 
+var curTime = 0;
+var delta = 0;
 
 $scope.init = function(){
   // get the AudioContext0
   audioContext = new ctx();
 
-  pannerNode = audioContext.createStereoPanner();
+  $scope.pannerNode = audioContext.createStereoPanner();
+  $scope.gainNode = audioContext.createGain();
+  $scope.gainNode.gain.value = 1;
 
   player = document.getElementById('player');
   gainSlider = document.getElementById('gainSlider');
@@ -242,6 +243,7 @@ $scope.init = function(){
       // starts the animation at 60 frames/s
   requestAnimationFrame(visualize);
   requestAnimationFrame(visualize2);
+
 
 };
 
@@ -310,10 +312,11 @@ $scope.loadTrackList = function(Track){
 
 $scope.trackSelected = true;
 
-console.log ('hi' + $scope.mixs.length);
+curTime = 0;
+delta = 0;
+
 
 $scope.findMixByTrackName ();
-
 
 freq_input0 = document.getElementById('freq_input0');
 freq_input1 = document.getElementById('freq_input1');
@@ -354,6 +357,9 @@ selectedTrack.piste.forEach (function(songName , i) {
 casqueT [i] = 0;
 soundURLt[i] =  base + songName.pisteMp3 ; 
 
+   $scope.gainNodesT[i] = audioContext.createGain(); 
+   $scope.gainNodesT[i].gain.value = 1;
+
 content+='<div class="row" ><div class="col-md-3"><H4 class="pistetitle">'+songName.pisteMp3;
 content+='<button class="mute" id="mute'+i+'" style="cursor: pointer;" ng-click = "mute ('+i+')">&nbsp;&nbsp;</button> ';
 content+='<button class="muteothers" id="muteothers'+i+'" style="cursor: pointer;" ng-click = "muteothers ('+i+')"></button>'+'</H4>';
@@ -365,7 +371,7 @@ $scope.frequencies.forEach (function(freq , j) {
 
 var s = "";
 s+='<label>'+freq+'</label>';
-s+='<input  id="freq_value'+k+j+'" type="range" value="0" step="1" min="-30" max="30" ng-model="freq_val'+k+j+'" ng-change="changeFrequency(freq_val'+k+j+' ,'+k+' ,'+j+')"></input>';
+s+='<input  id="freq_value'+k+j+'" type="range" value="0" step="1" min="-30" max="30" ng-model="filtersPistes['+i+']['+j+'].gain.value" ng-change="changeFrequency('+k+' ,'+j+')"></input>';
 s+='<output id="freq'+k+j+'">0 dB<br></output>';
 
 
@@ -375,9 +381,9 @@ content=content+s;
 
 content+='</div> </div> </div> <div class="row">';
 content+='<div class="col-md-6"><label for="gainSlider" class="label">Volume</label>';
-content+='<input class="range" type="range" min="0" max="1" step="0.01" value="1" id="gainSlider'+i+'" ng-model="gain'+k+'" ng-change="changeGain (gain'+k+' , '+k+')"/>';
+content+='<input class="range" type="range" min="0" max="1" step="0.01" value="1" id="gainSlider'+i+'" ng-model="gainNodesT['+i+'].gain.value" />';
 content+='</div><div class="col-md-6"><label for="pannerSlider" class="label">Stereo</label>';
-content+='<input class="range" type="range" min="-1" max="1" step="0.1" value="0" id="pannerSlider'+i+'" ng-model="panner'+k+'" ng-change="changePanner (panner'+k+' , '+k+')" />';
+content+='<input class="range" type="range" min="-1" max="1" step="0.1" value="0" id="pannerSlider'+i+'" ng-model="stereoNodet['+i+'].pan.value" />';
 
 content+='</div> </div> </div> <div class="col-md-5 col-md-offset-2"> <br><br><canvas id="canvasOnde'+i+'" width=400 height=150></canvas> </div> </div> <br><br>';
 
@@ -406,6 +412,10 @@ freq_pistes_input.push (document.getElementById("freq_value"+l+j));
 
 desactivateAll ();
 });
+
+$('#saveMixMessage').empty();
+$('#mixName').val('');
+$('#description').val('');
 
 initBuffer(true) ;
 
@@ -451,7 +461,7 @@ function loadSoundUsingAjax(url , i) {
     decodedSoundt [i] = buffer;
     bufferSourcet[i].buffer = decodedSoundt[i];
     bufferSourcet[i].start();
-
+    
    
     // we enable the button
      if (parseInt( $scope.percentage ) == 100)
@@ -477,27 +487,16 @@ function timer(n) {
   }
 
 
-$scope.changeGain = function(gain , i){
-    if (i==0) gainNode.gain.value = gain;
-     else
-      gainNodesT[i-1].gain.value = gain;
-};
-
-
-$scope.changePanner = function(panner , i){
-    if (i==0) pannerNode.pan.value = panner;
-     else
-      stereoNodet[i-1].pan.value= panner;
-};
-
-
-$scope.changeFrequency = function(freq_value , row , index){
+$scope.changeFrequency = function(row , index){
    var output = document.getElementById("freq"+row+index);
 
-    output.innerHTML = '<output>'+freq_value+' dB</output>';
+if (row==0)
+    output.innerHTML = '<output>'+$scope.filters[index].gain.value+' dB</output>';
+else
+      output.innerHTML = '<output>'+ $scope.filtersPistes[row-1][index].gain.value+' dB</output>';
 
-    if (row==0) filters[index].gain.value = freq_value;
-    else   filtersPistes[row-1][index].gain.value = freq_value;
+     //$scope.filters[index].gain.value = freq_value;
+       //$scope.filtersPistes[row-1][index].gain.value = freq_value;
 };
 
 $scope.buttonCompressor = 'Turn Compressor ON';
@@ -524,14 +523,18 @@ compressorNode.connect(audioContext.destination);
 }
 };
 
+var isPaused = false;
 
 $scope.play = function(){
+
+  curTime = (new Date()).getTime();
+  isPaused = false;
 
 for (var i = 0; i < soundURLt.length; i++) {
     
     bufferSourcet[i] = audioContext.createBufferSource();
     bufferSourcet[i].buffer = decodedSoundt[i];
-    bufferSourcet[i].start();
+    bufferSourcet[i].start(audioContext.currentTime, delta);
     
 }
 
@@ -541,11 +544,16 @@ stoppressed = false;
    activateAll ();
 
 bplay.disabled = true;
+bpause.disabled = false;
 
 };
 
 
 $scope.stop = function(){
+if (!isPaused){
+curTime = 0;
+delta = 0;
+}
 stoppressed = true;
 stopGraph (false);
 initBuffer(false) ;
@@ -554,8 +562,11 @@ bpause.disabled = true;
 bstop.disabled = true;
  };
 
- $scope.pause = function(){
-console.log ('stop') ;
+$scope.pause = function(){
+  isPaused = true;
+  delta = delta + (( (new Date()).getTime() - curTime) / 1000);
+  console.log (delta);
+  $scope.stop ();
 };
 
 
@@ -575,9 +586,9 @@ if (destroy == true)
  decodedSoundt = [] ;
  soundURLt = [];
  
- stereoNodet = [];
- filtersPistes = [];
- gainNodesT = [];
+ $scope.stereoNodet = [];
+ $scope.filtersPistes = [];
+ $scope.gainNodesT = [];
 
  }
 }
@@ -587,29 +598,28 @@ $scope.firstTime = true;
 function buildAudioGraph( ) {
 
   // create source and gain node
-  gainNode = audioContext.createGain();
+  $scope.gainNode = audioContext.createGain();
   var stereoModify;
   
   for (var i = 0; i < bufferSourcet.length; i++) {
     
-   stereoNodet[i] = audioContext.createStereoPanner();
-   bufferSourcet[i].connect ( stereoNodet[i]);
-   gainNodesT[i] = audioContext.createGain(); 
+   $scope.stereoNodet[i] = audioContext.createStereoPanner();
+   bufferSourcet[i].connect ( $scope.stereoNodet[i]);
   }
   
     // create the equalizer. It's a set of biquad Filters
    // Set filters
-   filters = [];
+   $scope.filters = [];
     $scope.frequencies.forEach(function(freq, i) {
       var eq = audioContext.createBiquadFilter();
       eq.frequency.value = parseFloat(freq);
       eq.type = "peaking";
       eq.gain.value = 0;
-      filters.push(eq);
+      $scope.filters.push(eq);
     });
   
   for (var j = 0; j < bufferSourcet.length; j++) {
-      filtersPistes[j] = new Array();
+      $scope.filtersPistes[j] = new Array();
 
       $scope.frequencies.forEach(function(freq, i) {
   
@@ -617,43 +627,43 @@ function buildAudioGraph( ) {
       eq.frequency.value = parseFloat(freq);
       eq.type = "peaking";
       eq.gain.value = 0;
-      filtersPistes[j].push(eq);
+      $scope.filtersPistes[j].push(eq);
 
     });
   }
   
   
   
-  for (var j = 0; j < filtersPistes.length ; j++) {
+  for (var j = 0; j < $scope.filtersPistes.length ; j++) {
 
-      for (var i = 0; i < filtersPistes[j].length - 1 ; i++) {
+      for (var i = 0; i < $scope.filtersPistes[j].length - 1 ; i++) {
       
     if (i == 0)
-    { stereoNodet[j].connect (filtersPistes[j][i]);
-      filtersPistes[j][i].connect(filtersPistes[j][i+1]); 
+    { $scope.stereoNodet[j].connect ($scope.filtersPistes[j][i]);
+      $scope.filtersPistes[j][i].connect($scope.filtersPistes[j][i+1]); 
     }   
       else
-    {     filtersPistes[j][i].connect(filtersPistes[j][i+1]);   
+    {     $scope.filtersPistes[j][i].connect($scope.filtersPistes[j][i+1]);   
     }   
 
     }
   
-     filtersPistes[j][filtersPistes[j].length - 1].connect(gainNodesT[j]) ;
-     gainNodesT[j].connect(gainNode) ;
+     $scope.filtersPistes[j][$scope.filtersPistes[j].length - 1].connect($scope.gainNodesT[j]) ;
+     $scope.gainNodesT[j].connect($scope.gainNode) ;
      
 
   }
   
   // Connect filters in serie
-   gainNode.connect(filters[0]);
-   for(var i = 0; i < filters.length - 1; i++) {
-      filters[i].connect(filters[i+1]);
+   $scope.gainNode.connect($scope.filters[0]);
+   for(var i = 0; i < $scope.filters.length - 1; i++) {
+      $scope.filters[i].connect($scope.filters[i+1]);
     }
 
   compressorNode = audioContext.createDynamicsCompressor();
 
   // connect the last filter to the speakers
-  filters[filters.length - 1].connect(pannerNode);
+  $scope.filters[$scope.filters.length - 1].connect($scope.pannerNode);
 
 if ($scope.firstTime)
 {
@@ -663,24 +673,24 @@ if ($scope.firstTime)
     {
 
       // direct/dry route source -> directGain -> destination
-  pannerNode.connect(directGaint[i]);
+  $scope.pannerNode.connect(directGaint[i]);
   directGaint[i].connect(analyser);
 
 
   // wet route with convolver: source -> convolver
   // -> convolverGain -> destination
-  pannerNode.connect(convolverNodet[i]);
+  $scope.pannerNode.connect(convolverNodet[i]);
   convolverNodet[i].connect(convolverGaint[i]);
   convolverGaint[i].connect(analyser);
 
     // connect the source to the analyser and the splitter
-  pannerNode.connect(splitter);
+  $scope.pannerNode.connect(splitter);
 
 
 
   }
 
-  //pannerNode.connect(analyser);
+  //$scope.pannerNode.connect(analyser);
   analyser.connect(analyser2);
   analyser2.connect(audioContext.destination);
 }
@@ -864,15 +874,15 @@ $scope.muteAll = function () {
 
    var button = document.getElementById("mute");
 
-  if   ( gainNode.gain.value != 0 )
+  if   ( $scope.gainNode.gain.value != 0 )
   { 
-  gainNode.gain.value = 0;
+  $scope.gainNode.gain.value = 0;
   button.style.backgroundImage="url('./lib/image/sound.png')";
   }
  
  else 
   {
-   gainNode.gain.value = gainSlider.value;
+   $scope.gainNode.gain.value = gainSlider.value;
    button.style.backgroundImage="url('./lib/image/mute.png')";
 }
   
@@ -883,15 +893,15 @@ $scope.mute = function (i) {
   
 var button = document.getElementById('mute'+i);
 var gainSlideri = document.getElementById('gainSlider'+i);
-if   ( gainNodesT[i].gain.value != 0 )
+if   ( $scope.gainNodesT[i].gain.value != 0 )
   { 
-  gainNodesT[i].gain.value = 0;
+  $scope.gainNodesT[i].gain.value = 0;
   button.style.backgroundImage="url('./lib/image/sound.png')";
  }
 
  else 
 {
-   gainNodesT[i].gain.value = gainSlideri.value;
+   $scope.gainNodesT[i].gain.value = gainSlideri.value;
    button.style.backgroundImage="url('./lib/image/mute.png')";
 } 
  };
@@ -906,25 +916,25 @@ $scope.muteothers = function (i) {
   
   button.style.backgroundImage="url('./lib/image/headn.png')";
 
-  for (var j = 0; j < gainNodesT.length  ; j++)
+  for (var j = 0; j < $scope.gainNodesT.length  ; j++)
   {
   if (j != i)
   {
-  gainNodesT[j].gain.value = 0;
+  $scope.gainNodesT[j].gain.value = 0;
   button = document.getElementById('muteothers'+j);
   button.style.backgroundImage="url('./lib/image/head.png')";
   if (casqueT[j] % 2 != 0) casqueT [j] += 1;
   }
   else
-  gainNodesT[j].gain.value = gainNodesT[i].gain.value;
+  $scope.gainNodesT[j].gain.value = $scope.gainNodesT[i].gain.value;
   }}
   
   else 
   { 
   button.style.backgroundImage="url('./lib/image/head.png')";
-  for (var j = 0; j < gainNodesT.length  ; j++)
+  for (var j = 0; j < $scope.gainNodesT.length  ; j++)
   {
-  gainNodesT[j].gain.value = 1;
+  $scope.gainNodesT[j].gain.value = 1;
   }}   
 
   };
@@ -1075,11 +1085,45 @@ function activateAll ()
 }
 
 
+function verifyMixExist (mix) {
+var exist = false;
+var i = 0;
+
+while (i<$scope.mixs.length && exist==false) {
+  if($scope.mixs[i].trackName===mix.trackName && $scope.mixs[i].mixName===mix.mixName)
+  exist = true;
+  i++;
+}
+
+return exist;
+}
   
 $scope.saveNewMix = function(){
 
+    $('#saveMixMessage').empty();
+
+
+    var input = document.getElementById('mixName');
+    var validityState_object = input.validity;
+      
+    var input2 = document.getElementById('description');
+    var validityState_object2 = input2.validity;
+
+    if(validityState_object.valueMissing)
+      input.setCustomValidity('Please set a mix name (required)'); 
+    else
+      input.setCustomValidity(''); 
+
+    if(validityState_object2.valueMissing)
+      input2.setCustomValidity('Please set a mix description (required)'); 
+    else
+      input2.setCustomValidity(''); 
+
+    if (! (validityState_object.valueMissing || validityState_object2.valueMissing) ) {
+
+   {
+
     $scope.mix.trackName = JSON.parse("[" + $scope.selectedTrack + "]")[0].trackName;
-    
     $scope.mix.gain = [];
     $scope.mix.frequencies = [];
     $scope.mix.balance = [];
@@ -1092,11 +1136,11 @@ var array = new Array();
 
    if (i==0)
    { 
-    $scope.mix.gain.push (gainNode.gain.value);
-    $scope.mix.balance.push (pannerNode.pan.value);
+    $scope.mix.gain.push ($scope.gainNode.gain.value);
+    $scope.mix.balance.push ($scope.pannerNode.pan.value);
     
     $scope.frequencies.forEach (function (freq, j) {
-    array.push(filters[j].gain.value);
+    array.push($scope.filters[j].gain.value);
     });
     
     obj.frequency = array;
@@ -1105,11 +1149,11 @@ var array = new Array();
   
     else
    {
-    $scope.mix.gain.push (gainNodesT[i-1].gain.value);
-    $scope.mix.balance.push (stereoNodet[i-1].pan.value);
+    $scope.mix.gain.push ($scope.gainNodesT[i-1].gain.value);
+    $scope.mix.balance.push ($scope.stereoNodet[i-1].pan.value);
 
    $scope.frequencies.forEach (function (freq, j) {
-    array.push(filtersPistes[i-1][j].gain.value);
+    array.push($scope.filtersPistes[i-1][j].gain.value);
     });
 
     obj.frequency = array;
@@ -1127,18 +1171,23 @@ $scope.impulses.forEach (function (impulse, i) {
 $scope.mix.impulses.push (convolverGaint[i].gain.value);
 });
 
-//var myJSONText = JSON.stringify($scope.mix, replace);
+$scope.mix.username = "";
 
-$scope.addMix();
+ var divMessage = document.getElementById ("saveMixMessage");
 
- };
-
-function replace(key, value) {
-    if (typeof value === 'number' && !isFinite(value)) {
-        return String(value);
-    }
-    return value;
+if (verifyMixExist ($scope.mix)) {
+  divMessage.style.color = "red";
+  divMessage.innerHTML = "<h4>Choose a different mix name<h4>";
 }
+else {
+  $scope.addMix();; 
+  divMessage.style.color = "green";
+  divMessage.innerHTML = "<h4>Mix saved successfully</h4>";
+}
+
+}
+}
+ };
 
 
 function drawTrack(decodedBuffer)  {
@@ -1154,6 +1203,86 @@ function drawTrack(decodedBuffer)  {
 }  
   $scope.comments = CommentsFactory.query();
   $scope.ratings = RatingsFactory.query();
+
+
+$scope.loadMix = function(mix){
+        
+$scope.gainNode.gain.value = mix.gain[0];
+$scope.pannerNode.pan.value = mix.balance[0];
+
+$scope.filters.forEach (function (freq, i) {
+ freq.gain.value = mix.frequencies[0].frequency[i];
+ $scope.changeFrequency (0, i); 
+});
+
+$scope.filtersPistes.forEach (function (freq, i) {
+freq.forEach (function (frequ, j) {
+ frequ.gain.value = mix.frequencies[i+1].frequency[j];
+ $scope.changeFrequency (i+1, j); 
+});
+});
+
+$scope.gainNodesT.forEach (function (gain, i) {
+gain.gain.value = mix.gain[i+1];
+});
+
+$scope.stereoNodet.forEach (function (pan, i) {
+pan.pan.value = mix.balance[i+1];
+});
+
+$scope.impulses.forEach (function (imp, i) {
+var impulse = document.getElementById ('convolverSlider' + i);
+impulse.value = mix.impulses[i];
+convolverGaint[i].gain.value = impulse.value;
+directGaint[i].gain.value = 1 - convolverGaint[i].gain.value;
+});
+
+if ( (mix.compressor == 'ON' && $scope.compressorSelected == true) || (mix.compressor == 'OFF' && $scope.compressorSelected == false) )
+  $scope.updateCompressor();
+
+
+    };
+
+
+$scope.resetParam = function () {
+
+$scope.gainNode.gain.value = 1;
+$scope.pannerNode.pan.value = 0;
+
+$scope.filters.forEach (function (freq, i) {
+ freq.gain.value = 0;
+ $scope.changeFrequency (0, i); 
+});
+
+$scope.filtersPistes.forEach (function (freq, i) {
+freq.forEach (function (frequ, j) {
+ frequ.gain.value = 0;
+ $scope.changeFrequency (i+1, j); 
+});
+});
+
+$scope.gainNodesT.forEach (function (gain, i) {
+gain.gain.value = 1;
+});
+
+$scope.stereoNodet.forEach (function (pan, i) {
+pan.pan.value = 0;
+});
+
+$scope.impulses.forEach (function (imp, i) {
+var impulse = document.getElementById ('convolverSlider' + i);
+impulse.value = 0;
+convolverGaint[i].gain.value = 0;
+directGaint[i].gain.value = 1;
+});
+
+
+if ( $scope.compressorSelected == true )
+  $scope.updateCompressor();
+
+};
+
+
 
   }]);
 })();
