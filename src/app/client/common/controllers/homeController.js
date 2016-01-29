@@ -164,7 +164,7 @@ var audioContext;
 
 var gainSlider, pannerSlider, bplay, bpause, player, compressorNode, compressorButton, bstop, list, bmute;
 var freq_input0, freq_input1, freq_input2, freq_input3, freq_input4, freq_input5, convSlider0, convSlider1, convSlider2, convSlider3;
-var bupload, bsavemix;
+var bupload, bsavemix, bloadmix, bmoremix;
 
 var freq_pistes_input = new Array ();
 var gain_pistes_input = new Array ();
@@ -229,7 +229,9 @@ $scope.init = function(){
   bmute = document.getElementById('mute');
   bupload = document.getElementById('upload');
   bsavemix = document.getElementById('savemix');
-
+  bloadmix = document.getElementById('mixdetails');
+  bmoremix = document.getElementById('more');
+ 
   $scope.impulses.forEach (function(impulse , i) {
   var  impulseURL = 'http://localhost:8080/impulse/' + impulse + '.wav';
 
@@ -998,7 +1000,10 @@ function desactivateAll ()
   compressorButton.disabled = true;
   list.disabled = true;
   mute.disabled = true;
-
+  if (bloadmix!=null && bmoremix!=null) {
+  bloadmix.disabled = true;
+  bmoremix.disabled = true;
+}
   freq_input0.disabled = true;
   freq_input1.disabled = true;
   freq_input2.disabled = true;
@@ -1046,6 +1051,10 @@ function activateAll ()
   compressorButton.disabled = false;
   list.disabled = false;
   mute.disabled = false;
+  if (bloadmix!=null && bmoremix!=null) {
+  bloadmix.disabled = false;
+  bmoremix.disabled = false;
+}
 
   freq_input0.disabled = false;
   freq_input1.disabled = false;
