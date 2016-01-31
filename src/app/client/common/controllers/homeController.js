@@ -1,94 +1,170 @@
 'use strict';
 
 (function() {
-	// body...
-	var app = angular.module('home.controller', []);
+  // body...
+  var app = angular.module('home.controller', []);
 
 
-	app.controller('HomeController', ['$scope', '$compile', 'MixsFactory', 'TrackFactory', 'TracksFactory', 
-		function($scope, $compile, MixsFactory, TrackFactory,TracksFactory){
+  app.controller('HomeController', ['$scope', '$compile', 'MixFactory', 'MixsFactory', 
+    'TrackFactory', 'TracksFactory', 'CommentFactory', 'CommentsFactory', 
+    'RatingFactory', 'RatingsFactory',
+    function($scope, $compile, MixFactory, MixsFactory, TrackFactory, TracksFactory, CommentFactory, CommentsFactory, RatingFactory, RatingsFactory){
 
 
-		var app = this;
+    var app = this;
 
-		/********************      MIXS              *****************************/
-		$scope.getAllMixs = function(){
-			MixsFactory.query(
-				function(response){
-					$scope.message = 'Loading ...';
-					$scope.showMixs = true;
-					$scope.mixs = response;
-				},
-				function(response){
-					$scope.message = 'Error: '+response.status+' '+response.statusText;
-				}
-			);
-		};
+    $scope.getCommentsByMixName = function(){
+        $scope.commentsmix = [];
+        $scope.comments.forEach(function(thisComment, idx){
+            if(thisComment.mixName === $scope.selectedMixName){
+              $scope.commentsmix.push(thisComment);
+            }
+        });
+    };
 
-		// on recupere un mix par id 
-		$scope.getMix = function(mixId){
-			MixsFactory.get({id:mixId}).$promise.then(
-				function(response){
-					$scope.showMix = true;
-					$scope.mix = response;
-				},
-				function(response){
-					$scope.message = 'Error: '+response.status+' '+response.statusText;
-				}
-			);
-		};
-
-		/********************     TRACKS              ********************/
-
-		$scope.findAllTracks = function(){
-
-			$scope.TracksFactory.query(
-				function(response){
-					$scope.showTracks = true;
-					$scope.tracks = response;
-				},
-				function(response){
-					$scope.message = 'Erro: '+response.status+' '+response.statusText;
-				}
-			);
-		};
+    $scope.getRatingsByMixName = function(){
+        $scope.ratingsmix = [];
+        $scope.ratings.forEach(function(thisRating, idx){
+          if(thisRating.mixName === $scope.selectedMixName){
+              $scope.ratingsmix.push(thisRating);
+          }
+        });
+    };
 
 
-		$scope.findTrackById = function(trackId){
-			TrackFactory.show({params:trackId}).$promise.then(
-				function(response){
-					$scope.showTrack = true;
-					$scope.track = response;
-				},
-				function(response){
-					$scope.message = 'Error: '+response.status+' '+response.statusText;
-				}
-			);
-		};
+    $scope.addRating = function(){
+      RatingsFactory.create($scope.rating);
+      $scope.ratings = RatingsFactory.query();
+    }
+
+    $scope.deleteRating = function(rId){
+      RatingFactory.delete({id:rId});
+      $scope.ratings = RatingsFactory.query();
+    }
+
+    $scope.addComment = function(){
+      CommentsFactory.create($scope.comment);
+      $scope.comments = CommentsFactory.query();
+    }
+
+    $scope.deleteComment = function(rId){
+      CommentFactory.delete({id:rId});
+      $scope.ratings = RatingsFactory.query();
+    }
+
+    /********************      MIXS              *****************************/
+    $scope.getAllMixs = function(){
+      MixsFactory.query(
+        function(response){
+          $scope.message = 'Loading ...';
+          $scope.showMixs = true;
+          $scope.mixs = response;
+        },
+        function(response){
+          $scope.message = 'Error: '+response.status+' '+response.statusText;
+        }
+      );
+    };
+
+    $scope.findMixByTrackName = function(){
+      $scope.trackmixs = [];
+      $scope.mixs.forEach(function(mixx, i){
+        if(mixx.trackName===JSON.parse("[" + $scope.selectedTrack + "]")[0].trackName){
+          $scope.trackmixs.push(mixx);
+        }
+      });
+    }
 
 
-		$scope.deleteTrack = function(trackId){
-			TrackFactory.delete({id: trackId});
-			$scope.tracks = TracksFactory.query();
-		};
+    $scope.addMix = function(){
+      MixsFactory.create($scope.mix);
 
-		$scope.mixs = MixsFactory.query();
-		$scope.tracks = TracksFactory.query();
+setTimeout(function () {
+        $scope.$apply(function () {
+$scope.getAllMixs();
+        });
+    }, 1000);
 
-	//	$scope.tracks = [ {"trackName":"Michael jackson - Beat It","piste":[{"pisteMp3":"basse.mp3"},{"pisteMp3":"batterie.mp3"},{"pisteMp3":"guitare.mp3"},{"pisteMp3":"synthes.mp3"},{"pisteMp3":"voix.mp3"}],"singer":"Micheal Jackson","album":"Beat It","type":"Pop","description":"Song of Micheal Jackson","dateOfTrack":"1992-10-21T13:28:06.419Z"},{"trackName":"Metallica - One","piste":[{"pisteMp3":"guitar.mp3"},{"pisteMp3":"rhythm.mp3"},{"pisteMp3":"song.mp3"}],"singer":"","album":"","type":"","description":"","dateOfTrack":""}];
-	
+setTimeout(function () {
+        $scope.$apply(function () {
+$scope.findMixByTrackName ();
+        });
+    }, 3000);
+    
+    //setTimeout($scope.getAllMixs, 1000); //wait 3 seconds before continuing
+    //setTimeout($scope.findMixByTrackName, 3000); //wait 3 seconds before continuing
+    
+    };
+
+    // on recupere un mix par id 
+    $scope.getMix = function(){
+      //var $id=5;
+        $scope.mix = MixFactory.show({id:6});
+        alert($scope.mix._id);
 
 
+      /**
+      MixsFactory.get(mixId).$promise.then(
+        function(response){
+          $scope.showMix = true;
+          $scope.mix = response;
+          console.log ($scope.mix);
+        },
+        function(response){
+          $scope.message = 'Error: '+response.status+' '+response.statusText;
+        }
+      );**/
+    };
 
-/////// added 17/01 by Farouk:
+    /********************     TRACKS              ********************/
+
+    $scope.findAllTracks = function(){
+
+      $scope.TracksFactory.query(
+        function(response){
+          $scope.showTracks = true;
+          $scope.tracks = response;
+        },
+        function(response){
+          $scope.message = 'Erro: '+response.status+' '+response.statusText;
+        }
+      );
+    };
+
+    $scope.addTrack = function(){
+      TracksFactory.create($scope.track);
+    };
+
+    $scope.findTrackById = function(trackId){
+      TrackFactory.show({params:trackId}).$promise.then(
+        function(response){
+          $scope.showTrack = true;
+          $scope.track = response;
+        },
+        function(response){
+          $scope.message = 'Error: '+response.status+' '+response.statusText;
+        }
+      );
+    };
+
+
+    $scope.deleteTrack = function(trackId){
+      TrackFactory.delete({id: trackId});
+      $scope.tracks = TracksFactory.query();
+    };
+
+
+    $scope.mixs = MixsFactory.query();
+    $scope.tracks = TracksFactory.query();
+
 
 
 var ctx = window.AudioContext || window.webkitAudioContext;
 var audioContext;
 
-var gainSlider, gainNode, pannerSlider, pannerNode, bplay, bpause, player, compressorNode, compressorButton, bstop, list, bmute;
+var gainSlider, pannerSlider, bplay, bpause, player, compressorNode, compressorButton, bstop, list, bmute;
 var freq_input0, freq_input1, freq_input2, freq_input3, freq_input4, freq_input5, convSlider0, convSlider1, convSlider2, convSlider3;
-var bupload, bsavemix;
+var bupload, bsavemix, bloadmix, bmoremix;
 
 var freq_pistes_input = new Array ();
 var gain_pistes_input = new Array ();
@@ -98,23 +174,22 @@ var playOnly_input = new Array ();
 
 var canvas, canvas2, canvasContext, canvasContext2, width, height, width2, height2, bufferLength, dataArray, bufferLength2, dataArray2;
 var analyser, analyser2, gradient, analyserLeft, analyserRight, dataArrayLeft, dataArrayRight, splitter;
-
+$scope.gain = [];
 
 var bufferSourcet = [];
 var decodedSoundt = [];
 var soundURLt = [];
 
-var stereoNodet = [];
-var gainNodesT = [];
+$scope.stereoNodet = [];
+$scope.gainNodesT = [];
 
-var filters = [];
-var filtersPistes = [];
+$scope.filters = [];
+$scope.filtersPistes = [];
 
 var casqueT = [];
 var stoppressed = false;  
 
 $scope.frequencies = ['60Hz' , '170Hz' , '350Hz' , '1000Hz' , '3500Hz' , '10000Hz' ];
-
 $scope.impulses = ['dance hall','mythology','sports verb', 'wobble room'];
 
 var decodedImpulset = [];
@@ -123,18 +198,25 @@ var directGaint  = [];
 var convolverNodet = [];
 
 $scope.trackSelected = false;
+$scope.trackmixs = [];
 
 $scope.gain = 1;
 
 $scope.impulse_value = 0;
 
+// Object that draws a sample waveform in a canvas  
+var waveformDrawer = new WaveformDrawer();  
 
+var curTime = 0;
+var delta = 0;
 
 $scope.init = function(){
   // get the AudioContext0
   audioContext = new ctx();
-  pannerNode = audioContext.createStereoPanner();
 
+  $scope.pannerNode = audioContext.createStereoPanner();
+  $scope.gainNode = audioContext.createGain();
+  $scope.gainNode.gain.value = 1;
 
   player = document.getElementById('player');
   gainSlider = document.getElementById('gainSlider');
@@ -147,7 +229,9 @@ $scope.init = function(){
   bmute = document.getElementById('mute');
   bupload = document.getElementById('upload');
   bsavemix = document.getElementById('savemix');
-
+  bloadmix = document.getElementById('mixdetails');
+  bmoremix = document.getElementById('more');
+ 
   $scope.impulses.forEach (function(impulse , i) {
   var  impulseURL = 'http://localhost:8080/impulse/' + impulse + '.wav';
 
@@ -225,9 +309,16 @@ function initCanvas ()
 
 }
 
+
 $scope.loadTrackList = function(Track){
 
 $scope.trackSelected = true;
+
+curTime = 0;
+delta = 0;
+
+
+$scope.findMixByTrackName ();
 
 freq_input0 = document.getElementById('freq_input0');
 freq_input1 = document.getElementById('freq_input1');
@@ -252,26 +343,29 @@ var array = JSON.parse("[" + Track + "]");
 var selectedTrack = array[0];
 
 
-
-	stopGraph (true);
-	//initCanvas ();
+  stopGraph (true);
+  //initCanvas ();
   bstop.disabled = true;
 
 var div_tracks = document.getElementById('tracks_list');
+
 soundURLt = [];
 var  base = 'http://localhost:8080/track/' + selectedTrack.trackName + '/sound/';
 
-var content = '<div class="row" >';
+var content = '<div class="row"><div class="col-md-offset-2">';
 
 selectedTrack.piste.forEach (function(songName , i) {
 
 casqueT [i] = 0;
 soundURLt[i] =  base + songName.pisteMp3 ; 
 
-content+='<div class="col-md-2"><H4 align="center">'+songName.pisteMp3;
+   $scope.gainNodesT[i] = audioContext.createGain(); 
+   $scope.gainNodesT[i].gain.value = 1;
+
+content+='<div class="row" ><div class="col-md-3"><H4 class="pistetitle">'+songName.pisteMp3;
 content+='<button class="mute" id="mute'+i+'" style="cursor: pointer;" ng-click = "mute ('+i+')">&nbsp;&nbsp;</button> ';
 content+='<button class="muteothers" id="muteothers'+i+'" style="cursor: pointer;" ng-click = "muteothers ('+i+')"></button>'+'</H4>';
-content+='<div class="controls1"><div class="row">';
+content+='<div class="controls1"><div class="row"> <div class="col-md-offset-1">';
 
 var k = i+1;
 
@@ -279,7 +373,7 @@ $scope.frequencies.forEach (function(freq , j) {
 
 var s = "";
 s+='<label>'+freq+'</label>';
-s+='<input  id="freq_value'+k+j+'" type="range" value="0" step="1" min="-30" max="30" ng-model="freq_val'+k+j+'" ng-change="changeFrequency(freq_val'+k+j+' ,'+k+' ,'+j+')"></input>';
+s+='<input  id="freq_value'+k+j+'" type="range" value="0" step="1" min="-30" max="30" ng-model="filtersPistes['+i+']['+j+'].gain.value" ng-change="changeFrequency('+k+' ,'+j+')"></input>';
 s+='<output id="freq'+k+j+'">0 dB<br></output>';
 
 
@@ -287,24 +381,23 @@ content=content+s;
 
 });
 
-content+='</div> </div> <div class="row">';
-content+='<div class="col-md-6"><label for="gainSlider">Gain</label>';
-content+='<input class="range" type="range" min="0" max="1" step="0.01" value="1" id="gainSlider'+i+'" ng-model="gain'+k+'" ng-change="changeGain (gain'+k+' , '+k+')"/>';
-content+='</div><div class="col-md-6"><label for="pannerSlider">Balance</label>';
-content+='<input class="range" type="range" min="-1" max="1" step="0.1" value="0" id="pannerSlider'+i+'" ng-model="panner'+k+'" ng-change="changePanner (panner'+k+' , '+k+')" />';
+content+='</div> </div> </div> <div class="row">';
+content+='<div class="col-md-6"><label for="gainSlider" class="label">Volume</label>';
+content+='<input class="range" type="range" min="0" max="1" step="0.01" value="1" id="gainSlider'+i+'" ng-model="gainNodesT['+i+'].gain.value" />';
+content+='</div><div class="col-md-6"><label for="pannerSlider" class="label">Stereo</label>';
+content+='<input class="range" type="range" min="-1" max="1" step="0.1" value="0" id="pannerSlider'+i+'" ng-model="stereoNodet['+i+'].pan.value" />';
 
-content+='</div> </div> </div>';
+content+='</div> </div> </div> <div class="col-md-5 col-md-offset-2"> <br><br><canvas id="canvasOnde'+i+'" width=400 height=150></canvas> </div> </div> <br><br>';
 
 });
 
-content+=' </div>';
+content+='</div> </div>';
 
-var freq_tabo = document.createElement('div');			
+var freq_tabo = document.createElement('div');      
 freq_tabo.innerHTML = content;
 div_tracks.innerHTML = null;
 div_tracks.appendChild (freq_tabo);
 $compile(freq_tabo)($scope);
-
 var l;
 selectedTrack.piste.forEach (function(songName , i) {
 
@@ -322,6 +415,10 @@ freq_pistes_input.push (document.getElementById("freq_value"+l+j));
 desactivateAll ();
 });
 
+$('#saveMixMessage').empty();
+$('#mixName').val('');
+$('#description').val('');
+
 initBuffer(true) ;
 
 };
@@ -333,9 +430,9 @@ if (load == true) $scope.percentage = 0;
 
 for (var i = 0; i < soundURLt.length; i++) {
     bufferSourcet[i] = audioContext.createBufferSource();
-	
-	if (load == true)
-	{
+  
+  if (load == true)
+  {
     loadSoundUsingAjax(soundURLt[i] , i);
     }
 }
@@ -344,6 +441,7 @@ for (var i = 0; i < soundURLt.length; i++) {
 
 
 function loadSoundUsingAjax(url , i) {
+
   var request = new XMLHttpRequest();
   
   request.open('GET', url, true);
@@ -362,19 +460,20 @@ function loadSoundUsingAjax(url , i) {
       $scope.percentage += (100/ (soundURLt.length) );
       timer(parseInt( $scope.percentage ) );
 
-	  decodedSoundt [i] = buffer;
+    decodedSoundt [i] = buffer;
     bufferSourcet[i].buffer = decodedSoundt[i];
     bufferSourcet[i].start();
-
+    
    
-	  // we enable the button
-     if ($scope.percentage == 100)
-	  {
-	 bplay.disabled = false;
+    // we enable the button
+     if (parseInt( $scope.percentage ) == 100)
+    {
+   bplay.disabled = false;
    list.disabled = false;
+   drawTrack (decodedSoundt);
 
       }   
- 	}, function(e) {
+  }, function(e) {
       console.log("error");});
   };
   
@@ -384,44 +483,33 @@ function loadSoundUsingAjax(url , i) {
 }
 
 
-  function timer(n) {
-    $(".progress-bar").css("width", n + "%");
-        $("#pourcentage").text(n + "%");
-
-    }
-
-
-$scope.changeGain = function(gain , i){
-    if (i==0) gainNode.gain.value = gain;
-     else
-     	gainNodesT[i-1].gain.value = gain;
-};
+function timer(n) {
+   $(".progress-bar").css("width", n + "%");
+     $("#pourcentage").text(n + "%");
+  }
 
 
-$scope.changePanner = function(panner , i){
-    if (i==0) pannerNode.pan.value = panner;
-     else
-     	stereoNodet[i-1].pan.value= panner;
-};
-
-$scope.changeFrequency = function(freq_value , row , index){
+$scope.changeFrequency = function(row , index){
    var output = document.getElementById("freq"+row+index);
 
-    output.innerHTML = '<output>'+freq_value+' dB</output>';
+if (row==0)
+    output.innerHTML = '<output>'+$scope.filters[index].gain.value+' dB</output>';
+else
+      output.innerHTML = '<output>'+ $scope.filtersPistes[row-1][index].gain.value+' dB</output>';
 
-    if (row==0) filters[index].gain.value = freq_value;
-    else   filtersPistes[row-1][index].gain.value = freq_value;
+     //$scope.filters[index].gain.value = freq_value;
+       //$scope.filtersPistes[row-1][index].gain.value = freq_value;
 };
 
 $scope.buttonCompressor = 'Turn Compressor ON';
-$scope.ompressorSelected = false;
+$scope.compressorSelected = false;
 
 $scope.updateCompressor = function () {
 
 var compressorButton = document.getElementById("compressorButton");
-$scope.ompressorSelected = !$scope.ompressorSelected;
+$scope.compressorSelected = !$scope.compressorSelected;
 
-if ( $scope.ompressorSelected == false )
+if ( $scope.compressorSelected == false )
 {
 $scope.buttonCompressor = 'Turn Compressor ON';
 compressorNode.disconnect(audioContext.destination);
@@ -430,21 +518,25 @@ analyser2.connect(audioContext.destination);
 }
 
 else
-{	$scope.buttonCompressor = 'Turn Compressor OFF';
+{ $scope.buttonCompressor = 'Turn Compressor OFF';
 analyser2.disconnect(audioContext.destination);
 analyser2.connect(compressorNode);
 compressorNode.connect(audioContext.destination);
 }
 };
 
+var isPaused = false;
 
 $scope.play = function(){
+
+  curTime = (new Date()).getTime();
+  isPaused = false;
 
 for (var i = 0; i < soundURLt.length; i++) {
     
     bufferSourcet[i] = audioContext.createBufferSource();
     bufferSourcet[i].buffer = decodedSoundt[i];
-    bufferSourcet[i].start();
+    bufferSourcet[i].start(audioContext.currentTime, delta);
     
 }
 
@@ -454,11 +546,16 @@ stoppressed = false;
    activateAll ();
 
 bplay.disabled = true;
+bpause.disabled = false;
 
 };
 
 
 $scope.stop = function(){
+if (!isPaused){
+curTime = 0;
+delta = 0;
+}
 stoppressed = true;
 stopGraph (false);
 initBuffer(false) ;
@@ -467,8 +564,11 @@ bpause.disabled = true;
 bstop.disabled = true;
  };
 
- $scope.pause = function(){
-console.log ('stop') ;
+$scope.pause = function(){
+  isPaused = true;
+  delta = delta + (( (new Date()).getTime() - curTime) / 1000);
+  console.log (delta);
+  $scope.stop ();
 };
 
 
@@ -488,85 +588,84 @@ if (destroy == true)
  decodedSoundt = [] ;
  soundURLt = [];
  
- stereoNodet = [];
- filtersPistes = [];
- gainNodesT = [];
+ $scope.stereoNodet = [];
+ $scope.filtersPistes = [];
+ $scope.gainNodesT = [];
 
  }
 }
 
-  $scope.firstTime = true;
+$scope.firstTime = true;
 
 function buildAudioGraph( ) {
 
   // create source and gain node
-  gainNode = audioContext.createGain();
+  $scope.gainNode = audioContext.createGain();
   var stereoModify;
   
   for (var i = 0; i < bufferSourcet.length; i++) {
     
-   stereoNodet[i] = audioContext.createStereoPanner();
-   bufferSourcet[i].connect ( stereoNodet[i]);
-   gainNodesT[i] = audioContext.createGain(); 
+   $scope.stereoNodet[i] = audioContext.createStereoPanner();
+   bufferSourcet[i].connect ( $scope.stereoNodet[i]);
   }
   
     // create the equalizer. It's a set of biquad Filters
    // Set filters
-   filters = [];
+   $scope.filters = [];
     $scope.frequencies.forEach(function(freq, i) {
       var eq = audioContext.createBiquadFilter();
       eq.frequency.value = parseFloat(freq);
       eq.type = "peaking";
       eq.gain.value = 0;
-      filters.push(eq);
+      $scope.filters.push(eq);
     });
-	
-	for (var j = 0; j < bufferSourcet.length; j++) {
-		  filtersPistes[j] = new Array();
+  
+  for (var j = 0; j < bufferSourcet.length; j++) {
+      $scope.filtersPistes[j] = new Array();
 
-	    $scope.frequencies.forEach(function(freq, i) {
-	
+      $scope.frequencies.forEach(function(freq, i) {
+  
       var eq = audioContext.createBiquadFilter();
       eq.frequency.value = parseFloat(freq);
       eq.type = "peaking";
       eq.gain.value = 0;
-      filtersPistes[j].push(eq);
+      $scope.filtersPistes[j].push(eq);
 
     });
-	}
-	
-	
-	
-	for (var j = 0; j < filtersPistes.length ; j++) {
+  }
+  
+  
+  
+  for (var j = 0; j < $scope.filtersPistes.length ; j++) {
 
-	    for (var i = 0; i < filtersPistes[j].length - 1 ; i++) {
-		  
-	  if (i == 0)
-	  { stereoNodet[j].connect (filtersPistes[j][i]);
-	    filtersPistes[j][i].connect(filtersPistes[j][i+1]); 
-	  }	  
+      for (var i = 0; i < $scope.filtersPistes[j].length - 1 ; i++) {
+      
+    if (i == 0)
+    { $scope.stereoNodet[j].connect ($scope.filtersPistes[j][i]);
+      $scope.filtersPistes[j][i].connect($scope.filtersPistes[j][i+1]); 
+    }   
       else
-	  {     filtersPistes[j][i].connect(filtersPistes[j][i+1]);   
-	  }	  
+    {     $scope.filtersPistes[j][i].connect($scope.filtersPistes[j][i+1]);   
+    }   
 
     }
-	
-	   filtersPistes[j][filtersPistes[j].length - 1].connect(gainNodesT[j]) ;
-	   gainNodesT[j].connect(gainNode) ;
-	   
+  
+     $scope.filtersPistes[j][$scope.filtersPistes[j].length - 1].connect($scope.gainNodesT[j]) ;
+     $scope.gainNodesT[j].connect($scope.gainNode) ;
+     
 
-	}
-	
+  }
+  
   // Connect filters in serie
-   gainNode.connect(filters[0]);
-   for(var i = 0; i < filters.length - 1; i++) {
-      filters[i].connect(filters[i+1]);
+   $scope.gainNode.connect($scope.filters[0]);
+   for(var i = 0; i < $scope.filters.length - 1; i++) {
+      $scope.filters[i].connect($scope.filters[i+1]);
     }
 
-	compressorNode = audioContext.createDynamicsCompressor();
+  compressorNode = audioContext.createDynamicsCompressor();
 
-	// connect the last filter to the speakers
-  filters[filters.length - 1].connect(pannerNode);
+  // connect the last filter to the speakers
+  $scope.filters[$scope.filters.length - 1].connect($scope.pannerNode);
 
 if ($scope.firstTime)
 {
@@ -576,24 +675,24 @@ if ($scope.firstTime)
     {
 
       // direct/dry route source -> directGain -> destination
-  pannerNode.connect(directGaint[i]);
+  $scope.pannerNode.connect(directGaint[i]);
   directGaint[i].connect(analyser);
 
 
   // wet route with convolver: source -> convolver
   // -> convolverGain -> destination
-  pannerNode.connect(convolverNodet[i]);
+  $scope.pannerNode.connect(convolverNodet[i]);
   convolverNodet[i].connect(convolverGaint[i]);
   convolverGaint[i].connect(analyser);
 
     // connect the source to the analyser and the splitter
-  pannerNode.connect(splitter);
+  $scope.pannerNode.connect(splitter);
 
 
 
   }
 
-	//pannerNode.connect(analyser);
+  //$scope.pannerNode.connect(analyser);
   analyser.connect(analyser2);
   analyser2.connect(audioContext.destination);
 }
@@ -777,73 +876,70 @@ $scope.muteAll = function () {
 
    var button = document.getElementById("mute");
 
-  if   ( gainNode.gain.value != 0 )
+  if   ( $scope.gainNode.gain.value != 0 )
   { 
-  gainNode.gain.value = 0;
+  $scope.gainNode.gain.value = 0;
   button.style.backgroundImage="url('./lib/image/sound.png')";
   }
  
  else 
   {
-   gainNode.gain.value = gainSlider.value;
-	 button.style.backgroundImage="url('./lib/image/mute.png')";
+   $scope.gainNode.gain.value = gainSlider.value;
+   button.style.backgroundImage="url('./lib/image/mute.png')";
 }
-	
+  
 };
 
     
-  $scope.mute = function (i) {
-	
+$scope.mute = function (i) {
+  
 var button = document.getElementById('mute'+i);
 var gainSlideri = document.getElementById('gainSlider'+i);
-if   ( gainNodesT[i].gain.value != 0 )
+if   ( $scope.gainNodesT[i].gain.value != 0 )
   { 
-  gainNodesT[i].gain.value = 0;
+  $scope.gainNodesT[i].gain.value = 0;
   button.style.backgroundImage="url('./lib/image/sound.png')";
  }
 
  else 
 {
-   gainNodesT[i].gain.value = gainSlideri.value;
-	 button.style.backgroundImage="url('./lib/image/mute.png')";
-}	
+   $scope.gainNodesT[i].gain.value = gainSlideri.value;
+   button.style.backgroundImage="url('./lib/image/mute.png')";
+} 
  };
   
-  $scope.muteothers = function (i) {
+$scope.muteothers = function (i) {
      
       casqueT [i] += 1;
       var button = document.getElementById('muteothers'+i);
 
-	   if (casqueT[i] % 2 != 0)
-	{
-	
-	button.style.backgroundImage="url('./lib/image/headn.png')";
+     if (casqueT[i] % 2 != 0)
+  {
+  
+  button.style.backgroundImage="url('./lib/image/headn.png')";
 
-	for (var j = 0; j < gainNodesT.length  ; j++)
+  for (var j = 0; j < $scope.gainNodesT.length  ; j++)
   {
   if (j != i)
   {
-  gainNodesT[j].gain.value = 0;
+  $scope.gainNodesT[j].gain.value = 0;
   button = document.getElementById('muteothers'+j);
   button.style.backgroundImage="url('./lib/image/head.png')";
   if (casqueT[j] % 2 != 0) casqueT [j] += 1;
   }
   else
-  gainNodesT[j].gain.value = gainNodesT[i].gain.value;
+  $scope.gainNodesT[j].gain.value = $scope.gainNodesT[i].gain.value;
   }}
   
   else 
- 	{	
+  { 
   button.style.backgroundImage="url('./lib/image/head.png')";
-  for (var j = 0; j < gainNodesT.length  ; j++)
+  for (var j = 0; j < $scope.gainNodesT.length  ; j++)
   {
-  gainNodesT[j].gain.value = 1;
-  }}	 
+  $scope.gainNodesT[j].gain.value = 1;
+  }}   
 
   };
-
-
-
 
 
 function loadImpulse(url, i ) {
@@ -904,7 +1000,10 @@ function desactivateAll ()
   compressorButton.disabled = true;
   list.disabled = true;
   mute.disabled = true;
-
+  if (bloadmix!=null && bmoremix!=null) {
+  bloadmix.disabled = true;
+  bmoremix.disabled = true;
+}
   freq_input0.disabled = true;
   freq_input1.disabled = true;
   freq_input2.disabled = true;
@@ -952,6 +1051,10 @@ function activateAll ()
   compressorButton.disabled = false;
   list.disabled = false;
   mute.disabled = false;
+  if (bloadmix!=null && bmoremix!=null) {
+  bloadmix.disabled = false;
+  bmoremix.disabled = false;
+}
 
   freq_input0.disabled = false;
   freq_input1.disabled = false;
@@ -990,31 +1093,204 @@ function activateAll ()
 
 }
 
-	
+
+function verifyMixExist (mix) {
+var exist = false;
+var i = 0;
+
+while (i<$scope.mixs.length && exist==false) {
+  if($scope.mixs[i].trackName===mix.trackName && $scope.mixs[i].mixName===mix.mixName)
+  exist = true;
+  i++;
+}
+
+return exist;
+}
+  
 $scope.saveNewMix = function(){
 
- var mix = {
-        "username": "test",
-        "mixName" : "test",
-        "description" : "test",
-        "gain": [],
-        "balance": [],
-        "compressor": "ON",
-        "frequencies": [],
-        "impulse": []
-    };
+    $('#saveMixMessage').empty();
 
-var myJSONText = JSON.stringify(mix, replace);
-console.log (myJSONText);
 
+    var input = document.getElementById('mixName');
+    var validityState_object = input.validity;
+      
+    var input2 = document.getElementById('description');
+    var validityState_object2 = input2.validity;
+
+    if(validityState_object.valueMissing)
+      input.setCustomValidity('Please set a mix name (required)'); 
+    else
+      input.setCustomValidity(''); 
+
+    if(validityState_object2.valueMissing)
+      input2.setCustomValidity('Please set a mix description (required)'); 
+    else
+      input2.setCustomValidity(''); 
+
+    if (! (validityState_object.valueMissing || validityState_object2.valueMissing) ) {
+
+   {
+
+    $scope.mix.trackName = JSON.parse("[" + $scope.selectedTrack + "]")[0].trackName;
+    $scope.mix.gain = [];
+    $scope.mix.frequencies = [];
+    $scope.mix.balance = [];
+    $scope.mix.impulses = [];
+
+for (var i=0 ; i<=soundURLt.length ; i++) {
+
+var obj = {"frequency" : []};
+var array = new Array();
+
+   if (i==0)
+   { 
+    $scope.mix.gain.push ($scope.gainNode.gain.value);
+    $scope.mix.balance.push ($scope.pannerNode.pan.value);
+    
+    $scope.frequencies.forEach (function (freq, j) {
+    array.push($scope.filters[j].gain.value);
+    });
+    
+    obj.frequency = array;
+    $scope.mix.frequencies.push (obj);
+   }
+  
+    else
+   {
+    $scope.mix.gain.push ($scope.gainNodesT[i-1].gain.value);
+    $scope.mix.balance.push ($scope.stereoNodet[i-1].pan.value);
+
+   $scope.frequencies.forEach (function (freq, j) {
+    array.push($scope.filtersPistes[i-1][j].gain.value);
+    });
+
+    obj.frequency = array;
+    $scope.mix.frequencies.push (obj);
+
+  }
+}
+
+if ($scope.compressorSelected == false)
+$scope.mix.compressor = "OFF";
+else
+$scope.mix.compressor = "ON";
+
+$scope.impulses.forEach (function (impulse, i) {
+$scope.mix.impulses.push (convolverGaint[i].gain.value);
+});
+
+$scope.mix.username = "";
+
+ var divMessage = document.getElementById ("saveMixMessage");
+
+if (verifyMixExist ($scope.mix)) {
+  divMessage.style.color = "red";
+  divMessage.innerHTML = "<h4>Choose a different mix name<h4>";
+}
+else {
+  $scope.addMix();; 
+  divMessage.style.color = "green";
+  divMessage.innerHTML = "<h4>Mix saved successfully</h4>";
+}
+
+}
+}
  };
 
- function replace(key, value) {
-    if (typeof value === 'number' && !isFinite(value)) {
-        return String(value);
-    }
-    return value;
-}
+
+function drawTrack(decodedBuffer)  {
+
+    decodedBuffer.forEach (function(gain , i) {
+    
+    var canvas = document.getElementById ('canvasOnde'+i);
+    waveformDrawer.init(decodedBuffer[i], canvas, 'green');  
+    // First parameter = Y position (top left corner)  
+    // second = height of the sample drawing  
+    waveformDrawer.drawWave(0, canvas.height);  
+})
+}  
+  $scope.comments = CommentsFactory.query();
+  $scope.ratings = RatingsFactory.query();
+
+
+$scope.loadMix = function(mix){
+        
+$scope.gainNode.gain.value = mix.gain[0];
+$scope.pannerNode.pan.value = mix.balance[0];
+
+$scope.filters.forEach (function (freq, i) {
+ freq.gain.value = mix.frequencies[0].frequency[i];
+ $scope.changeFrequency (0, i); 
+});
+
+$scope.filtersPistes.forEach (function (freq, i) {
+freq.forEach (function (frequ, j) {
+ frequ.gain.value = mix.frequencies[i+1].frequency[j];
+ $scope.changeFrequency (i+1, j); 
+});
+});
+
+$scope.gainNodesT.forEach (function (gain, i) {
+gain.gain.value = mix.gain[i+1];
+});
+
+$scope.stereoNodet.forEach (function (pan, i) {
+pan.pan.value = mix.balance[i+1];
+});
+
+$scope.impulses.forEach (function (imp, i) {
+var impulse = document.getElementById ('convolverSlider' + i);
+impulse.value = mix.impulses[i];
+convolverGaint[i].gain.value = impulse.value;
+directGaint[i].gain.value = 1 - convolverGaint[i].gain.value;
+});
+
+if ( (mix.compressor == 'ON' && $scope.compressorSelected == true) || (mix.compressor == 'OFF' && $scope.compressorSelected == false) )
+  $scope.updateCompressor();
+
+
+    };
+
+
+$scope.resetParam = function () {
+
+$scope.gainNode.gain.value = 1;
+$scope.pannerNode.pan.value = 0;
+
+$scope.filters.forEach (function (freq, i) {
+ freq.gain.value = 0;
+ $scope.changeFrequency (0, i); 
+});
+
+$scope.filtersPistes.forEach (function (freq, i) {
+freq.forEach (function (frequ, j) {
+ frequ.gain.value = 0;
+ $scope.changeFrequency (i+1, j); 
+});
+});
+
+$scope.gainNodesT.forEach (function (gain, i) {
+gain.gain.value = 1;
+});
+
+$scope.stereoNodet.forEach (function (pan, i) {
+pan.pan.value = 0;
+});
+
+$scope.impulses.forEach (function (imp, i) {
+var impulse = document.getElementById ('convolverSlider' + i);
+impulse.value = 0;
+convolverGaint[i].gain.value = 0;
+directGaint[i].gain.value = 1;
+});
+
+
+if ( $scope.compressorSelected == true )
+  $scope.updateCompressor();
+
+};
+
 
 
   }]);

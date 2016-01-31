@@ -36,12 +36,6 @@ div.controls {
 }
 
 
-  
-
-
-
-
-
 /* piste frequance table */
 div.controls1 label, output {
   text-align: center;
@@ -64,7 +58,6 @@ div.controls1 input {
 
 }
 
-
 div.controls1 {
   margin: 20px;
   border:1px solid;
@@ -78,52 +71,14 @@ div.controls1 {
   font-size: 12px;
 }
 
-
   
-
-
 /* canvas */
 canvas {
     display: block;
     border:2px solid #7E8F7C;
 }
 
-
-
-            
-.mute         {
-            
-width: 23px;
-height: 23px;
-            background: url(../image/mute.png) no-repeat;
-                        cursor:pointer;
-            border: none;            
-    float: right;
-            }           
-            
-#mute         {
-            
-width: 23px;
-height: 23px;
-            background: url(../image/mute.png) no-repeat;
-                        cursor:pointer;
-            border: none;            
-            }
-            
-            
-/* mute button */
-.muteothers       {
-            
-width: 23px;
-margin-right : 8px;
-height: 23px;
-            background: url(../image/head.png) no-repeat;
-                        cursor:pointer;
-            border: none;            
-    float: right;
-            }
         
-            
 /* songlist */
 select {
     padding:3px;
@@ -177,7 +132,6 @@ select {
 
 
 /* input range style*/
-
 .range {
   -webkit-appearance: none;
   margin: 10px 0;
@@ -265,3 +219,91 @@ select {
 .range:focus::-ms-fill-upper {
   background: #2497E3;
 }
+
+
+/*labesl*/
+.label {
+  color: #0092CD;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.pistetitle {
+  color: #DE1B1B;
+  font-weight: bold;
+}
+
+#pourcentage {
+  color: #B71427;
+  font-size: 15px;
+  font-weight: bold;
+
+}
+          
+/* mute button */
+.mute  {
+width: 23px;
+height: 23px;
+background: url(../image/mute.png) no-repeat;
+cursor:pointer;
+border: none;            
+float: right;
+ }           
+            
+#mute  {
+width: 23px;
+height: 23px;
+background: url(../image/mute.png) no-repeat;
+cursor:pointer;
+border: none;            
+ }
+                      
+.muteothers {
+width: 23px;
+margin-right : 8px;
+height: 23px;
+background: url(../image/head.png) no-repeat;
+cursor:pointer;
+border: none;            
+float: right;
+ }        
+
+
+
+
+ /* summary details */
+
+#more {
+    margin-left: 5px;
+  }     
+
+summary::-webkit-details-marker {
+  display: none;
+}
+
+summary:before{
+  background: red;
+  border-radius: 5px; 
+  content: "+"; 
+  color: #fff; 
+  float: left;
+  font-size: 1.5em; 
+  font-weight: bold; 
+  margin: -2px 10px 0 0; 
+  padding: 0; 
+  text-align: center; 
+  width: 15px;
+}
+
+#sp1 {
+    font-size: 1.4em; 
+    font-family: "Comic Sans MS", cursive, sans-serif ;
+    color: #7D1935; 
+}
+
+#sp2 {
+    font-size: 1.3em; 
+    font-family: "Times New Roman", Times, serif;
+}
+
+

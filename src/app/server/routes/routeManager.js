@@ -934,7 +934,7 @@ module.exports = function(app) {
 
   app.get('/tracks', findAllTracks);
   app.get('/tracks/:id', findTrackById);
-  app.post('/tracks', addTrack);//{"trackName":"Michael jackson - Beat It","piste":[{"pisteMp3":"bassee.mp3"},{"pisteMp3":"batterie.mp3"},{"pisteMp3":"guitare.mp3"},{"pisteMp3":"synthes.mp3"},{"pisteMp3":"voix.mp3"}],"singer":"Micheal Jackson","album":"Beat It","type":"Pop","description":"Song of Micheal Jackson","dateOfTrack":"1992-10-21T13:28:06.419Z"}
+  app.post('/tracks', addTrack);//{"trackName":"Michael jackson - Beat It","piste":[{"pisteMp3":"basse.mp3"},{"pisteMp3":"batterie.mp3"},{"pisteMp3":"guitare.mp3"},{"pisteMp3":"synthes.mp3"},{"pisteMp3":"voix.mp3"}],"singer":"Micheal Jackson","album":"Beat It","type":"Pop","description":"Song of Micheal Jackson","dateOfTrack":"1992-10-21T13:28:06.419Z"}
   app.put('/tracks/:id', updateTrack);
   app.delete('/tracks/:id', deleteTrack);
 

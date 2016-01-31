@@ -8,6 +8,14 @@
 		function($scope, UserFactory, UsersFactory, $location){
 		var app = this;
 
+		/**
+		$scope.connected = false;
+
+		if(!$scope.connected){
+			$location.path('/login');
+		}**/
+
+
 		$scope.editUser = function(uid){
 			$location.path('/user-detail/'+uid);
 		};
@@ -32,11 +40,11 @@
 		$scope.updateUser = function(){
 			var $id = $routeParams.id;
 			UserFactory.update({id: $id}, $scope.user);
-			$location.path('/users-list');
+			$location.path('/user-list');
 		};
 
 		$scope.cancel = function(){
-			$location.path('/users-list');
+			$location.path('/user-list');
 		};
 
 		$scope.user = UserFactory.show({id: $routeParams.id});
@@ -48,7 +56,7 @@
 		
 		$scope.createNewUser = function(){
 			UsersFactory.create($scope.user);
-			$location.path('/users-list');
+			$location.path('/user-list');
 		};	
 	}]);
 

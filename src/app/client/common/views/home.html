@@ -1,7 +1,13 @@
 <div class="container" data-ng-init="init()">
+<br>
 
 <div class="row">
+
 <div class="col-md-5">
+
+  <div class="row">
+
+    <div class="col-md-7">
 <audio id="player" crossorigin="anonymous" loop />
 
 <div id="songs">
@@ -10,39 +16,48 @@
          <option id ="option"
     ng-repeat="track in tracks" 
     value="{{track}}" 
-    title= '{{track.description}} 
+    title= "¨ {{track.description}} 
     Singer : {{track.singer}}
     Album : {{track.album}}
     Type : {{track.type}}
-    Released : {{track.dateOfTrack.substring(0, 10)}}'>
+    Released : {{track.dateOfTrack.substring(0, 10)}}">
     {{track.trackName}}
     </option>
 
-
 </select>
 </label>
+</div> 
+</div> 
 
 
-<button class="btn btn-primary glyphicon glyphicon-play" id="play" style="cursor: pointer;" ng-click="play();" disabled=true></button>
+<div class="col-md-4">
+&nbsp;<button class="btn btn-primary glyphicon glyphicon-play" id="play" style="cursor: pointer;" ng-click="play();" disabled=true></button>
 <button class="btn btn-primary glyphicon glyphicon-pause" id="pause" style="cursor: pointer;" ng-click="pause();" disabled=true></button>
 <button class="btn btn-primary glyphicon glyphicon-stop" id="stop" style="cursor: pointer;" ng-click="stop();"disabled=true></button>
-<br><br>
+</div>
+
+</div> 
+
+<br>
 <div class="row">
-<div class="col-md-offset-5 col-md-2">
-<label for="gainSlider">Volume</label>
+<div class="col-md-2 col-md-offset-5">
+<label for="gainSlider" class="label">Volume</label>
 </div>
 <div class="col-md-3">
-<input class="range" type="range" min="0" max="1" step="0.01" value="1" id="gainSlider" ng-model="gain" ng-change="changeGain (gain , 0)" disabled=true/>
+<input class="range" type="range" min="0" max="1" step="0.01" value="1" id="gainSlider" ng-model="gainNode.gain.value" disabled=true/>
 </div>
 <div class="col-md-1">
 <button id="mute" style="cursor: pointer;" ng-click="muteAll();" disabled=true/>
 </div>
 </div>
-  
-</div> 
-</div> 
 
-<div class="col-md-4">
+<br><br>
+
+</div>
+
+
+<div class="col-md-4" >
+
   <div class="progress progress-striped">
     <div class="progress-bar"></div>
   </div>
@@ -52,32 +67,21 @@
 </div>
 
 
-<div class="col-md-offset-1 col-md-2" >
-<button id="upload" data-toggle="modal" href="#infos" class="btn btn-primary">Upload track</button>
-<div class="modal fade" id="infos">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">x</button>
-        <h4 class="modal-title">Track informations</h4>
-      </div>
+<div class="col-md-1 col-md-offset-1" >
+
+  <button id="upload" data-toggle="modal" href="./common/views/tracks/track-creation.html" data-target="#uploadPage" class="btn btn-primary glyphicon glyphicon-upload">&nbsp;Upload track</button>
       
-      <div class="modal-body">
-      formulaire
+      <div class="modal fade" id="uploadPage">
+        <div class="modal-dialog">  
+          <div class="modal-content"></div>  
+        </div> 
       </div>
-      
-      <div class="modal-footer">
-        <button class="btn btn-info" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-</div>
-<br><br>
 
 </div>
 
-<br><br>
+
+</div>
+
 
 <div class="row">
 
@@ -85,8 +89,6 @@
 <canvas id="myCanvas" width=250 height=200></canvas>
 </div>
  
-
-
 
 <div class="col-md-7" ng-show="trackSelected">
 <div class="row"> <br><br><br><br> </div>
@@ -96,8 +98,8 @@
 
   <div class="col-md-offset-4 col-md-3">
 
-  <label for="pannerSlider">Balance</label>
-  <input class="range" type="range" min="-1" max="1" step="0.1" value="0" id="pannerSlider" ng-model="panner" ng-change="changePanner (panner , 0)" />
+  <label for="pannerSlider" class="label">Stereo</label>
+  <input class="range" type="range" min="-1" max="1" step="0.1" value="0" id="pannerSlider" ng-model="pannerNode.pan.value" />
   </div>
 
   <div class="col-md-3 col-md-offset-1">
@@ -111,28 +113,23 @@
 <div class="controls" >
 
     <div ng-repeat = "freq in frequencies">
-	<div class="row">
-	<div class="col-md-2"><label>{{freq}}</label></div>
- <div class="col-md-7"><input ng-attr-id="{{ 'freq_input' + $index }}" type="range" value="0" step="1" min="-30" max="30" ng-model="freq_value" ng-change = "changeFrequency (freq_value , 0 , $index)"></input></div>
+  <div class="row">
+  <div class="col-md-2"><label>{{freq}}</label></div>
+ <div class="col-md-7"><input ng-attr-id="{{ 'freq_input' + $index }}" type="range" value="0" step="1" min="-30" max="30" ng-model="filters[$index].gain.value" ng-change = "changeFrequency (0 , $index)"></input></div>
     <div ng-attr-id="{{ 'freq0' + $index }}" class="col-md-3"><output>0 dB</br></output></div>
     </div> 
     </div> 
 
 </div>
-
-
 </div>
 </div>
 
   
 
-
-
-
  <div class="row"> <div class="col-md-7 col-md-offset-4">
 
     <div ng-repeat = "impulse in impulses">
-<div class="col-md-3"><label for="convolverSlider' + $index + '" style="font-size:10px">{{impulse}} (Dry/Wet)</label>
+<div class="col-md-3"><label for="convolverSlider' + $index + '" style="font-size:10px" class="label">{{impulse}} <br> (Dry/Wet)</label>
 <input class="range" type="range" min="0" max="1" step="0.1" value="0" ng-attr-id="{{ 'convolverSlider' + $index }}" ng-model="impulse_value" ng-change="changeImpulse ($index)" /></div>
     </div>
  </div> </div>
@@ -140,7 +137,7 @@
 
 
 <br><br>
-	</div>
+  </div>
 
 </div>
 
@@ -151,17 +148,98 @@
 <br><br>
 
 </div>
+<br>
 
 <div class = "row" id="tracks_list" ng-show="trackSelected" >
-
 </div> 
-
-
-<br><br>
-<button class="btn btn-primary" id="savemix" style="cursor: pointer;" ng-show="trackSelected" ng-click="saveNewMix();">Save Mixe</button>
+<br>
  
 
+<div class="row" ng-show="trackSelected" >
+<div class="col-md-offset-4 col-md-4">
+  <button class="btn btn-primary btn-block" ng-click="resetParam ();">Reset</button>
+</div>
+</div>
+
+<br><br>
+
+ <div class="row" ng-show="trackSelected" >
+<div id="saveMixMessage"></div>
+<br>
+<form class="form-horizontal col-md-4" name="savemixform" id="saveform">
+  
+  <div class="form-group">
+    <legend class="pistetitle">Save your mix</legend>
+  </div>
+  
+  <div class="row">
+    <div class="form-group">
+      <label for="mixName" class="col-md-4 control-label label" >Mix name : </label>
+      <div class="col-md-8">
+        <input type="text" class="form-control" id="mixName" placeholder="Mix name"  ng-model="mix.mixName" required>
+      </div>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="form-group">
+      <label for="description" class="col-md-4 control-label label">Description : </label>
+      <div class="col-md-8">
+        <input type="textarea" class="form-control" id="description" placeholder="Description"  ng-model="mix.description" required >
+      </div>
+    </div>
+  </div>
+ 
+  <div class="form-group">
+    <button id="savemix" type="submit" class="pull-right btn btn-primary glyphicon glyphicon-save" ng-click="saveNewMix ();">&nbsp;Save&nbsp;</button>
+  </div>
+  
+   </form>
 
 
+   <div class = "col-md-offset-5 col-md-3"> 
+
+<br>
+
+<div ng-repeat="mix in trackmixs">
+ <details>
+ <summary >
+  
+ <span id="sp1"> {{ mix.mixName }} </span>
+
+  <button class="btn btn-primary pull-right" data-toggle="modal" data-target="#f1" id="more">More</button>
+  <button id="mixdetails" type="submit" class="btn btn-primary pull-right" ng-click="loadMix (mix);">Load</button>
+
+  <div class="modal fade" id="f1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">x</button>
+        <h4 class="modal-title">Commentaires + ratings :</h4>
+      </div>
+
+        <div class="modal-body">
+       Commentaire + ratings
+        </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-info" data-dismiss="modal">Annuler</button>
+      </div>
+      
+      </div>
+    </div>
+  </div>
+ 
+
+</summary>
+ <br> &nbsp;&nbsp; <span id="sp2"> Description : {{ mix.description }}<br> &nbsp;&nbsp;&nbsp;Added by : </span>
+</details>
+<br> <br>
+</div>
+
+</div>
+
+</div>
 
 </div>
