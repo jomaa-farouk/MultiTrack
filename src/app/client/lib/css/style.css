@@ -305,3 +305,8 @@ summary:before{
     font-size: 1.3em; 
     font-family: "Times New Roman", Times, serif;
 }
+
+.likes{
+  width: 100%;
+  height: 5px;
+} 
