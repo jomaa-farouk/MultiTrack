@@ -23,6 +23,10 @@ var Rating = new Schema({
     type    : String,
     require : true
   },
+  trackName:     {
+    type    : String,
+    require : true
+  },
   mark:     {
     type    : String,
     require : true

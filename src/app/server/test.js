@@ -169,7 +169,7 @@ it('Updates a comment',function(done){
 /***********************************************    TEST FOR RATING  *****************************************************/
 
 /*************************************************************************************************************************/
-var rating = new Rating({ username : "mongoUser", mixName : "michael jackson beat it mix 1", mark : "3.5" }); 
+var rating = new Rating({ username : "mongoUser", mixName : "michael jackson beat it mix 1", trackName : "Michael jackson - Beat It", mark : "3.5" }); 
 
 
 it('Post rating', function(done){  

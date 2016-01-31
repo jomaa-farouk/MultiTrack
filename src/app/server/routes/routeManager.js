@@ -392,6 +392,7 @@ module.exports = function(app) {
     var rating = new Rating({
       username:    req.body.username,
       mixName:    req.body.mixName,
+      trackName:    req.body.trackName,
       mark: req.body.mark
     });
 
@@ -461,6 +462,7 @@ module.exports = function(app) {
 
       if (req.body.username != null) user.username= req.body.username;
       if (req.body.mixName != null) user.mixName= req.body.mixName;
+      if (req.body.trackName != null) user.trackName= req.body.trackName;
       if (req.body.mark != null) user.mark=rq.body.mark;
 
       return rating.save(function(err) {
@@ -926,7 +928,7 @@ module.exports = function(app) {
 
   app.get('/ratings', findAllRatings);
   app.get('/ratings/:id', findRatingById);
-  app.post('/ratings', addRating);//{ "username" : "mongoUser", "mixName" : "michael jackson beat it mix 1", "mark" : "3.5" }
+  app.post('/ratings', addRating);//{ "username" : "mongoUser", "mixName" : "michael jackson beat it mix 1","trackName":"Michael jackson - Beat It", "mark" : "3.5" }
   app.put('/ratings/:id', updateRating);
   app.delete('/ratings/:id', deleteRating);
 
