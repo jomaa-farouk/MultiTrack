@@ -26,7 +26,6 @@ module.exports = function(app) {
 /***********************************************    HANDLE USERS     ********************************************************/
 
 /****************************************************************************************************************************/
-
   /**
    * Find and retrieves all Users
    * @param {Object} req HTTP request object.
@@ -54,7 +53,7 @@ module.exports = function(app) {
    */
   findById = function(req, res) {
 
-    console.log("GET - /users/:id");
+    console.log("GET - /users/:id"); 
     return User.findById(req.params.id, function(err, user) {
 
       if(!user) {
@@ -89,7 +88,8 @@ module.exports = function(app) {
       username:    req.body.username,
       fullname:    req.body.fullname,
       mail:        req.body.mail,
-      passwd:      req.body.passwd
+      passwd:      req.body.passwd,
+      role:        req.body.role
     });
 
     user.save(function(err) {
@@ -132,6 +132,7 @@ module.exports = function(app) {
       if (req.body.fullname!= null) user.fullname= req.body.fullname;
       if (req.body.mail!= null) user.mail = req.body.mail;
       if (req.body.passwd != null) user.passwd = req.body.passwd;
+      if (req.body.role != null) user.passwd = req.body.role;
 
       return user.save(function(err) {
         if(!err) {
@@ -254,6 +255,7 @@ module.exports = function(app) {
 
     var comment = new Comment({
       username:    req.body.username,
+      trackName:    req.body.trackName,
       content:    req.body.content,
       mixName:    req.body.mixName
     });
@@ -295,6 +297,7 @@ module.exports = function(app) {
       }
 
       if (req.body.username != null) user.username= req.body.username;
+      if (req.body.trackName!= null) user.trackName= req.body.trackName;
       if (req.body.comment!= null) user.comment= req.body.comment;
       if (req.body.mixName!= null) user.mixName= req.body.mixName;
 
@@ -907,15 +910,15 @@ module.exports = function(app) {
 
   app.get('/users', findAllUsers);
   app.get('/users/:id', findById);
-  app.post('/users', addUser);//{ "username" : "mongoUser", "fullname" : "UserFullName", "mail" : "mg@gmail.com", "passwd" : "1234" }
-  app.put('/users/:id', updateUser);
+  app.post('/users', addUser);//{ "username" : "mongoUser", "fullname" : "UserFullName", "mail" : "mg@gmail.com", "passwd" : "1234", "role":"admin"}
+  app.put('/users/:id', updateUser);  
   app.delete('/users/:id', deleteUser);
 
 
 
   app.get('/comments', findAllComments);
   app.get('/comments/:id', findCommentById);
-  app.post('/comments', addComment);//{ "username" : "mongoUser", "content" : "That's a good mix !" ,"mixName" : "michael jackson beat it mix 1"}
+  app.post('/comments', addComment);//{ "username" : "mongoUser", "trackName" : "Michael jackson - Beat It","content" : "That's a good mix !" ,"mixName" : "michael jackson beat it mix 1"}
   app.put('/comments/:id', updateComment);
   app.delete('/comments/:id', deleteComment);
 

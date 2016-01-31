@@ -99,7 +99,7 @@ it('Updates a user',function(done){
 /***********************************************    TEST FOR COMMENT  *****************************************************/
 
 /**************************************************************************************************************************/
-var comment = new Comment({ username : "mongoUser", content : "That's a good mix !" , mixName : "michael jackson beat it mix 1"}); 
+var comment = new Comment({ username : "mongoUser",trackName:"Michael jackson - Beat It", content : "That's a good mix !" , mixName : "michael jackson beat it mix 1"}); 
 
 
 it('Post comment', function(done){  

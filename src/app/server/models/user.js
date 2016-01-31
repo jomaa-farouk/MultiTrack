@@ -31,6 +31,10 @@ var User = new Schema({
     type: String,
 	  require : true
   }
+  role: {
+    type: String, // "admin" or "simpleUser"
+    require: true
+  }
 });
 
 User.plugin(autoIncrement.plugin, 'User');

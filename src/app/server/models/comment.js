@@ -19,6 +19,10 @@ var Comment = new Schema({
     type    : String,
     require : true
   },
+  trackName:    {
+    type    : String,
+    require : true
+  },
   content:     {
     type    : String,
     require : true
