@@ -30,7 +30,7 @@ var User = new Schema({
   passwd:   {
     type: String,
 	  require : true
-  }
+  },
   role: {
     type: String, // "admin" or "simpleUser"
     require: true

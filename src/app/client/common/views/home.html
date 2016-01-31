@@ -157,7 +157,7 @@
 
 <div class="row" ng-show="trackSelected" >
 <div class="col-md-offset-4 col-md-4">
-  <button class="btn btn-primary btn-block" ng-click="resetParam ();">Reset</button>
+  <button class="btn btn-primary btn-block" id="reset" ng-click="resetParam ();">Reset</button>
 </div>
 </div>
 
@@ -176,7 +176,7 @@
     <div class="form-group">
       <label for="mixName" class="col-md-4 control-label label" >Mix name : </label>
       <div class="col-md-8">
-        <input type="text" class="form-control" id="mixName" placeholder="Mix name"  ng-model="mix.mixName" required>
+        <input type="text" class="form-control" id="mixName" placeholder="Mix name"  ng-model="mix.mixName" >
       </div>
     </div>
   </div>
@@ -185,7 +185,7 @@
     <div class="form-group">
       <label for="description" class="col-md-4 control-label label">Description : </label>
       <div class="col-md-8">
-        <input type="textarea" class="form-control" id="description" placeholder="Description"  ng-model="mix.description" required >
+        <textarea  type="textarea" class="form-control" id="description" placeholder="Description"  ng-model="mix.description" ></textarea>
       </div>
     </div>
   </div>
@@ -207,8 +207,8 @@
   
  <span id="sp1"> {{ mix.mixName }} </span>
 
-  <button class="btn btn-primary pull-right" data-toggle="modal" data-target="#f1" id="more">More</button>
-  <button id="mixdetails" type="submit" class="btn btn-primary pull-right" ng-click="loadMix (mix);">Load</button>
+  <button class="btn btn-primary pull-right more" data-toggle="modal" data-target="#f1" ng-attr-id="{{ 'more' + $index }}" ng-click="loadComments ( mix.mixName );" disabled>More</button>
+  <button id="mixdetails" type="submit" class="btn btn-primary pull-right" ng-click="loadMix (mix);" ng-attr-id="{{ 'load' + $index }}" disabled>Load</button>
 
   <div class="modal fade" id="f1">
     <div class="modal-dialog">
@@ -216,15 +216,33 @@
 
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">x</button>
-        <h4 class="modal-title">Commentaires + ratings :</h4>
+        <h4  class="pistetitle" class="modal-title">Add Comment :</h4>
       </div>
 
         <div class="modal-body">
-       Commentaire + ratings
-        </div>
 
+    <form name="addcomment" id="addcomment">
+   
+ 
+    <div class="form-group">
+        <textarea type="textarea" cols="35" class="form-control" id="comment" placeholder="Comment"  ng-model="comment.content"> </textarea>
+    </div>
+ 
+    <button id="savecomment" type="submit" class="btn btn-primary pull-right" ng-click="saveComment ();">Add</button>
+  
+   </form>
+
+<br>
+        <ul ng-repeat="comment in commentsmix" class="ul">
+          <li class="li">{{ comment.content }} &nbsp;&nbsp;  <button class="btn btn-danger btn-xs glyphicon glyphicon-remove" disabled></button> <br>
+           added by: {{ comment.username }},  the: {{ comment.dateOfCreation | date:'yyyy-MM-dd' }}</li>
+           <br>
+        </ul>
+
+       </div>
+<br><br>
       <div class="modal-footer">
-        <button class="btn btn-info" data-dismiss="modal">Annuler</button>
+        <button class="btn btn-info" data-dismiss="modal">Close</button>
       </div>
       
       </div>

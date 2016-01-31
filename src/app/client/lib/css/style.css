@@ -273,7 +273,7 @@ float: right;
 
  /* summary details */
 
-#more {
+.more {
     margin-left: 5px;
   }     
 
@@ -305,5 +305,3 @@ summary:before{
     font-size: 1.3em; 
     font-family: "Times New Roman", Times, serif;
 }
-
-

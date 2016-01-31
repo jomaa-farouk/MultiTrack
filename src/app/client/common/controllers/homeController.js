@@ -16,9 +16,10 @@
     $scope.getCommentsByMixName = function(){
         $scope.commentsmix = [];
         $scope.comments.forEach(function(thisComment, idx){
-            if(thisComment.mixName === $scope.selectedMixName){
+            if(thisComment.mixName === $scope.selectedMixName && thisComment.trackName == JSON.parse("[" + $scope.selectedTrack + "]")[0].trackName){
               $scope.commentsmix.push(thisComment);
             }
+
         });
     };
 
@@ -42,10 +43,22 @@
       $scope.ratings = RatingsFactory.query();
     }
 
-    $scope.addComment = function(){
+    $scope.addComment = function(mix){
       CommentsFactory.create($scope.comment);
-      $scope.comments = CommentsFactory.query();
-    }
+    
+       setTimeout(function () {
+       $scope.$apply(function () {
+       $scope.getAllComments();
+       });
+       }, 1000);
+
+      setTimeout(function () {
+      $scope.$apply(function () {
+      $scope.getCommentsByMixName();
+        });
+       }, 2000);
+      
+   }
 
     $scope.deleteComment = function(rId){
       CommentFactory.delete({id:rId});
@@ -66,6 +79,19 @@
       );
     };
 
+    $scope.getAllComments = function(){
+      CommentsFactory.query(
+        function(response){
+          $scope.message = 'Loading ...';
+          $scope.comments = response;
+       },
+        function(response){
+          $scope.message = 'Error: '+response.status+' '+response.statusText;
+        }
+      );
+    };
+
+
     $scope.findMixByTrackName = function(){
       $scope.trackmixs = [];
       $scope.mixs.forEach(function(mixx, i){
@@ -79,21 +105,17 @@
     $scope.addMix = function(){
       MixsFactory.create($scope.mix);
 
-setTimeout(function () {
+      setTimeout(function () {
         $scope.$apply(function () {
-$scope.getAllMixs();
+        $scope.getAllMixs();
         });
-    }, 1000);
+      }, 1000);
 
-setTimeout(function () {
-        $scope.$apply(function () {
-$scope.findMixByTrackName ();
-        });
-    }, 3000);
-    
-    //setTimeout($scope.getAllMixs, 1000); //wait 3 seconds before continuing
-    //setTimeout($scope.findMixByTrackName, 3000); //wait 3 seconds before continuing
-    
+      setTimeout(function () {
+       $scope.$apply(function () {
+       $scope.findMixByTrackName ();
+       });
+      }, 2000);
     };
 
     // on recupere un mix par id 
@@ -164,7 +186,10 @@ var audioContext;
 
 var gainSlider, pannerSlider, bplay, bpause, player, compressorNode, compressorButton, bstop, list, bmute;
 var freq_input0, freq_input1, freq_input2, freq_input3, freq_input4, freq_input5, convSlider0, convSlider1, convSlider2, convSlider3;
-var bupload, bsavemix, bloadmix, bmoremix;
+var bupload, bsavemix, breset;
+
+var bloadmix = [];
+var bmoremix = [];
 
 var freq_pistes_input = new Array ();
 var gain_pistes_input = new Array ();
@@ -204,6 +229,8 @@ $scope.gain = 1;
 
 $scope.impulse_value = 0;
 
+$scope.comment = {};
+
 // Object that draws a sample waveform in a canvas  
 var waveformDrawer = new WaveformDrawer();  
 
@@ -229,9 +256,8 @@ $scope.init = function(){
   bmute = document.getElementById('mute');
   bupload = document.getElementById('upload');
   bsavemix = document.getElementById('savemix');
-  bloadmix = document.getElementById('mixdetails');
-  bmoremix = document.getElementById('more');
- 
+  breset = document.getElementById('reset');
+
   $scope.impulses.forEach (function(impulse , i) {
   var  impulseURL = 'http://localhost:8080/impulse/' + impulse + '.wav';
 
@@ -695,6 +721,7 @@ if ($scope.firstTime)
   //$scope.pannerNode.connect(analyser);
   analyser.connect(analyser2);
   analyser2.connect(audioContext.destination);
+
 }
 }
 
@@ -752,6 +779,7 @@ function drawWaveform() {
   // draw the path at once
   canvasContext.stroke();    
   canvasContext.restore();
+
 }
 
 
@@ -1036,8 +1064,10 @@ function desactivateAll ()
   gain.disabled = true;
   });
 
+  breset.disabled = true;
   bupload.disabled = true;
   bsavemix.disabled = true;
+
 }
 
 function activateAll ()
@@ -1090,6 +1120,13 @@ function activateAll ()
 
   bupload.disabled = false;
   bsavemix.disabled = false;
+  breset.disabled = false;
+
+  for (var i = 0; i < $scope.trackmixs.length; i++) {
+    document.getElementById('more'+i).disabled = false;
+    document.getElementById('load'+i).disabled = false;
+  }
+  
 
 }
 
@@ -1192,6 +1229,9 @@ else {
   $scope.addMix();; 
   divMessage.style.color = "green";
   divMessage.innerHTML = "<h4>Mix saved successfully</h4>";
+  $('#mixName').val('');
+  $('#description').val('');
+
 }
 
 }
@@ -1291,6 +1331,32 @@ if ( $scope.compressorSelected == true )
 
 };
 
+
+$scope.loadComments = function (mix){
+$scope.selectedMixName = mix;
+$scope.getCommentsByMixName();
+  $('#comment').val('');
+
+};
+
+$scope.saveComment = function (){
+    
+    var input = document.getElementById('comment');
+    var validityState_object = input.validity;
+   
+    if(validityState_object.valueMissing)
+      input.setCustomValidity('You cannot add an empty comment'); 
+    else
+      input.setCustomValidity(''); 
+   
+    if (! (validityState_object.valueMissing ) ) {
+    $('#comment').val('');
+    $scope.comment.mixName = $scope.selectedMixName;
+    $scope.comment.trackName = JSON.parse("[" + $scope.selectedTrack + "]")[0].trackName;
+    $scope.addComment();
+}
+
+};
 
 
   }]);
