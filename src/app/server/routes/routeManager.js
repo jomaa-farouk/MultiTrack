@@ -75,6 +75,35 @@ module.exports = function(app) {
 
 
 
+/**
+   * Find and retrieves a single user by its username and password
+   * @param {Object} req HTTP request object.
+   * @param {Object} res HTTP response object.
+   */
+  findByUsernameAndPassword = function(req, res) {
+
+    console.log("GET - /users/:username/:passwd"); 
+    return User.find({username: req.params.username,passwd: req.params.passwd}, function(err, user) {
+
+    if(err) {
+        res.statusCode = 404;
+        return res.send({ error: 'Not found' });
+      }
+
+      if(!err) {
+        return res.send({ status: 'OK', user:user });
+      } else {
+
+        res.statusCode = 500;
+        console.log('Internal error(%d): %s', res.statusCode, err.message);
+        return res.send({ error: 'Server error' });
+      }
+    });
+  };
+
+
+
+
   /**
    * Creates a new user from the data request
    * @param {Object} req HTTP request object.
@@ -912,6 +941,7 @@ module.exports = function(app) {
 
   app.get('/users', findAllUsers);
   app.get('/users/:id', findById);
+  app.get('/users/:username/:passwd', findByUsernameAndPassword);
   app.post('/users', addUser);//{ "username" : "mongoUser", "fullname" : "UserFullName", "mail" : "mg@gmail.com", "passwd" : "1234", "role":"admin"}
   app.put('/users/:id', updateUser);  
   app.delete('/users/:id', deleteUser);
