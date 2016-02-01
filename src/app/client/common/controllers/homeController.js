@@ -26,16 +26,28 @@
     $scope.getRatingsByMixName = function(){
         $scope.ratingsmix = [];
         $scope.ratings.forEach(function(thisRating, idx){
-          if(thisRating.mixName === $scope.selectedMixName){
+          if(thisRating.mixName === $scope.selectedMixName && thisRating.trackName == JSON.parse("[" + $scope.selectedTrack + "]")[0].trackName){
               $scope.ratingsmix.push(thisRating);
           }
         });
+      $scope.likesBar ();
     };
 
 
     $scope.addRating = function(){
       RatingsFactory.create($scope.rating);
-      $scope.ratings = RatingsFactory.query();
+
+       setTimeout(function () {
+       $scope.$apply(function () {
+       $scope.ratings = RatingsFactory.query();
+       });
+       }, 1000);
+
+      setTimeout(function () {
+      $scope.$apply(function () {
+      $scope.getRatingsByMixName();
+        });
+       }, 2000);
     }
 
     $scope.deleteRating = function(rId){
@@ -230,6 +242,7 @@ $scope.gain = 1;
 $scope.impulse_value = 0;
 
 $scope.comment = {};
+$scope.rating = {};
 
 // Object that draws a sample waveform in a canvas  
 var waveformDrawer = new WaveformDrawer();  
@@ -510,8 +523,8 @@ function loadSoundUsingAjax(url , i) {
 
 
 function timer(n) {
-   $(".progress-bar").css("width", n + "%");
-     $("#pourcentage").text(n + "%");
+   $("#progress-bar").css("width", n + "%");
+   $("#pourcentage").text(n + "%");
   }
 
 
@@ -1336,6 +1349,7 @@ $scope.loadComments = function (mix){
 $scope.selectedMixName = mix;
 $scope.getCommentsByMixName();
   $('#comment').val('');
+$scope.getRatingsByMixName();  
 
 };
 
@@ -1357,6 +1371,53 @@ $scope.saveComment = function (){
 }
 
 };
+
+
+$scope.addLike = function (){
+    
+$scope.rating.mixName = $scope.selectedMixName;
+$scope.rating.mark = "+";
+$scope.rating.username = "";
+$scope.rating.trackName = JSON.parse("[" + $scope.selectedTrack + "]")[0].trackName;;
+
+$scope.addRating();
+};
+
+
+$scope.addDislike = function (){
+    
+$scope.rating.mixName = $scope.selectedMixName;
+$scope.rating.mark = "-";
+$scope.rating.username = "";
+$scope.rating.trackName = JSON.parse("[" + $scope.selectedTrack + "]")[0].trackName;;
+
+$scope.addRating();
+
+};
+
+$scope.likesBar = function (){
+
+var plus=0;
+var moins=0;
+   $scope.ratingsmix.forEach (function (rating, i){
+  if (rating.mark == "+")
+  plus += 1;
+  else if (rating.mark == "-")
+  moins += 1;
+   });
+
+var n = (plus / $scope.ratingsmix.length) * 100;
+
+$("#likesBar").css("width", n + "%");
+
+
+var splike = document.getElementById ("splike");
+var spdislike = document.getElementById ("spdislike");
+
+splike.innerHTML = plus;
+spdislike.innerHTML = moins;
+
+  };
 
 
   }]);
