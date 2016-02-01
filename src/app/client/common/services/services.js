@@ -89,5 +89,15 @@
 			query : {method:'GET', isArray:true},
 			create: {method:'POST'}
 		});
-	}]);		
+	}]);
+
+	services.factory('AuthFactory', ['md5', function(md5){
+		
+		return{
+			crypt: function(pass){
+				return md5.createHash(pass||'');
+			}
+		};
+
+	}]);
 })();

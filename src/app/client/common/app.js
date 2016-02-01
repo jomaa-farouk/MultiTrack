@@ -1,6 +1,7 @@
 'use strict';
 
 angular.module('multitrack',  ['ngRoute',
+    'angular-md5',
     'multitrack.services',
     'home.controller',
     'tracks.controller',
@@ -16,8 +17,7 @@ angular.module('multitrack',  ['ngRoute',
 	
     $routeProvider.when('/user-list', {templateUrl:'common/views/users/user-list.html', controller:'UsersController'});
     $routeProvider.when('/user-creation', {templateUrl:'common/views/users/user-creation.html', controller:'UserCreation'});
-    $routeProvider.when('/user-detail/:id', {templateUrl:'common/views/users/user-detail.html', controller:'UserController'});
-	
+    $routeProvider.when('/user-detail/:id', {templateUrl:'common/views/users/user-detail.html', controller:'UserController'});	
 
     $routeProvider.when('/mix-list', {templateUrl:'common/views/mixs/mix-list.html', controller:'MixsController'});
     $routeProvider.when('/mix-creation', {templateUrl:'common/views/mixs/mix-creation.html', controller:'MixCreation'});
@@ -29,6 +29,5 @@ angular.module('multitrack',  ['ngRoute',
 
     $routeProvider.when('/login', {templateUrl:'common/views/login.html', controller:'LoginController'});
 	   
-
     $routeProvider.otherwise({redirectTo : '/'});
 }]);
