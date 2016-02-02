@@ -17,6 +17,7 @@
 				console.log($scope.user);
 				if($scope.user!==undefined){
 					alert($scope.user.username+': logged successful');
+					AuthFactory.login($scope.user);
 					$location.path('/home');	
 				}else{
 					alert('Wrong User / Password');

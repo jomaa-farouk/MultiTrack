@@ -7,11 +7,22 @@
 
   app.controller('HomeController', ['$scope', '$compile', 'MixFactory', 'MixsFactory', 
     'TrackFactory', 'TracksFactory', 'CommentFactory', 'CommentsFactory', 
-    'RatingFactory', 'RatingsFactory',
-    function($scope, $compile, MixFactory, MixsFactory, TrackFactory, TracksFactory, CommentFactory, CommentsFactory, RatingFactory, RatingsFactory){
+    'RatingFactory', 'RatingsFactory', 'AuthFactory',
+    function($scope, $compile, MixFactory, MixsFactory, TrackFactory, TracksFactory, CommentFactory, CommentsFactory, RatingFactory, RatingsFactory, AuthFactory){
 
 
     var app = this;
+
+    $scope.user = AuthFactory.getUser();
+
+    $scope.isConnected = function(){
+      return $scope.user.connected;
+    }
+
+    $scope.disconnect = function(){
+      AuthFactory.logout();
+      $scope.user = AuthFactory.getUser();
+    };
 
     $scope.getCommentsByMixName = function(){
         $scope.commentsmix = [];
