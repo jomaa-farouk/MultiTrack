@@ -111,7 +111,7 @@
           $scope.trackmixs.push(mixx);
         }
       });
-    }
+  }
 
 
     $scope.addMix = function(){
@@ -128,6 +128,14 @@
        $scope.findMixByTrackName ();
        });
       }, 2000);
+
+      setTimeout(function () {
+       $scope.$apply(function () {
+       activateAll();
+       });
+      }, 2050);
+
+
     };
 
     // on recupere un mix par id 
@@ -191,7 +199,7 @@
     $scope.mixs = MixsFactory.query();
     $scope.tracks = TracksFactory.query();
 
-
+$scope.params = {};
 
 var ctx = window.AudioContext || window.webkitAudioContext;
 var audioContext;
@@ -249,6 +257,7 @@ var waveformDrawer = new WaveformDrawer();
 
 var curTime = 0;
 var delta = 0;
+$scope.savedVolume = 10;
 
 $scope.init = function(){
   // get the AudioContext0
@@ -350,6 +359,10 @@ function initCanvas ()
 
 
 $scope.loadTrackList = function(Track){
+
+if (!$scope.firstTime)
+$scope.savedVolume = $scope.gainNode.gain.value;
+$scope.initParam ();
 
 $scope.trackSelected = true;
 
@@ -569,7 +582,8 @@ var isPaused = false;
 $scope.play = function(){
 
   curTime = (new Date()).getTime();
-  isPaused = false;
+
+isPaused = false;
 
 for (var i = 0; i < soundURLt.length; i++) {
     
@@ -580,6 +594,10 @@ for (var i = 0; i < soundURLt.length; i++) {
 }
 
 buildAudioGraph();
+
+if (stoppressed)
+$scope.activateParams ($scope.params);
+
 stoppressed = false;
 
    activateAll ();
@@ -596,6 +614,7 @@ curTime = 0;
 delta = 0;
 }
 stoppressed = true;
+$scope.saveparams ();
 stopGraph (false);
 initBuffer(false) ;
 bplay.disabled = false;
@@ -608,6 +627,7 @@ $scope.pause = function(){
   delta = delta + (( (new Date()).getTime() - curTime) / 1000);
   console.log (delta);
   $scope.stop ();
+
 };
 
 
@@ -639,7 +659,8 @@ $scope.firstTime = true;
 function buildAudioGraph( ) {
 
   // create source and gain node
-  $scope.gainNode = audioContext.createGain();
+  //$scope.gainNode = audioContext.createGain();
+
   var stereoModify;
   
   for (var i = 0; i < bufferSourcet.length; i++) {
@@ -1139,8 +1160,8 @@ function activateAll ()
     document.getElementById('more'+i).disabled = false;
     document.getElementById('load'+i).disabled = false;
   }
-  
-
+ 
+ console.log ("me"); 
 }
 
 
@@ -1156,7 +1177,60 @@ while (i<$scope.mixs.length && exist==false) {
 
 return exist;
 }
+
+$scope.saveparams = function () {
+
+    $scope.params.gain = [];
+    $scope.params.frequencies = [];
+    $scope.params.balance = [];
+    $scope.params.impulses = [];
+
+for (var i=0 ; i<=soundURLt.length ; i++) {
+
+var obj = {"frequency" : []};
+var array = new Array();
+
+   if (i==0)
+   { 
+    $scope.params.gain.push ($scope.gainNode.gain.value);
+    $scope.params.balance.push ($scope.pannerNode.pan.value);
+    
+    $scope.frequencies.forEach (function (freq, j) {
+    array.push($scope.filters[j].gain.value);
+    });
+    
+    obj.frequency = array;
+    $scope.params.frequencies.push (obj);
+   }
   
+    else
+   {
+    $scope.params.gain.push ($scope.gainNodesT[i-1].gain.value);
+    $scope.params.balance.push ($scope.stereoNodet[i-1].pan.value);
+
+   $scope.frequencies.forEach (function (freq, j) {
+    array.push($scope.filtersPistes[i-1][j].gain.value);
+    });
+
+    obj.frequency = array;
+    $scope.params.frequencies.push (obj);
+
+  }
+}
+
+if ($scope.compressorSelected == false)
+$scope.params.compressor = "ON";
+else
+$scope.params.compressor = "OFF";
+
+console.log ($scope.params.compressor);
+
+$scope.impulses.forEach (function (impulse, i) {
+$scope.params.impulses.push (convolverGaint[i].gain.value);
+});
+
+} 
+
 $scope.saveNewMix = function(){
 
     $('#saveMixMessage').empty();
@@ -1246,10 +1320,8 @@ else {
   $('#description').val('');
 
 }
-
 }
-}
- };
+} };
 
 
 function drawTrack(decodedBuffer)  {
@@ -1305,6 +1377,43 @@ if ( (mix.compressor == 'ON' && $scope.compressorSelected == true) || (mix.compr
 
     };
 
+$scope.activateParams = function (mix) {
+
+$scope.gainNode.gain.value = mix.gain[0];
+$scope.pannerNode.pan.value = mix.balance[0];
+
+$scope.filters.forEach (function (freq, i) {
+ freq.gain.value = mix.frequencies[0].frequency[i];
+ $scope.changeFrequency (0, i); 
+});
+
+$scope.filtersPistes.forEach (function (freq, i) {
+freq.forEach (function (frequ, j) {
+ frequ.gain.value = mix.frequencies[i+1].frequency[j];
+ $scope.changeFrequency (i+1, j); 
+});
+});
+
+$scope.gainNodesT.forEach (function (gain, i) {
+gain.gain.value = mix.gain[i+1];
+});
+
+$scope.stereoNodet.forEach (function (pan, i) {
+pan.pan.value = mix.balance[i+1];
+});
+
+$scope.impulses.forEach (function (imp, i) {
+var impulse = document.getElementById ('convolverSlider' + i);
+impulse.value = mix.impulses[i];
+convolverGaint[i].gain.value = impulse.value;
+directGaint[i].gain.value = 1 - convolverGaint[i].gain.value;
+});
+
+//if ( (mix.compressor == 'ON' && $scope.compressorSelected == true) || (mix.compressor == 'OFF' && $scope.compressorSelected == false) )
+//  $scope.updateCompressor();
+
+};
+
 
 $scope.resetParam = function () {
 
@@ -1330,6 +1439,34 @@ gain.gain.value = 1;
 $scope.stereoNodet.forEach (function (pan, i) {
 pan.pan.value = 0;
 });
+
+$scope.impulses.forEach (function (imp, i) {
+var impulse = document.getElementById ('convolverSlider' + i);
+impulse.value = 0;
+convolverGaint[i].gain.value = 0;
+directGaint[i].gain.value = 1;
+});
+
+
+if ( $scope.compressorSelected == true )
+  $scope.updateCompressor();
+
+};
+
+
+$scope.initParam = function () {
+
+if ($scope.savedVolume != 10)
+ $scope.gainNode.gain.value = $scope.savedVolume;
+else $scope.gainNode.gain.value = 1;
+
+$scope.pannerNode.pan.value = 0;
+
+$scope.filters.forEach (function (freq, i) {
+ freq.gain.value = 0;
+ $scope.changeFrequency (0, i); 
+});
+
 
 $scope.impulses.forEach (function (imp, i) {
 var impulse = document.getElementById ('convolverSlider' + i);
