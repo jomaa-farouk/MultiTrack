@@ -7,13 +7,6 @@
 	app.controller('TracksController', ['$scope', 'TrackFactory', 'TracksFactory', '$location', 
 
 		function($scope, TrackFactory, TracksFactory, $location) {
-			
-			/**
-			$scope.connected = false;
-
-			if(!$scope.connected){
-				$location.path('/login');
-			}**/
 
 			$scope.editTrack = function(trackId) {
 				$location.path('/track-edit/'+trackId);

@@ -89,5 +89,57 @@
 			query : {method:'GET', isArray:true},
 			create: {method:'POST'}
 		});
-	}]);		
+	}]);
+
+	services.factory('AuthFactory', ['md5', '$window', function(md5, $window){
+
+		$window.sessionStorage.username = undefined;
+		$window.sessionStorage.role = undefined;
+		$window.sessionStorage.connected = false;
+		
+		return{
+			crypt: function(pass){
+				return md5.createHash(pass||'');
+			},
+
+			isConnectedAsAdmin: function(){
+				return $window.sessionStorage.role === "admin";
+			},
+
+			isConnectedAsUser: function(){
+				return ($window.sessionStorage.username !== undefined && $window.sessionStorage.role !== "admin");
+			},
+
+			login: function(user){
+				$window.sessionStorage.username = user.username;
+				$window.sessionStorage.role = user.role;
+				$window.sessionStorage.connected = true;
+			},
+
+			logout: function(){
+				$window.sessionStorage.username = undefined;
+				$window.sessionStorage.role = undefined;
+				$window.sessionStorage.connected = false;
+			},
+
+			getConnectedUser:function(){
+				var user = $window.sessionStorage.username
+				$window.sessionStorage.username = user !== undefined ? user : "Login";
+				return $window.sessionStorage.username;
+			},
+
+			getUser: function(){
+				var user = {}
+				user.username = $window.sessionStorage.username;
+				user.role = $window.sessionStorage.role;
+				user.connected = $window.sessionStorage.connected;
+				return user;
+			},
+
+			check: function(){
+				return $window.sessionStorage.connected;
+			}
+		};
+
+	}]);
 })();

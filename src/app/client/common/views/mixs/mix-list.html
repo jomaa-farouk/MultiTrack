@@ -2,9 +2,17 @@
 	<h4>List Of Mixs</h4>
 	<br>
 	<ul class="list-group">
-    	<li class="list-group-item" ng-repeat="mix in mixs"><span class="badge">12</span>{{mix}}<a ng-click="editMix(mix._id)" class="btn btn-xs btn-primary"><span class="glyphicon glyphicon-edit"></span>edit</a>
+    	<li class="list-group-item" ng-repeat="mix in mixs">
+    	<p id="plist">
+    		<em>
+	    		<strong>Mix:</strong> {{mix.mixName}}<br>
+	    		<strong>Track:</strong> {{mix.trackName}}<br>
+	    		<strong>Description:</strong> {{mix.description}}<br>
+	    		<strong>Date Of Creation:</strong> {{mix.dateOfCreation}}
+    		</em>
+    	</p>
+    	<a ng-click="editMix(mix._id)" class="btn btn-xs btn-primary"><span class="glyphicon glyphicon-edit"></span>edit</a>
 				<a ng-click="deleteMix(mix._id)" class="btn btn-xs btn-danger"><span class="glyphicon glyphicon-trash"></span>delete</a></li>
     </ul>
-
     <a ng-click="createNewMix()" class="btn btn-xs btn-primary"><span class="glyphicon glyphicon-plus"></span>New Mix</a>
 </div>
