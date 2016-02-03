@@ -93,10 +93,6 @@
 
 	services.factory('AuthFactory', ['md5', '$window', function(md5, $window){
 
-		$window.sessionStorage.username = undefined;
-		$window.sessionStorage.role = undefined;
-		$window.sessionStorage.connected = false;
-		
 		return{
 			crypt: function(pass){
 				return md5.createHash(pass||'');
