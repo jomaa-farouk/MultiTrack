@@ -32,6 +32,11 @@
                     }
 
                 });
+
+                $scope.commentsmix.sort(function(a,b){
+                return new Date(b.dateOfCreation) - new Date(a.dateOfCreation);
+                });
+
             };
 
             $scope.getRatingsByMixName = function(){
@@ -1315,7 +1320,7 @@
                             $scope.mix.impulses.push (convolverGaint[i].gain.value);
                         });
 
-                        $scope.mix.username = "";
+                        $scope.mix.username = $scope.user.username;
 
                         var divMessage = document.getElementById ("saveMixMessage");
 
@@ -1515,6 +1520,7 @@
                     $('#comment').val('');
                     $scope.comment.mixName = $scope.selectedMixName;
                     $scope.comment.trackName = JSON.parse("[" + $scope.selectedTrack + "]")[0].trackName;
+                    $scope.comment.username = $scope.user.username;
                     $scope.addComment();
                 }
 

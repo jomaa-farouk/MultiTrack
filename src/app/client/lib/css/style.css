@@ -316,3 +316,17 @@ summary:before{
   margin-top: 2px;
   border-radius: 4px;
 }
+
+.modal .modal-body {
+    max-height: 420px;
+    overflow-y: auto;
+}
+
+.ul { list-style-type: none; width:95%;  } 
+.li { display : block; padding:8px; border : 1px solid #95CAE4; } 
+
+#sp3 {
+    font-size: 1.2em; 
+    font-family: "Comic Sans MS", cursive, sans-serif ;
+    color: #3F5D7D; 
+}

@@ -21,10 +21,10 @@
                                         ng-repeat="track in tracks"
                                         value="{{track}}"
                                         title= "¨ {{track.description}}
-    Singer : {{track.singer}}
-    Album : {{track.album}}
-    Type : {{track.type}}
-    Released : {{track.dateOfTrack.substring(0, 10)}}">
+                                        Singer : {{track.singer}}
+                                        Album : {{track.album}}
+                                        Type : {{track.type}}
+                                        Released : {{track.dateOfTrack.substring(0, 10)}}">
                                     {{track.trackName}}
                                 </option>
 
@@ -73,7 +73,7 @@
 
         <div class="col-md-1 col-md-offset-1" >
 
-            <button id="upload" data-toggle="modal" href="./common/views/tracks/track-creation.html" data-target="#uploadPage" class="btn btn-primary glyphicon glyphicon-upload">&nbsp;Upload track</button>
+            <button id="upload" data-toggle="modal" href="./common/views/tracks/track-creation.html" data-target="#uploadPage" class="btn btn-primary glyphicon glyphicon-upload" ng-show="{{isConnected()}}">&nbsp;Upload track</button>
 
             <div class="modal fade" id="uploadPage">
                 <div class="modal-dialog">
@@ -94,7 +94,7 @@
         </div>
 
 
-        <div class="col-md-7" ng-show="trackSelected">
+        <div class="col-md-6" ng-show="trackSelected">
             <div class="row"> <br><br><br><br> </div>
             <div class="row" ng-show="trackSelected">
 
@@ -146,7 +146,7 @@
         </div>
 
         <div class="col-md-2 col-md-offset-1" ng-show="trackSelected">
-            <canvas id="myCanvas2" width=250 height=200></canvas>
+         <div class="row"><div class="col-md-11 col-md-offset-1">    <canvas id="myCanvas2" width=250 height=200></canvas>  </div></div>
         </div>
 
         <br><br>
@@ -167,7 +167,7 @@
 
     <br><br>
 
-    <div class="row" ng-show="trackSelected" >
+    <div class="row" ng-show="trackSelected && {{isConnected()}}" >
         <div id="saveMixMessage"></div>
         <br>
         <form class="form-horizontal col-md-4" name="savemixform" id="saveform">
@@ -254,8 +254,8 @@
                                         </div>
                                         <br>
                                         <ul ng-repeat="comment in commentsmix" class="ul">
-                                            <li class="li">{{ comment.content }} &nbsp;&nbsp;  <button class="btn btn-danger btn-xs glyphicon glyphicon-remove" disabled></button> <br>
-                                                added by: {{ comment.username }},  the: {{ comment.dateOfCreation | date:'yyyy-MM-dd' }}</li>
+                                            <li class="li">&nbsp;&nbsp;<span id="sp3">{{ comment.content }} </span>  <button class="btn btn-danger btn-xs glyphicon glyphicon-remove pull-right" disabled></button> <br>
+                                                &nbsp;<b>Added by:</b> <u>{{ comment.username }}</u>&nbsp; <b> On: </b> {{ comment.dateOfCreation | date:'dd-MM-yyy' }}</li>
                                             <br>
                                         </ul>
 
@@ -271,7 +271,7 @@
 
 
                     </summary>
-                    <br> &nbsp;&nbsp; <span id="sp2"> Description : {{ mix.description }}<br> &nbsp;&nbsp;&nbsp;Added by : </span>
+                    <br> &nbsp;&nbsp;<span id="sp2"> Description: {{ mix.description }}<br>&nbsp;&nbsp;&nbsp;Added by: <u>{{ mix.username }}</u>&nbsp;on {{ mix.dateOfCreation | date:'dd-MM-yyyy' }}</span>
                 </details>
                 <br> <br>
             </div>
