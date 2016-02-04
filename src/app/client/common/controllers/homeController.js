@@ -47,6 +47,8 @@
                     }
                 });
                 $scope.likesBar ();
+                $scope.verifyLikeButtons ();
+                document.getElementById('likes'+$scope.selectedMixName + JSON.parse("[" + $scope.selectedTrack + "]")[0].trackName).innerHTML = $scope.getlikes ($scope.selectedMixName);
             };
 
 
@@ -258,6 +260,8 @@
             var directGaint  = [];
             var convolverNodet = [];
 
+var listOfSoundSamplesURLs = [];
+
             $scope.trackSelected = false;
             $scope.trackmixs = [];
 
@@ -270,14 +274,22 @@
 
 // Object that draws a sample waveform in a canvas  
             var waveformDrawer = new WaveformDrawer();
+            var bufferLoader;
 
             var curTime = 0;
             var delta = 0;
             $scope.savedVolume = 10;
 
+                audioContext = new ctx();
+
+                $scope.gainNode = audioContext.createGain();
+                $scope.gainNode.gain.value = 1;
+
+             $scope.beforeMuteValue;   
+             $scope.beforeMuteValues = [];   
+
             $scope.init = function(){
                 // get the AudioContext0
-                audioContext = new ctx();
 
                 $scope.pannerNode = audioContext.createStereoPanner();
                 $scope.gainNode = audioContext.createGain();
@@ -297,11 +309,12 @@
                 breset = document.getElementById('reset');
 
                 $scope.impulses.forEach (function(impulse , i) {
-                    var  impulseURL = 'http://localhost:8080/impulse/' + impulse + '.wav';
-
-                    loadImpulse(impulseURL, i);
-
+                    var  impulseURL = 'http://localhost:8080/impulse/' + impulse + '.mp3';
+                    listOfSoundSamplesURLs.push (impulseURL);
+                   // loadImpulse(impulseURL, i);
                 });
+
+                 loadAllImpulses ();
 
                 initCanvas ();
 
@@ -381,6 +394,7 @@
                 $scope.initParam ();
 
                 $scope.trackSelected = true;
+                $scope.beforeMuteValues = [];   
 
                 curTime = 0;
                 delta = 0;
@@ -429,6 +443,7 @@
 
                     $scope.gainNodesT[i] = audioContext.createGain();
                     $scope.gainNodesT[i].gain.value = 1;
+                    $scope.$watch('gainNodesT['+i+'].gain.value', checkMute, true);
 
                     content+='<div class="row" ><div class="col-md-3"><H4 class="pistetitle">'+songName.pisteMp3;
                     content+='<button class="mute" id="mute'+i+'" style="cursor: pointer;" ng-click = "mute ('+i+')">&nbsp;&nbsp;</button> ';
@@ -956,18 +971,35 @@
 
                 if   ( $scope.gainNode.gain.value != 0 )
                 {
+                    $scope.beforeMuteValue = gainSlider.value;
                     $scope.gainNode.gain.value = 0;
                     button.style.backgroundImage="url('./lib/image/sound.png')";
+                    console.log (button.style.backgroundImage);
                 }
 
-                else
+                else if (($scope.gainNode.gain.value == 0) &&  (button.style.backgroundImage=='url("./lib/image/sound.png")'))
                 {
-                    $scope.gainNode.gain.value = gainSlider.value;
+                    $scope.gainNode.gain.value = $scope.beforeMuteValue;
                     button.style.backgroundImage="url('./lib/image/mute.png')";
                 }
 
             };
 
+    function checkMute(){
+    var button = document.getElementById("mute");
+    if ( $scope.gainNode.gain.value != 0 ) 
+    button.style.backgroundImage="url('./lib/image/mute.png')";
+
+    for (var i=0 ; i<$scope.gainNodesT.length ; i++)
+    {
+    if ( $scope.gainNodesT[i].gain.value != 0 ) {
+    var b = document.getElementById("mute"+i);
+    b.style.backgroundImage="url('./lib/image/mute.png')";
+    }
+    }
+    };
+
+    $scope.$watch('gainNode.gain.value', checkMute, true);
 
             $scope.mute = function (i) {
 
@@ -975,13 +1007,14 @@
                 var gainSlideri = document.getElementById('gainSlider'+i);
                 if   ( $scope.gainNodesT[i].gain.value != 0 )
                 {
+                    $scope.beforeMuteValues [i] = gainSlideri.value;
                     $scope.gainNodesT[i].gain.value = 0;
                     button.style.backgroundImage="url('./lib/image/sound.png')";
                 }
 
-                else
+                else if ($scope.gainNodesT[i].gain.value == 0 && button.style.backgroundImage=='url("./lib/image/sound.png")')
                 {
-                    $scope.gainNodesT[i].gain.value = gainSlideri.value;
+                    $scope.gainNodesT[i].gain.value = $scope.beforeMuteValues [i];
                     button.style.backgroundImage="url('./lib/image/mute.png')";
                 }
             };
@@ -1006,7 +1039,7 @@
                             if (casqueT[j] % 2 != 0) casqueT [j] += 1;
                         }
                         else
-                            $scope.gainNodesT[j].gain.value = $scope.gainNodesT[i].gain.value;
+                            $scope.gainNodesT[j].gain.value = 1;
                     }}
 
                 else
@@ -1020,7 +1053,7 @@
             };
 
 
-            function loadImpulse(url, i ) {
+          /*  function loadImpulse(url, i ) {
                 var ajaxRequest = new XMLHttpRequest();
                 ajaxRequest.open('GET', url, true);
                 ajaxRequest.responseType = 'arraybuffer'; // for binary transfer
@@ -1041,6 +1074,31 @@
                 };
                 ajaxRequest.send();
             }
+*/
+function loadAllImpulses() {
+  // onSamplesDecoded will be called when all samples 
+  // have been loaded and decoded, and the decoded sample will
+  // be its only parameter (see function above)
+    bufferLoader = new BufferLoader(
+            audioContext,      
+            listOfSoundSamplesURLs,   
+            onSamplesDecoded          
+            );
+  
+  // start loading and decoding the files
+    bufferLoader.load();              
+}
+
+function onSamplesDecoded(buffers){
+  console.log("all samples loaded and decoded");
+  
+
+for (var i=0 ; i<buffers.length ; i++)
+{
+decodedImpulset[i] = buffers[i];  
+buildImpulseNode (i);
+}
+}
 
             function buildImpulseNode(i)
             {
@@ -1503,8 +1561,36 @@
                 $scope.getCommentsByMixName();
                 $('#comment').val('');
                 $scope.getRatingsByMixName();
-
             };
+
+$scope.verifyLikeButtons = function () {
+
+var like = false;
+var dislike = false;
+var i = 0;
+
+while (!like && i<$scope.ratingsmix.length)
+{
+if (($scope.ratingsmix[i].username == $scope.user.username) && ($scope.ratingsmix[i].mark == '+'))
+like = true;
+i++;
+}
+
+if (like) document.getElementById ("like").disabled = true;
+else document.getElementById ("like").disabled = false;
+
+i=0;
+while (!dislike && i<$scope.ratingsmix.length)
+{
+if (($scope.ratingsmix[i].username == $scope.user.username) && ($scope.ratingsmix[i].mark == '-'))
+dislike = true;
+i++;
+}
+
+if (dislike) document.getElementById ("dislike").disabled = true;
+else document.getElementById ("dislike").disabled = false;
+
+};
 
             $scope.saveComment = function (){
 
@@ -1531,7 +1617,7 @@
 
                 $scope.rating.mixName = $scope.selectedMixName;
                 $scope.rating.mark = "+";
-                $scope.rating.username = "";
+                $scope.rating.username = $scope.user.username;
                 $scope.rating.trackName = JSON.parse("[" + $scope.selectedTrack + "]")[0].trackName;;
 
                 $scope.addRating();
@@ -1542,7 +1628,7 @@
 
                 $scope.rating.mixName = $scope.selectedMixName;
                 $scope.rating.mark = "-";
-                $scope.rating.username = "";
+                $scope.rating.username = $scope.user.username;
                 $scope.rating.trackName = JSON.parse("[" + $scope.selectedTrack + "]")[0].trackName;;
 
                 $scope.addRating();
@@ -1572,6 +1658,99 @@
                 spdislike.innerHTML = moins;
 
             };
+
+$scope.getlikes = function (mixName) 
+{
+  var nb_likes = 0;
+$scope.ratings.forEach (function (rating, i){
+if (rating.mixName == mixName && rating.trackName == JSON.parse("[" + $scope.selectedTrack + "]")[0].trackName && rating.mark == '+' )
+nb_likes ++ ;
+});
+
+return nb_likes;
+};
+
+/*$scope.getdislikes = function (mixName) 
+{
+  var nb_dislikes = 0;
+$scope.ratings.forEach (function (rating, i){
+if (rating.mixName == mixName && rating.trackName == JSON.parse("[" + $scope.selectedTrack + "]")[0].trackName && rating.mark == '-' )
+nb_dislikes ++ ;
+});
+
+return nb_dislikes;
+};
+*/
+/* ############################
+    BUFFER LOADER for loading multiple files asyncrhonously. The callback functions is called when all
+    files have been loaded and decoded 
+ ############################## */
+function BufferLoader(context, urlList, callback) {
+    this.context = context;
+    this.urlList = urlList;
+    this.callback = callback;
+    this.bufferList = [];
+    this.loadCount = 0;
+}
+
+BufferLoader.prototype.loadBuffer = function(url, index) {
+    // Load buffer asynchronously
+    console.log('file : ' + url + "loading and decoding");
+
+    var request = new XMLHttpRequest();
+    request.open("GET", url, true);
+
+    request.responseType = "arraybuffer";
+
+    var loader = this;
+
+    request.onload = function() {
+
+        // Asynchronously decode the audio file data in request.response
+        loader.context.decodeAudioData(
+                request.response,
+                function(buffer) {
+                        console.log("Loaded and decoded track " + (loader.loadCount+1) + 
+                        "/" +  loader.urlList.length + "...");
+
+                    if (!buffer) {
+                        alert('error decoding file data: ' + url);
+                        return;
+                    }
+                    loader.bufferList[index] = buffer;
+
+                    //console.log("In bufferLoader.onload bufferList size is " + loader.bufferList.length + " index =" + index);
+                    if (++loader.loadCount == loader.urlList.length)
+                       // call the callback and pass it the decoded buffers, we've finihed
+                      loader.callback(loader.bufferList);
+                },
+                function(error) {
+                    console.error('decodeAudioData error', error);
+                }
+        );
+    };
+
+    request.onprogress = function(e) {
+         if(e.total !== 0) {
+            var percent = (e.loaded * 100) / e.total;
+
+            console.log("loaded " + percent  + " % of file " + index);
+         }
+    };
+    
+    request.onerror = function() {
+        alert('BufferLoader: XHR error');
+    };
+
+    request.send();
+};
+
+BufferLoader.prototype.load = function() {
+    console.log("Loading " + this.urlList.length + "track(s)... please wait...");
+    for (var i = 0; i < this.urlList.length; ++i)
+        this.loadBuffer(this.urlList[i], i);
+};
+
 
 
         }]);

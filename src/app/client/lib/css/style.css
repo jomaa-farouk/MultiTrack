@@ -330,3 +330,8 @@ summary:before{
     font-family: "Comic Sans MS", cursive, sans-serif ;
     color: #3F5D7D; 
 }
+
+.sp_likes {
+  margin-top: 4px;
+  margin-left: 20px;
+}
