@@ -51,13 +51,19 @@
 
 	}]);
 
-	app.controller('UserCreation', ['$scope', 'UsersFactory', '$location', 
-		function($scope, UsersFactory, $location){
-		
+	app.controller('UserCreation', ['$scope', 'UsersFactory', 'AuthFactory','$location', 
+		function($scope, UsersFactory, AuthFactory, $location){
+		$scope.roles = [
+			{id: 'Admin'}, {id: 'User'}, {id: 'Guest'}
+		]
+			
 		$scope.createNewUser = function(){
+			var hash = AuthFactory.crypt($scope.user.passwd);
+			$scope.user.passwd = hash;
+			console.log('password hash is ',$scope.user.passwd);
 			UsersFactory.create($scope.user);
 			$location.path('/user-list');
-		};	
+		};
 	}]);
 
 })();

@@ -1,279 +1,290 @@
 <div class="container" data-ng-init="init()">
-<br>
+    <p>user: {{user.username}}<br>
+        role: {{user.role}}
+    </p>
+    <br>
+    <button ng-click="disconnect()">{{isConnected()}}</button>
 
-<div class="row">
+    <div class="row">
 
-<div class="col-md-5">
+        <div class="col-md-5">
 
-  <div class="row">
+            <div class="row">
 
-    <div class="col-md-7">
-<audio id="player" crossorigin="anonymous" loop />
+                <div class="col-md-7">
+                    <audio id="player" crossorigin="anonymous" loop />
 
-<div id="songs">
-<label id="labelList">
-<select id ="select"   ng-model="selectedTrack" ng-change="loadTrackList (selectedTrack)">
-         <option id ="option"
-    ng-repeat="track in tracks" 
-    value="{{track}}" 
-    title= "¨ {{track.description}} 
-    Singer : {{track.singer}}
-    Album : {{track.album}}
-    Type : {{track.type}}
-    Released : {{track.dateOfTrack.substring(0, 10)}}">
-    {{track.trackName}}
-    </option>
+                    <div id="songs">
+                        <label id="labelList">
+                            <select id ="select"   ng-model="selectedTrack" ng-change="loadTrackList (selectedTrack)">
+                                <option id ="option"
+                                        ng-repeat="track in tracks"
+                                        value="{{track}}"
+                                        title= "¨ {{track.description}}
+                                        Singer : {{track.singer}}
+                                        Album : {{track.album}}
+                                        Type : {{track.type}}
+                                        Released : {{track.dateOfTrack.substring(0, 10)}}">
+                                    {{track.trackName}}
+                                </option>
 
-</select>
-</label>
-</div> 
-</div> 
-
-
-<div class="col-md-4">
-&nbsp;<button class="btn btn-primary glyphicon glyphicon-play" id="play" style="cursor: pointer;" ng-click="play();" disabled=true></button>
-<button class="btn btn-primary glyphicon glyphicon-pause" id="pause" style="cursor: pointer;" ng-click="pause();" disabled=true></button>
-<button class="btn btn-primary glyphicon glyphicon-stop" id="stop" style="cursor: pointer;" ng-click="stop();"disabled=true></button>
-</div>
-
-</div> 
-
-<br>
-<div class="row">
-<div class="col-md-2 col-md-offset-5">
-<label for="gainSlider" class="label">Volume</label>
-</div>
-<div class="col-md-3">
-<input class="range" type="range" min="0" max="1" step="0.01" value="1" id="gainSlider" ng-model="gainNode.gain.value" disabled=true/>
-</div>
-<div class="col-md-1">
-<button id="mute" style="cursor: pointer;" ng-click="muteAll();" disabled=true/>
-</div>
-</div>
-
-<br><br>
-
-</div>
+                            </select>
+                        </label>
+                    </div>
+                </div>
 
 
-<div class="col-md-4" >
+                <div class="col-md-4">
+                    &nbsp;<button class="btn btn-primary glyphicon glyphicon-play" id="play" style="cursor: pointer;" ng-click="play();" disabled=true></button>
+                    <button class="btn btn-primary glyphicon glyphicon-pause" id="pause" style="cursor: pointer;" ng-click="pause();" disabled=true></button>
+                    <button class="btn btn-primary glyphicon glyphicon-stop" id="stop" style="cursor: pointer;" ng-click="stop();"disabled=true></button>
+                </div>
 
-  <div class="progress progress-striped">
-    <div class="progress-bar" id="progress-bar"></div>
-  </div>
-        <div id="pourcentage" class="pull-right" ></div>
-<br><br>
+            </div>
 
-</div>
+            <br>
+            <div class="row">
+                <div class="col-md-2 col-md-offset-5">
+                    <label for="gainSlider" class="label">Volume</label>
+                </div>
+                <div class="col-md-3">
+                    <input class="range" type="range" min="0" max="1" step="0.01" value="1" id="gainSlider" ng-model="gainNode.gain.value" disabled=true/>
+                </div>
+                <div class="col-md-1">
+                    <button id="mute" style="cursor: pointer;" ng-click="muteAll();" disabled=true/>
+                </div>
+            </div>
 
+            <br><br>
 
-<div class="col-md-1 col-md-offset-1" >
-
-  <button id="upload" data-toggle="modal" href="./common/views/tracks/track-creation.html" data-target="#uploadPage" class="btn btn-primary glyphicon glyphicon-upload">&nbsp;Upload track</button>
-      
-      <div class="modal fade" id="uploadPage">
-        <div class="modal-dialog">  
-          <div class="modal-content"></div>  
-        </div> 
-      </div>
-
-</div>
+        </div>
 
 
-</div>
+        <div class="col-md-4" >
+
+            <div class="progress progress-striped">
+                <div class="progress-bar" id="progress-bar"></div>
+            </div>
+            <div id="pourcentage" class="pull-right" ></div>
+            <br><br>
+
+        </div>
 
 
-<div class="row">
+        <div class="col-md-1 col-md-offset-1" >
 
-<div class="col-md-2" ng-show="trackSelected">
-<canvas id="myCanvas" width=250 height=200></canvas>
-</div>
- 
+            <button id="upload" data-toggle="modal" href="./common/views/tracks/track-creation.html" data-target="#uploadPage" class="btn btn-primary glyphicon glyphicon-upload" ng-show="{{isConnected()}}">&nbsp;Upload track</button>
 
-<div class="col-md-7" ng-show="trackSelected">
-<div class="row"> <br><br><br><br> </div>
-<div class="row" ng-show="trackSelected">
+            <div class="modal fade" id="uploadPage">
+                <div class="modal-dialog">
+                    <div class="modal-content"></div>
+                </div>
+            </div>
 
-   <div class="row">
+        </div>
 
-  <div class="col-md-offset-4 col-md-3">
 
-  <label for="pannerSlider" class="label">Stereo</label>
-  <input class="range" type="range" min="-1" max="1" step="0.1" value="0" id="pannerSlider" ng-model="pannerNode.pan.value" />
-  </div>
-
-  <div class="col-md-3 col-md-offset-1">
-  <button class="btn btn-primary" id="compressorButton" ng-click= "updateCompressor()" align="right">{{buttonCompressor}}</button>
-  </div>
-  </div>
-
-<div class="row">
-
-<div class="col-md-offset-4 col-md-4">
-<div class="controls" >
-
-    <div ng-repeat = "freq in frequencies">
-  <div class="row">
-  <div class="col-md-2"><label>{{freq}}</label></div>
- <div class="col-md-7"><input ng-attr-id="{{ 'freq_input' + $index }}" type="range" value="0" step="1" min="-30" max="30" ng-model="filters[$index].gain.value" ng-change = "changeFrequency (0 , $index)"></input></div>
-    <div ng-attr-id="{{ 'freq0' + $index }}" class="col-md-3"><output>0 dB</br></output></div>
-    </div> 
-    </div> 
-
-</div>
-</div>
-</div>
-
-  
-
- <div class="row"> <div class="col-md-7 col-md-offset-4">
-
-    <div ng-repeat = "impulse in impulses">
-<div class="col-md-3"><label for="convolverSlider' + $index + '" style="font-size:10px" class="label">{{impulse}} <br> (Dry/Wet)</label>
-<input class="range" type="range" min="0" max="1" step="0.1" value="0" ng-attr-id="{{ 'convolverSlider' + $index }}" ng-model="impulse_value" ng-change="changeImpulse ($index)" /></div>
     </div>
- </div> </div>
+
+
+    <div class="row">
+
+        <div class="col-md-2" ng-show="trackSelected">
+            <canvas id="myCanvas" width=250 height=200></canvas>
+        </div>
+
+
+        <div class="col-md-6" ng-show="trackSelected">
+            <div class="row"> <br><br><br><br> </div>
+            <div class="row" ng-show="trackSelected">
+
+                <div class="row">
+
+                    <div class="col-md-offset-4 col-md-3">
+
+                        <label for="pannerSlider" class="label">Stereo</label>
+                        <input class="range" type="range" min="-1" max="1" step="0.1" value="0" id="pannerSlider" ng-model="pannerNode.pan.value" />
+                    </div>
+
+                    <div class="col-md-3 col-md-offset-1">
+                        <button class="btn btn-primary" id="compressorButton" ng-click= "updateCompressor()" align="right">{{buttonCompressor}}</button>
+                    </div>
+                </div>
+
+                <div class="row">
+
+                    <div class="col-md-offset-4 col-md-4">
+                        <div class="controls" >
+
+                            <div ng-repeat = "freq in frequencies">
+                                <div class="row">
+                                    <div class="col-md-2"><label>{{freq}}</label></div>
+                                    <div class="col-md-7"><input ng-attr-id="{{ 'freq_input' + $index }}" type="range" value="0" step="1" min="-30" max="30" ng-model="filters[$index].gain.value" ng-change = "changeFrequency (0 , $index)"></input></div>
+                                    <div ng-attr-id="{{ 'freq0' + $index }}" class="col-md-3"><output>0 dB</br></output></div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
 
 
 
-<br><br>
-  </div>
+                <div class="row"> <div class="col-md-7 col-md-offset-4">
 
-</div>
+                    <div ng-repeat = "impulse in impulses">
+                        <div class="col-md-3"><label for="convolverSlider' + $index + '" style="font-size:10px" class="label">{{impulse}} <br> (Dry/Wet)</label>
+                            <input class="range" type="range" min="0" max="1" step="0.1" value="0" ng-attr-id="{{ 'convolverSlider' + $index }}" ng-model="impulse_value" ng-change="changeImpulse ($index)" /></div>
+                    </div>
+                </div> </div>
 
-<div class="col-md-2 col-md-offset-1" ng-show="trackSelected">
-<canvas id="myCanvas2" width=250 height=200></canvas>
-</div>
 
-<br><br>
 
-</div>
-<br>
+                <br><br>
+            </div>
 
-<div class = "row" id="tracks_list" ng-show="trackSelected" >
-</div> 
-<br>
- 
+        </div>
 
-<div class="row" ng-show="trackSelected" >
-<div class="col-md-offset-4 col-md-4">
-  <button class="btn btn-primary btn-block" id="reset" ng-click="resetParam ();">Reset</button>
-</div>
-</div>
+        <div class="col-md-2 col-md-offset-1" ng-show="trackSelected">
+         <div class="row"><div class="col-md-11 col-md-offset-1">    <canvas id="myCanvas2" width=250 height=200></canvas>  </div></div>
+        </div>
 
-<br><br>
+        <br><br>
 
- <div class="row" ng-show="trackSelected" >
-<div id="saveMixMessage"></div>
-<br>
-<form class="form-horizontal col-md-4" name="savemixform" id="saveform">
-  
-  <div class="form-group">
-    <legend class="pistetitle">Save your mix</legend>
-  </div>
-  
-  <div class="row">
-    <div class="form-group">
-      <label for="mixName" class="col-md-4 control-label label" >Mix name : </label>
-      <div class="col-md-8">
-        <input type="text" class="form-control" id="mixName" placeholder="Mix name"  ng-model="mix.mixName" >
-      </div>
     </div>
-  </div>
-  
-  <div class="row">
-    <div class="form-group">
-      <label for="description" class="col-md-4 control-label label">Description : </label>
-      <div class="col-md-8">
-        <textarea  type="textarea" class="form-control" id="description" placeholder="Description"  ng-model="mix.description" ></textarea>
-      </div>
+    <br>
+
+    <div class = "row" id="tracks_list" ng-show="trackSelected" >
     </div>
-  </div>
- 
-  <div class="form-group">
-    <button id="savemix" type="submit" class="pull-right btn btn-primary glyphicon glyphicon-save" ng-click="saveNewMix ();">&nbsp;Save&nbsp;</button>
-  </div>
-  
-   </form>
+    <br>
 
 
-   <div class = "col-md-offset-5 col-md-3"> 
-
-<br>
-
-<div ng-repeat="mix in trackmixs">
- <details>
- <summary >
-  
- <span id="sp1"> {{ mix.mixName }} </span>
-
-  <button class="btn btn-primary pull-right more" data-toggle="modal" data-target="#f1" ng-attr-id="{{ 'more' + $index }}" ng-click="loadComments ( mix.mixName );" disabled>More</button>
-  <button id="mixdetails" type="submit" class="btn btn-primary pull-right" ng-click="loadMix (mix);" ng-attr-id="{{ 'load' + $index }}" disabled>Load</button>
-
-  <div class="modal fade" id="f1">
-    <div class="modal-dialog">
-      <div class="modal-content">
-
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">x</button>
-      </div>
-
-        <div class="modal-body">
-<br>
-<div class=row>
-  <div class="col-md-7">
-    <form name="addcomment" id="addcomment">
-   
- 
-    <div class="form-group">
-        <textarea type="textarea" cols="35" class="form-control" id="comment" placeholder="Comment"  ng-model="comment.content"> </textarea>
+    <div class="row" ng-show="trackSelected" >
+        <div class="col-md-offset-4 col-md-4">
+            <button class="btn btn-primary btn-block" id="reset" ng-click="resetParam ();">Reset</button>
+        </div>
     </div>
- 
-    <button id="savecomment" type="submit" class="btn btn-primary pull-right" ng-click="saveComment ();">Add</button>
-  
-   </form>
-  </div> 
 
-    <div class="col-md-4 col-md-offset-1">
-  <div class="progress likes">
-      <div class="progress-bar progress-bar-info" id="likesBar"></div> 
-  </div>
-  <div class="row">
-    <div class="col-md-5 col-md-offset-1">
-      <button id="like" class="btn btn-success btn-xs glyphicon glyphicon-thumbs-up" ng-click="addLike ();"></button>
-      &nbsp;&nbsp;<span id="splike"></span></div>
-    <div class="col-md-5 col-md-offset-1">
-      <button id="dislike" class="btn btn-danger btn-xs glyphicon glyphicon-thumbs-down" ng-click="addDislike ();"></button>
-      &nbsp;&nbsp;<span id="spdislike"></span></div>
-  </div>  
-</div>  
-</div>
-<br>
-        <ul ng-repeat="comment in commentsmix" class="ul">
-          <li class="li">{{ comment.content }} &nbsp;&nbsp;  <button class="btn btn-danger btn-xs glyphicon glyphicon-remove" disabled></button> <br>
-           added by: {{ comment.username }},  the: {{ comment.dateOfCreation | date:'yyyy-MM-dd' }}</li>
-           <br>
-        </ul>
+    <br><br>
 
-       </div>
-<br><br>
-      <div class="modal-footer">
-        <button class="btn btn-info" data-dismiss="modal">Close</button>
-      </div>
-      
-      </div>
+
+    <div class="row" ng-show="trackSelected" >
+    <div ng-show="{{isConnected()}}">
+        <div id="saveMixMessage"></div>
+        <br>
+        <form class="form-horizontal col-md-4" name="savemixform" id="saveform">
+
+            <div class="form-group">
+                <legend class="pistetitle">Save your mix</legend>
+            </div>
+
+            <div class="row">
+                <div class="form-group">
+                    <label for="mixName" class="col-md-4 control-label label" >Mix name : </label>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control" id="mixName" placeholder="Mix name"  ng-model="mix.mixName" >
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group">
+                    <label for="description" class="col-md-4 control-label label">Description : </label>
+                    <div class="col-md-8">
+                        <textarea  type="textarea" class="form-control" id="description" placeholder="Description"  ng-model="mix.description" ></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <button id="savemix" type="submit" class="pull-right btn btn-primary glyphicon glyphicon-save" ng-click="saveNewMix ();">&nbsp;Save&nbsp;</button>
+            </div>
+
+        </form>
+
+
+        <div class = "col-md-offset-4 col-md-4">
+
+            <br>
+
+            <div ng-repeat="mix in trackmixs">
+                <details>
+                    <summary >
+
+                        <span id="sp1"> {{ mix.mixName }} </span>
+                      
+<!--                       <span class="pull-right sp_likes"> <b>&nbsp;&nbsp;{{ getdislikes (mix.mixName) }}</b>&nbsp;<button class="btn btn-danger btn-xs glyphicon glyphicon-thumbs-down"></button></span>
+ -->
+                      <span class="pull-right sp_likes"> &nbsp;&nbsp;&nbsp;<b ng-attr-id="{{ 'likes' + mix.mixName + mix.trackName}}">{{getlikes (mix.mixName)}}</b>&nbsp;<button class="btn btn-success btn-xs glyphicon glyphicon-thumbs-up"></button></span>
+                      
+                        <button class="btn btn-primary pull-right more" data-toggle="modal" data-target="#f1" ng-attr-id="{{ 'more' + $index }}" ng-click="loadComments ( mix.mixName );" disabled>More</button>
+                        <button id="mixdetails" type="submit" class="btn btn-primary pull-right" ng-click="loadMix (mix);" ng-attr-id="{{ 'load' + $index }}" disabled>Load</button>
+
+                        <div class="modal fade" id="f1">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">x</button>
+                                    </div>
+
+                                    <div class="modal-body">
+                                        <br>
+                                        <div class=row>
+                                            <div class="col-md-7">
+                                                <form name="addcomment" id="addcomment">
+
+
+                                                    <div class="form-group">
+                                                        <textarea type="textarea" cols="35" class="form-control" id="comment" placeholder="Comment"  ng-model="comment.content"> </textarea>
+                                                    </div>
+
+                                                    <button id="savecomment" type="submit" class="btn btn-primary pull-right" ng-click="saveComment ();">Add</button>
+
+                                                </form>
+                                            </div>
+
+                                            <div class="col-md-4 col-md-offset-1">
+                                                <div class="progress likes">
+                                                    <div class="progress-bar progress-bar-info" id="likesBar"></div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-5 col-md-offset-1">
+                                                        <button id="like" class="btn btn-success btn-xs glyphicon glyphicon-thumbs-up" ng-click="addLike ();"></button>
+                                                        &nbsp;&nbsp;<span id="splike"></span></div>
+                                                    <div class="col-md-5 col-md-offset-1">
+                                                        <button id="dislike" class="btn btn-danger btn-xs glyphicon glyphicon-thumbs-down" ng-click="addDislike ();"></button>
+                                                        &nbsp;&nbsp;<span id="spdislike"></span></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <ul ng-repeat="comment in commentsmix" class="ul">
+                                            <li class="li">&nbsp;&nbsp;<span id="sp3">{{ comment.content }} </span>  <button class="btn btn-danger btn-xs glyphicon glyphicon-remove pull-right" disabled></button> <br>
+                                                &nbsp;<b>Added by:</b> <u>{{ comment.username }}</u>&nbsp; <b> On: </b> {{ comment.dateOfCreation | date:'dd-MM-yyyy' }}</li>
+                                            <br>
+                                        </ul>
+
+                                    </div>
+                                    <br><br>
+                                    <div class="modal-footer">
+                                        <button class="btn btn-info" data-dismiss="modal">Close</button>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </summary>
+                    <br> &nbsp;&nbsp;<span id="sp2"> Description: {{ mix.description }}<br>&nbsp;&nbsp;&nbsp;Added by: <u>{{ mix.username }}</u>&nbsp;on {{ mix.dateOfCreation | date:'dd-MM-yyyy' }}</span>
+                </details>
+                <br> <br>
+            </div>
+
+        </div>
+
     </div>
-  </div>
- 
-
-</summary>
- <br> &nbsp;&nbsp; <span id="sp2"> Description : {{ mix.description }}<br> &nbsp;&nbsp;&nbsp;Added by : </span>
-</details>
-<br> <br>
-</div>
-
-</div>
-
-</div>
+    </div>
 
 </div>
