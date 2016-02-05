@@ -1,5 +1,5 @@
 /*
- * Main App file App.js
+ * Main App file app.js
  */
 
 
