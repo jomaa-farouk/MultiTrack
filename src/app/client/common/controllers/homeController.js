@@ -129,6 +129,11 @@
                         $scope.trackmixs.push(mixx);
                     }
                 });
+
+                                $scope.trackmixs.sort(function(a,b){
+                return $scope.getlikes(b.mixName) - $scope.getlikes(a.mixName);
+                });
+
             }
 
 
