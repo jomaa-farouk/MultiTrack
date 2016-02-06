@@ -299,6 +299,7 @@
 
             var casqueT = [];
             var stoppressed = false;
+            var newTrackSelected = false;
 
             $scope.frequencies = ['60Hz' , '170Hz' , '350Hz' , '1000Hz' , '3500Hz' , '10000Hz' ];
             $scope.impulses = ['dance hall','mythology','sports verb', 'wobble room'];
@@ -442,6 +443,8 @@ var listOfSoundSamplesURLs = [];
                 $scope.initParam ();
 
                 $scope.trackSelected = true;
+                newTrackSelected = true;
+                
                 $scope.beforeMuteValues = [];   
 
                 curTime = 0;
@@ -642,6 +645,7 @@ var listOfSoundSamplesURLs = [];
 
                 if ( $scope.compressorSelected == false )
                 {
+                    console.log("on");
                     $scope.buttonCompressor = 'Turn Compressor ON';
                     compressorNode.disconnect(audioContext.destination);
                     analyser2.disconnect(compressorNode);
@@ -650,6 +654,8 @@ var listOfSoundSamplesURLs = [];
 
                 else
                 { $scope.buttonCompressor = 'Turn Compressor OFF';
+            console.log("off");
+                    analyser2.connect(audioContext.destination);
                     analyser2.disconnect(audioContext.destination);
                     analyser2.connect(compressorNode);
                     compressorNode.connect(audioContext.destination);
@@ -674,7 +680,7 @@ var listOfSoundSamplesURLs = [];
 
                 buildAudioGraph();
 
-                if (stoppressed)
+                if (stoppressed && !newTrackSelected)
                     $scope.activateParams ($scope.params);
 
                 stoppressed = false;
@@ -692,6 +698,7 @@ var listOfSoundSamplesURLs = [];
                     curTime = 0;
                     delta = 0;
                 }
+                newTrackSelected = false;
                 stoppressed = true;
                 $scope.saveparams ();
                 stopGraph (false);
@@ -1350,7 +1357,6 @@ buildImpulseNode (i);
                 $scope.impulses.forEach (function (impulse, i) {
                     $scope.params.impulses.push (convolverGaint[i].gain.value);
                 });
-
             }
 
             $scope.saveNewMix = function(){
@@ -1493,7 +1499,13 @@ buildImpulseNode (i);
                     directGaint[i].gain.value = 1 - convolverGaint[i].gain.value;
                 });
 
-                if ( (mix.compressor == 'ON' && $scope.compressorSelected == true) || (mix.compressor == 'OFF' && $scope.compressorSelected == false) )
+                if ( mix.compressor == 'ON' ) 
+                {
+                 $scope.compressorSelected = false;
+                }
+                else if(mix.compressor == 'OFF' )
+                 $scope.compressorSelected = true;
+
                     $scope.updateCompressor();
 
 
@@ -1531,8 +1543,16 @@ buildImpulseNode (i);
                     directGaint[i].gain.value = 1 - convolverGaint[i].gain.value;
                 });
 
-//if ( (mix.compressor == 'ON' && $scope.compressorSelected == true) || (mix.compressor == 'OFF' && $scope.compressorSelected == false) )
-//  $scope.updateCompressor();
+
+                /*if ( $scope.params.compressor == 'ON' && $scope.compressorSelected == true)
+    {
+ $scope.updateCompressor();
+}*/
+    if ( mix.compressor == 'OFF')
+      {   
+        $scope.compressorSelected = false;
+        $scope.updateCompressor();
+     }
 
             };
 

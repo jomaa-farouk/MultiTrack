@@ -274,7 +274,7 @@ float: right;
  /* summary details */
 
 .more {
-    margin-left: 5px;
+    margin-left: 4px;
   }     
 
 summary::-webkit-details-marker {
@@ -296,7 +296,7 @@ summary:before{
 }
 
 #sp1 {
-    font-size: 1.4em; 
+    font-size: 1.3em; 
     font-family: "Comic Sans MS", cursive, sans-serif ;
     color: #7D1935; 
 }
