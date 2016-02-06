@@ -5,15 +5,17 @@
 
 	var app = angular.module('mixs.controller', []);
 
-	app.controller('MixsController', ['$scope', 'MixFactory', 'MixsFactory', '$location',
-		function($scope, MixFactory, MixsFactory, $location){
+	app.controller('MixsController', ['$scope', 'AuthFactory','MixFactory', 'MixsFactory', '$location',
+		function($scope, AuthFactory, MixFactory, MixsFactory, $location){
 
-			/**
-			$scope.connected = false;
-
-			if(!$scope.connected){
+			if(!AuthFactory.check()){
 				$location.path('/login');
-			}**/
+			};
+
+			$scope.logout = function(){
+				AuthFactory.logout();
+				$location.path('/home');
+			};
 
 			$scope.editMix = function(mixId){
 				$location.path('/mix-edit/'+mixId);

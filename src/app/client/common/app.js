@@ -3,6 +3,7 @@
 angular.module('multitrack',  ['ngRoute',
     'angular-md5',
     'multitrack.services',
+    'multitrack.directives',
     'home.controller',
     'tracks.controller',
     'mixs.controller',

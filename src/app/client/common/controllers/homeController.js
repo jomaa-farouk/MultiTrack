@@ -7,22 +7,63 @@
 
     app.controller('HomeController', ['$scope', '$compile', 'MixFactory', 'MixsFactory',
         'TrackFactory', 'TracksFactory', 'CommentFactory', 'CommentsFactory',
-        'RatingFactory', 'RatingsFactory', 'AuthFactory',
-        function($scope, $compile, MixFactory, MixsFactory, TrackFactory, TracksFactory, CommentFactory, CommentsFactory, RatingFactory, RatingsFactory, AuthFactory){
+        'RatingFactory', 'RatingsFactory', 'AuthFactory','$location',
+        function($scope, $compile, MixFactory, MixsFactory, TrackFactory, TracksFactory, CommentFactory, CommentsFactory, RatingFactory, RatingsFactory, AuthFactory, $location){
 
 
             var app = this;
-
             $scope.user = AuthFactory.getUser();
+
+            $scope.switchAcount = function(){
+                if($scope.user.connected){
+                    $scope.rightBtn = "Logout";
+                    $scope.leftBtn = "Welcome, "+$scope.user.username;
+                }else{
+                    $scope.rightBtn = "Login";
+                    $scope.leftBtn = "Register";   
+                }
+            };
+
+            (function(){ 
+                $scope.switchAcount();
+            })();
+
+            $scope.connectDisconnect = function(){
+                if($scope.user.connected){
+                    AuthFactory.logout();
+                    $scope.user = AuthFactory.getUser();
+                    $scope.user.connected = false;
+                    $scope.rightBtn = "Login";
+                    $scope.leftBtn = "Register";
+                }
+                else{
+                    $location.path("/login");
+                }
+            };
+
+            $scope.register = function(){
+                if($scope.leftBtn === "Register"){
+                    $location.path("/user-creation");
+                }
+            }
 
             $scope.disconnect = function(){
                 AuthFactory.logout();
                 $scope.user = AuthFactory.getUser();
+                $scope.rightBtn = "login";
+                $scope.leftBtn = "Register";
+            };
+
+            $scope.connect = function(){
+                $location.path("/login");
             };
 
             $scope.isConnected = function(){
                 return $scope.user.connected;
             }
+
+
+
 
             $scope.getCommentsByMixName = function(){
                 $scope.commentsmix = [];
@@ -38,6 +79,8 @@
                 });
 
             };
+
+
 
             $scope.getRatingsByMixName = function(){
                 $scope.ratingsmix = [];
@@ -88,12 +131,12 @@
                     });
                 }, 2000);
 
-            }
+            };
 
-            $scope.deleteComment = function(rId){
-                CommentFactory.delete({id:rId});
-                $scope.ratings = RatingsFactory.query();
-            }
+            $scope.deleteComment = function(cId){
+                CommentFactory.delete({id:cId});
+                $scope.comments = CommentsFactory.query();
+            };
 
             /********************      MIXS              *****************************/
             $scope.getAllMixs = function(){

@@ -1,19 +1,11 @@
 <div class="container" data-ng-init="init()">
-    <p>user: {{user.username}}<br>
-        role: {{user.role}}
-    </p>
-    <br>
-    <button ng-click="disconnect()">{{isConnected()}}</button>
-
+    <dir-account></dir-account>
+    <br><br><br><br>
     <div class="row">
-
         <div class="col-md-5">
-
             <div class="row">
-
                 <div class="col-md-7">
                     <audio id="player" crossorigin="anonymous" loop />
-
                     <div id="songs">
                         <label id="labelList">
                             <select id ="select"   ng-model="selectedTrack" ng-change="loadTrackList (selectedTrack)">
@@ -27,13 +19,10 @@
                                         Released : {{track.dateOfTrack.substring(0, 10)}}">
                                     {{track.trackName}}
                                 </option>
-
                             </select>
                         </label>
                     </div>
                 </div>
-
-
                 <div class="col-md-4">
                     &nbsp;<button class="btn btn-primary glyphicon glyphicon-play" id="play" style="cursor: pointer;" ng-click="play();" disabled=true></button>
                     <button class="btn btn-primary glyphicon glyphicon-pause" id="pause" style="cursor: pointer;" ng-click="pause();" disabled=true></button>

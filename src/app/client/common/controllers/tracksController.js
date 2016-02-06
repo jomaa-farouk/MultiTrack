@@ -4,10 +4,19 @@
 
 	var app = angular.module('tracks.controller', []);
 
-	app.controller('TracksController', ['$scope', 'TrackFactory', 'TracksFactory', '$location', 
+	app.controller('TracksController', ['$scope', 'AuthFactory','TrackFactory', 'TracksFactory', '$location', 
 
-		function($scope, TrackFactory, TracksFactory, $location) {
+		function($scope, AuthFactory, TrackFactory, TracksFactory, $location) {
 
+			if(!AuthFactory.check()){
+				$location.path('/login');
+			};
+
+			$scope.logout = function(){
+				AuthFactory.logout();
+				$location.path('/home');
+			};	
+			
 			$scope.editTrack = function(trackId) {
 				$location.path('/track-edit/'+trackId);
 			};

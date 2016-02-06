@@ -4,17 +4,21 @@
 	// body...
 	var app = angular.module('users.controller', []);
 
-	app.controller('UsersController', ['$scope', 'UserFactory', 'UsersFactory', '$location', 
-		function($scope, UserFactory, UsersFactory, $location){
+	app.controller('UsersController', ['$scope', 'AuthFactory','UserFactory', 'UsersFactory', '$location', 
+		function($scope, AuthFactory, UserFactory, UsersFactory, $location){
 		var app = this;
 
-		/**
-		$scope.connected = false;
+		
 
-		if(!$scope.connected){
+		if(!AuthFactory.check()){
 			$location.path('/login');
-		}**/
+		};
 
+
+		$scope.logout = function(){
+			AuthFactory.logout();
+			$location.path('/home');
+		};
 
 		$scope.editUser = function(uid){
 			$location.path('/user-detail/'+uid);
@@ -60,9 +64,10 @@
 		$scope.createNewUser = function(){
 			var hash = AuthFactory.crypt($scope.user.passwd);
 			$scope.user.passwd = hash;
+			$scope.user.role = "User";
 			console.log('password hash is ',$scope.user.passwd);
 			UsersFactory.create($scope.user);
-			$location.path('/user-list');
+			$location.path('/home');
 		};
 	}]);
 

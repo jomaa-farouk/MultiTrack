@@ -98,14 +98,6 @@
 				return md5.createHash(pass||'');
 			},
 
-			isConnectedAsAdmin: function(){
-				return $window.sessionStorage.role === "admin";
-			},
-
-			isConnectedAsUser: function(){
-				return ($window.sessionStorage.username !== undefined && $window.sessionStorage.role !== "admin");
-			},
-
 			login: function(user){
 				$window.sessionStorage.username = user.username;
 				$window.sessionStorage.role = user.role;
@@ -113,15 +105,7 @@
 			},
 
 			logout: function(){
-				$window.sessionStorage.username = undefined;
-				$window.sessionStorage.role = undefined;
-				$window.sessionStorage.connected = false;
-			},
-
-			getConnectedUser:function(){
-				var user = $window.sessionStorage.username
-				$window.sessionStorage.username = user !== undefined ? user : "Login";
-				return $window.sessionStorage.username;
+				$window.sessionStorage.clear();
 			},
 
 			getUser: function(){
@@ -133,7 +117,7 @@
 			},
 
 			check: function(){
-				return $window.sessionStorage.connected;
+				return $window.sessionStorage.role === "Admin";
 			}
 		};
 
