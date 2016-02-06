@@ -249,7 +249,7 @@
                                         </div>
                                         <br>
                                         <ul ng-repeat="comment in commentsmix" class="ul">
-                                            <li class="li">&nbsp;&nbsp;<span id="sp3">{{ comment.content }} </span>  <button class="btn btn-danger btn-xs glyphicon glyphicon-remove pull-right" disabled></button> <br>
+                                            <li class="li">&nbsp;&nbsp;<span id="sp3">{{ comment.content }} </span>  <button class="btn btn-danger btn-xs glyphicon glyphicon-remove pull-right" ng-attr-id="{{ 'deletecomment' + comment._id }}" ng-click = "deleteComment (comment._id)" ng-disabled="checkDeleteButton (mix.mixName)"></button> <br>
                                                 &nbsp;<b>Added by:</b> <u>{{ comment.username }}</u>&nbsp; <b> On: </b> {{ comment.dateOfCreation | date:'dd-MM-yyyy' }}</li>
                                             <br>
                                         </ul>

@@ -7,8 +7,8 @@
 
     app.controller('HomeController', ['$scope', '$compile', 'MixFactory', 'MixsFactory',
         'TrackFactory', 'TracksFactory', 'CommentFactory', 'CommentsFactory',
-        'RatingFactory', 'RatingsFactory', 'AuthFactory','$location',
-        function($scope, $compile, MixFactory, MixsFactory, TrackFactory, TracksFactory, CommentFactory, CommentsFactory, RatingFactory, RatingsFactory, AuthFactory, $location){
+        'RatingFactory', 'RatingsFactory', 'AuthFactory','$location', '$window',
+        function($scope, $compile,  MixFactory, MixsFactory, TrackFactory, TracksFactory, CommentFactory, CommentsFactory, RatingFactory, RatingsFactory, AuthFactory, $location, $window){
 
 
             var app = this;
@@ -30,6 +30,7 @@
 
             $scope.connectDisconnect = function(){
                 if($scope.user.connected){
+                    $window.location.reload();
                     AuthFactory.logout();
                     $scope.user = AuthFactory.getUser();
                     $scope.user.connected = false;
@@ -37,6 +38,7 @@
                     $scope.leftBtn = "Register";
                 }
                 else{
+                    $window.location.reload();
                     $location.path("/login");
                 }
             };
@@ -48,6 +50,7 @@
             }
 
             $scope.disconnect = function(){
+                console.log ("disconnect");
                 AuthFactory.logout();
                 $scope.user = AuthFactory.getUser();
                 $scope.rightBtn = "login";
@@ -135,7 +138,19 @@
 
             $scope.deleteComment = function(cId){
                 CommentFactory.delete({id:cId});
-                $scope.comments = CommentsFactory.query();
+
+                setTimeout(function () {
+                    $scope.$apply(function () {
+                        $scope.getAllComments();
+                    });
+                }, 1000);
+
+                setTimeout(function () {
+                    $scope.$apply(function () {
+                        $scope.getCommentsByMixName();
+                    });
+                }, 2000);
+
             };
 
             /********************      MIXS              *****************************/
@@ -1627,8 +1642,22 @@ buildImpulseNode (i);
             $scope.loadComments = function (mix){
                 $scope.selectedMixName = mix;
                 $scope.getCommentsByMixName();
+
+
                 $('#comment').val('');
                 $scope.getRatingsByMixName();
+            };
+
+            $scope.checkDeleteButton = function (mix) {
+                $scope.commentsmix.forEach (function (comm, i){
+                if (comm.mixName == mix)
+                {var b = document.getElementById ("deletecomment" + comm._id);
+                console.log ("deletecomment" + comm._id);
+                if (comm.username == $scope.user.username) b.disabled = false;
+                else  b.disabled = true;}
+                });
+
+
             };
 
 $scope.verifyLikeButtons = function () {
