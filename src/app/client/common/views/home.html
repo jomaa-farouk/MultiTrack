@@ -215,7 +215,7 @@
                       
 <!--                       <span class="pull-right sp_likes"> <b>&nbsp;&nbsp;{{ getdislikes (mix.mixName) }}</b>&nbsp;<button class="btn btn-danger btn-xs glyphicon glyphicon-thumbs-down"></button></span>
  -->
-                      <span class="pull-right sp_likes"> &nbsp;&nbsp;&nbsp;<b ng-attr-id="{{ 'likes' + mix.mixName + mix.trackName}}">{{getlikes (mix.mixName)}}</b>&nbsp;<button class="btn btn-success btn-xs glyphicon glyphicon-thumbs-up"></button></span>
+                      <span class="pull-right sp_likes"> &nbsp;<b ng-attr-id="{{ 'likes' + mix.mixName + mix.trackName}}">{{getlikes (mix.mixName)}}</b>&nbsp;<button class="btn btn-success btn-xs glyphicon glyphicon-thumbs-up"></button></span>
                       
                         <button class="btn btn-primary pull-right more" data-toggle="modal" data-target="#f1" ng-attr-id="{{ 'more' + $index }}" ng-click="loadComments ( mix.mixName );" disabled>More</button>
                         <button id="mixdetails" type="submit" class="btn btn-primary pull-right" ng-click="loadMix (mix);" ng-attr-id="{{ 'load' + $index }}" disabled>Load</button>
