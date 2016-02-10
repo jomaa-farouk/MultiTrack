@@ -68,13 +68,16 @@
 
 			
 			var response = $http.post('/users', $scope.user);
+			
+			response.success(function(data, status, header, config){
+				console.log($scope.user + " created successfly!");
+				$scope.user = data;
+				$location.path("/home");
+			});
+
 			response.error(function(data, status, header, config){
 				$scope.showError = true;
 				$scope.message = "Error : "+status+ " Existing username '"+$scope.user.username+"' or empty field(s)";
-			});
-			response.success(function(data, status, header, config){
-				console.log($scope.user + " created successfly!");
-				$location.path("/home");
 			});
 
 			

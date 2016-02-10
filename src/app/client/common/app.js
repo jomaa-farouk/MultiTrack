@@ -6,6 +6,8 @@ angular.module('multitrack',  ['ngRoute',
     'multitrack.directives',
     'home.controller',
     'tracks.controller',
+    'comments.controller',
+    'ratings.controller',
     'mixs.controller',
     'users.controller',
     'login.controller',
@@ -27,6 +29,10 @@ angular.module('multitrack',  ['ngRoute',
     $routeProvider.when('/track-list', {templateUrl:'common/views/tracks/track-list.html', controller:'TracksController'});
     $routeProvider.when('/track-creation', {templateUrl:'common/views/tracks/track-creation.html', controller:'TrackCreation'});
     $routeProvider.when('/track-edit/:id', {templateUrl:'common/views/tracks/track-detail.html', controller:'TrackController'});
+
+    $routeProvider.when('/comment-list', {templateUrl:'common/views/comments/comment-list.html', controller:'CommentsController'});
+
+    $routeProvider.when('/rating-list', {templateUrl:'common/views/ratings/rating-list.html', controller:'RatingsController'});
 
     $routeProvider.when('/login', {templateUrl:'common/views/login.html', controller:'LoginController'});
 	   

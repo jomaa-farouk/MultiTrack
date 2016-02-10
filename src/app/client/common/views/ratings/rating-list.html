@@ -1,0 +1,17 @@
+<div class="container">
+    <log-out></log-out>
+	<h4>List Of Ratings</h4>
+	<br>
+	<ul class="list-group">
+    	<li class="list-group-item" ng-repeat="rating in ratings">
+    	<p id="plist">
+    		<em>
+    		<strong>Username:</strong> {{rating.username}}<br>
+    		<strong>MixName:</strong> {{rating.mixName}}<br>
+    		<strong>TrackName:</strong> {{rating.trackName}}<br>
+    		<strong>Mark:</strong> {{rating.mark}}<br>
+    		<strong>Date:</strong> {{rating.dateOfCreation}}<br></em>
+    	</p>
+			<a ng-click="deleteById(rating._id)" class="btn btn-xs btn-danger"><span class="glyphicon glyphicon-trash"></span>delete</a></li>
+    </ul>
+</div>
