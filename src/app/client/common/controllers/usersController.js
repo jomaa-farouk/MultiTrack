@@ -81,19 +81,12 @@
                 var validityState_object2 = input2.validity;
 
  				var inputmail = document.getElementById('email');
+                var validityState_object3 = inputmail.validity;
  				var mail = inputmail.value;
                 var mail_valid = true;
 
- 				if (mail!=null && mail !='') {
- 					
- 					if (validateEmail (mail)) input.setCustomValidity('');
- 					else 
- 					{
- 				     input.setCustomValidity('you must enter a valid mail'); 
- 				     mail_valid = false;
- 					 }
 
-                }
+console.log( validityState_object.valueMissing);
 
                 if(validityState_object.valueMissing)
                     input.setCustomValidity('You must enter a username');
@@ -105,21 +98,38 @@
                 else
                     input2.setCustomValidity('');
 
+				if (!validityState_object3.valueMissing) {
+ 					
+ 					if (validateEmail (mail)) {
+ 						mail_valid = true;
+ 						inputmail.setCustomValidity('');
+ 					}
+ 					else 
+ 					{
+ 				     inputmail.setCustomValidity('you must enter a valid E-mail'); 
+ 				     mail_valid = false;
+ 					 }
 
-if (mail_valid && !validityState_object.valueMissing && !validityState_object2.valueMissing)
+                }
+        	    else inputmail.setCustomValidity('you must enter an E-mail'); 
+
+
+
+		if (mail_valid && !validityState_object.valueMissing && !validityState_object2.valueMissing) {
             $http.post('/users' , $scope.user ).then(function (response) {
-          console.log ('we are here');
-          if (response.data.error != null) {console.log ('error');
+           if (response.data.error != null) {
           		$scope.showError = true;
-				$scope.message = "Error : "+status+ " Existing username '"+$scope.user.username+"' or empty field(s)";
+				$scope.message = "Error : Existing username '"+$scope.user.username+"'";
 				}
 			else  
-			{alert ('user created successfully');
-		    $location.path("/home");}
-	
-          return response.data;
+			{
+			$scope.showError = false;
+			alert ('user created successfully');
+		    $location.path("/home");
+		    }
+			return response.data;
 			});
-
+			}
 /*if c pas bon
           		$scope.showError = true;
 				$scope.message = "Error : "+status+ " Existing username '"+$scope.user.username+"' or empty field(s)";
@@ -147,18 +157,6 @@ if (mail_valid && !validityState_object.valueMissing && !validityState_object2.v
 	
 	}]);
 })();
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 //https://docs.angularjs.org/api/ngResource/service/$resource
