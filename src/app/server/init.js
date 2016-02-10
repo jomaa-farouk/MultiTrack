@@ -53,7 +53,7 @@ var user = new User({
     }); 
 
 var track1 = new Track({trackName:"Michael jackson - Beat It",piste:'[{"pisteMp3":"basse.mp3"},{"pisteMp3":"batterie.mp3"},{"pisteMp3":"guitare.mp3"},{"pisteMp3":"synthes.mp3"},{"pisteMp3":"voix.mp3"}]',singer:"Micheal Jackson",album:"Thriller",type:"Pop",description:"Song of Micheal Jackson",dateOfTrack:"1983-02-14T13:28:06.419Z"}); 
-var track2= new Track({trackName:"Michael jackson - Beat It",piste:'[{"pisteMp3":"basse.mp3"},{"pisteMp3":"batterie.mp3"},{"pisteMp3":"guitare.mp3"},{"pisteMp3":"synthes.mp3"},{"pisteMp3":"voix.mp3"}]',singer:"Micheal Jackson",album:"Thriller",type:"Pop",description:"Song of Micheal Jackson",dateOfTrack:"1983-02-14T13:28:06.419Z"}); 
+var track2= new Track({trackName:"Metallica - One",piste:'[{"pisteMp3":"guitar.mp3"},{"pisteMp3":"rhythm.mp3"},{"pisteMp3":"song.mp3"}]',singer:"Metallica",album:"...And Justice for All",type:"Pop",description:"Song of Micheal Jackson",dateOfTrack:"1989-01-10T13:28:06.419Z"}); 
 var track3= new Track({trackName:"Metallica - Enter Sandman (9 Trcks)",piste:'[{"pisteMp3":"Bass.mp3"},{"pisteMp3":"Drums 1.mp3"},{"pisteMp3":"Drums 2.mp3"},{"pisteMp3":"Drums 3.mp3"},{"pisteMp3":"Drums 4.mp3"},{"pisteMp3":"Guitar 1.mp3"},{"pisteMp3":"Guitar 2.mp3"},{"pisteMp3":"Vocal 2 + extras.mp3"},{"pisteMp3":"Vocal.mp3"}]',singer:"Metallica",album:"Thriller",type:"Metal",description:"Song of Metallica",dateOfTrack:"1991-08-12T13:28:06.419Z"}); 
 
 
