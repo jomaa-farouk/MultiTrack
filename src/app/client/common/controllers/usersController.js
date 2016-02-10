@@ -55,22 +55,31 @@
 
 	}]);
 
-	app.controller('UserCreation', ['$scope', 'UsersFactory', 'AuthFactory','$location', 
-		function($scope, UsersFactory, AuthFactory, $location){
-		$scope.roles = [
-			{id: 'Admin'}, {id: 'User'}, {id: 'Guest'}
-		]
+	app.controller('UserCreation', ['$scope', '$http', 'UsersFactory', 'AuthFactory','$location', 
+		function($scope, $http, UsersFactory, AuthFactory, $location){
+
+		$scope.showError = false;
 			
 		$scope.createNewUser = function(){
 			var hash = AuthFactory.crypt($scope.user.passwd);
 			$scope.user.passwd = hash;
 			$scope.user.role = "User";
 			console.log('password hash is ',$scope.user.passwd);
-			UsersFactory.create($scope.user);
-			$location.path('/home');
+
+			
+			var response = $http.post('/users', $scope.user);
+			response.error(function(data, status, header, config){
+				$scope.showError = true;
+				$scope.message = "Error : "+status+ " Existing username '"+$scope.user.username+"' or empty field(s)";
+			});
+			response.success(function(data, status, header, config){
+				console.log($scope.user + " created successfly!");
+				$location.path("/home");
+			});
+
+			
 		};
 	}]);
-
 })();
 
 
