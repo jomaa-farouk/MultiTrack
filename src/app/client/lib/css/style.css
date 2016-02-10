@@ -363,5 +363,8 @@ summary:before{
    color:red;
 }
 
+#username_label:after, #mail_label:after, #pwd_label:after  { 
+   content:"*";
+   color:red;
+}
 
-      
