@@ -17,7 +17,8 @@ var Track = new Schema({
 
   trackName:    {
     type    : String,
-    require : true
+    require : true,
+    unique : true
   },
   piste: {
     type: Array
