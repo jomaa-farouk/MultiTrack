@@ -1,0 +1,1034 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'C:\\Program Files\\nodejs\\node.exe',
+1 verbose cli   'C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'install' ]
+2 info using npm@2.14.7
+3 info using node@v4.2.3
+4 verbose readDependencies loading dependencies from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\package.json
+5 warn package.json server-side@0.0.1 No README data
+6 verbose install where, deps [ 'C:\\Users\\Farouk\\Desktop\\workspace\\MultiTrack\\src\\app\\server',
+6 verbose install   [ 'express',
+6 verbose install     'mongoose',
+6 verbose install     'body-parser',
+6 verbose install     'method-override',
+6 verbose install     'morgan',
+6 verbose install     'mongoskin',
+6 verbose install     'expect.js',
+6 verbose install     'mocha',
+6 verbose install     'superagent' ] ]
+7 verbose install where, peers [ 'C:\\Users\\Farouk\\Desktop\\workspace\\MultiTrack\\src\\app\\server',
+7 verbose install   [] ]
+8 verbose installManyTop reading for lifecycle C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\package.json
+9 info preinstall server-side@0.0.1
+10 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\accepts\package.json
+11 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\async\package.json
+12 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\bluebird\package.json
+13 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\body-parser\package.json
+14 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\bson\package.json
+15 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\buffer-crc32\package.json
+16 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\bytes\package.json
+17 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\commander\package.json
+18 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\cookie\package.json
+19 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\cookie-signature\package.json
+20 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\cookiejar\package.json
+21 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\core-util-is\package.json
+22 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\debug\package.json
+23 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\diff\package.json
+24 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\ee-first\package.json
+25 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\emitter-component\package.json
+26 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\es6-promise\package.json
+27 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\escape-html\package.json
+28 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\expect.js\package.json
+29 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\express\package.json
+30 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\extend\package.json
+31 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\finished\package.json
+32 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\formidable\package.json
+33 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\fresh\package.json
+34 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\fs\package.json
+35 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\glob\package.json
+36 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\graceful-fs\package.json
+37 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\growl\package.json
+38 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\hooks-fixed\package.json
+39 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\inherits\package.json
+40 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\ipaddr.js\package.json
+41 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\isarray\package.json
+42 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\jade\package.json
+43 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\kareem\package.json
+44 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\kerberos\package.json
+45 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\lru-cache\package.json
+46 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\merge-descriptors\package.json
+47 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\method-override\package.json
+48 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\methods\package.json
+49 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\mime\package.json
+50 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\mime-types\package.json
+51 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\minimatch\package.json
+52 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\mkdirp\package.json
+53 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\mocha\package.json
+54 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\mongodb\package.json
+55 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\mongodb-core\package.json
+56 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\mongoose\package.json
+57 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\mongoose-auto-increment\package.json
+58 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\mongoskin\package.json
+59 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\morgan\package.json
+60 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\mpath\package.json
+61 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\mpromise\package.json
+62 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\mquery\package.json
+63 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\ms\package.json
+64 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\multer\package.json
+65 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\muri\package.json
+66 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\nan\package.json
+67 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\negotiator\package.json
+68 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\parseurl\package.json
+69 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\path-to-regexp\package.json
+70 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\proxy-addr\package.json
+71 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\qs\package.json
+72 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\range-parser\package.json
+73 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\raw-body\package.json
+74 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\readable-stream\package.json
+75 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\reduce-component\package.json
+76 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\regexp-clone\package.json
+77 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\send\package.json
+78 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\serve-static\package.json
+79 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\sigmund\package.json
+80 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\sliced\package.json
+81 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\string_decoder\package.json
+82 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\superagent\package.json
+83 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\type-is\package.json
+84 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\utils-merge\package.json
+85 verbose installManyTop reading scoped package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\vary\package.json
+86 info package.json async@0.9.0 No license field.
+87 info package.json buffer-crc32@0.2.3 No license field.
+88 info package.json bytes@1.0.0 No license field.
+89 info package.json cookie@0.1.2 No license field.
+90 info package.json commander@2.0.0 No license field.
+91 info package.json cookiejar@1.3.0 No repository field.
+92 info package.json cookiejar@1.3.0 No license field.
+93 info package.json cookie-signature@1.0.4 No license field.
+94 info package.json debug@1.0.2 No license field.
+95 info package.json diff@1.0.7 No license field.
+96 info package.json emitter-component@1.0.0 No repository field.
+97 info package.json emitter-component@1.0.0 No license field.
+98 info package.json escape-html@1.0.1 No license field.
+99 info package.json expect.js@0.3.1 No license field.
+100 info package.json formidable@1.0.14 No license field.
+101 info package.json fresh@0.2.2 No license field.
+102 info package.json extend@1.2.1 No license field.
+103 info package.json fs@0.0.2 fs is also the name of a node core module.
+104 info package.json fs@0.0.2 No description
+105 info package.json fs@0.0.2 No repository field.
+106 info package.json glob@3.2.3 license should be a valid SPDX license expression
+107 info package.json graceful-fs@2.0.3 license should be a valid SPDX license expression
+108 info package.json growl@1.7.0 No repository field.
+109 info package.json growl@1.7.0 No license field.
+110 info package.json hooks-fixed@1.1.0 No license field.
+111 info package.json ipaddr.js@0.1.2 No license field.
+112 info package.json jade@0.26.3 No license field.
+113 info package.json kareem@1.0.1 license should be a valid SPDX license expression
+114 info package.json kerberos@0.0.17 license should be a valid SPDX license expression
+115 info package.json mime@1.2.11 No license field.
+116 info package.json minimatch@0.2.14 license should be a valid SPDX license expression
+117 info package.json mongodb-core@1.2.19 license should be a valid SPDX license expression
+118 info package.json mongoose-auto-increment@5.0.1 No license field.
+119 info package.json ms@0.6.2 No license field.
+120 info package.json path-to-regexp@0.1.2 No license field.
+121 info package.json qs@0.6.6 No license field.
+122 info package.json range-parser@1.0.0 No license field.
+123 info package.json reduce-component@1.0.1 license should be a valid SPDX license expression
+124 info package.json string_decoder@0.10.31 string_decoder is also the name of a node core module.
+125 info package.json superagent@0.17.0 No license field.
+126 info package.json utils-merge@1.0.0 No license field.
+127 info package.json mocha@1.18.2 No license field.
+128 verbose readDependencies loading dependencies from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\package.json
+129 verbose targetResolver reading package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\accepts\package.json
+130 verbose targetResolver reading package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\async\package.json
+131 verbose targetResolver reading package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\bluebird\package.json
+132 verbose targetResolver reading package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\body-parser\package.json
+133 verbose targetResolver reading package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\bson\package.json
+134 verbose targetResolver reading package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\buffer-crc32\package.json
+135 verbose targetResolver reading package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\bytes\package.json
+136 verbose targetResolver reading package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\commander\package.json
+137 verbose targetResolver reading package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\cookie\package.json
+138 verbose targetResolver reading package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\cookie-signature\package.json
+139 verbose targetResolver reading package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\cookiejar\package.json
+140 verbose targetResolver reading package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\core-util-is\package.json
+141 verbose targetResolver reading package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\debug\package.json
+142 verbose targetResolver reading package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\diff\package.json
+143 verbose targetResolver reading package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\ee-first\package.json
+144 verbose targetResolver reading package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\emitter-component\package.json
+145 verbose targetResolver reading package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\es6-promise\package.json
+146 verbose targetResolver reading package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\escape-html\package.json
+147 verbose targetResolver reading package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\expect.js\package.json
+148 verbose targetResolver reading package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\express\package.json
+149 verbose targetResolver reading package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\extend\package.json
+150 verbose targetResolver reading package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\finished\package.json
+151 verbose targetResolver reading package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\formidable\package.json
+152 verbose targetResolver reading package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\fresh\package.json
+153 verbose targetResolver reading package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\fs\package.json
+154 verbose targetResolver reading package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\glob\package.json
+155 verbose targetResolver reading package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\graceful-fs\package.json
+156 verbose targetResolver reading package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\growl\package.json
+157 verbose targetResolver reading package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\hooks-fixed\package.json
+158 verbose targetResolver reading package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\inherits\package.json
+159 verbose targetResolver reading package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\ipaddr.js\package.json
+160 verbose targetResolver reading package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\isarray\package.json
+161 verbose targetResolver reading package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\jade\package.json
+162 verbose targetResolver reading package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\kareem\package.json
+163 verbose targetResolver reading package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\kerberos\package.json
+164 verbose targetResolver reading package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\lru-cache\package.json
+165 verbose targetResolver reading package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\merge-descriptors\package.json
+166 verbose targetResolver reading package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\method-override\package.json
+167 verbose targetResolver reading package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\methods\package.json
+168 verbose targetResolver reading package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\mime\package.json
+169 verbose targetResolver reading package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\mime-types\package.json
+170 verbose targetResolver reading package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\minimatch\package.json
+171 verbose targetResolver reading package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\mkdirp\package.json
+172 verbose targetResolver reading package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\mocha\package.json
+173 verbose targetResolver reading package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\mongodb\package.json
+174 verbose targetResolver reading package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\mongodb-core\package.json
+175 verbose targetResolver reading package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\mongoose\package.json
+176 verbose targetResolver reading package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\mongoose-auto-increment\package.json
+177 verbose targetResolver reading package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\mongoskin\package.json
+178 verbose targetResolver reading package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\morgan\package.json
+179 verbose targetResolver reading package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\mpath\package.json
+180 verbose targetResolver reading package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\mpromise\package.json
+181 verbose targetResolver reading package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\mquery\package.json
+182 verbose targetResolver reading package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\ms\package.json
+183 verbose targetResolver reading package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\multer\package.json
+184 verbose targetResolver reading package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\muri\package.json
+185 verbose targetResolver reading package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\nan\package.json
+186 verbose targetResolver reading package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\negotiator\package.json
+187 verbose targetResolver reading package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\parseurl\package.json
+188 verbose targetResolver reading package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\path-to-regexp\package.json
+189 verbose targetResolver reading package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\proxy-addr\package.json
+190 verbose targetResolver reading package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\qs\package.json
+191 verbose targetResolver reading package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\range-parser\package.json
+192 verbose targetResolver reading package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\raw-body\package.json
+193 verbose targetResolver reading package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\readable-stream\package.json
+194 verbose targetResolver reading package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\reduce-component\package.json
+195 verbose targetResolver reading package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\regexp-clone\package.json
+196 verbose targetResolver reading package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\send\package.json
+197 verbose targetResolver reading package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\serve-static\package.json
+198 verbose targetResolver reading package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\sigmund\package.json
+199 verbose targetResolver reading package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\sliced\package.json
+200 verbose targetResolver reading package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\string_decoder\package.json
+201 verbose targetResolver reading package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\superagent\package.json
+202 verbose targetResolver reading package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\type-is\package.json
+203 verbose targetResolver reading package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\utils-merge\package.json
+204 verbose targetResolver reading package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\vary\package.json
+205 verbose targetResolver reading package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\.bin\jade\package.json
+206 verbose targetResolver reading package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\.bin\jade.cmd\package.json
+207 verbose targetResolver reading package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\.bin\mocha\package.json
+208 verbose targetResolver reading package data from C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\.bin\mocha.cmd\package.json
+209 verbose already installed skipping mongoskin@~1.4.1 C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server
+210 verbose already installed skipping expect.js@~0.3.1 C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server
+211 verbose already installed skipping mocha@~1.18.2 C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server
+212 verbose already installed skipping superagent@~0.17.0 C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server
+213 verbose already installed skipping express@~4.4.1 C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server
+214 verbose already installed skipping mongoose@~4.1.12 C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server
+215 verbose already installed skipping body-parser@~1.3.0 C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server
+216 verbose already installed skipping method-override@~2.0.1 C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server
+217 verbose already installed skipping morgan@~1.1.1 C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server
+218 silly install resolved []
+219 info build C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server
+220 info linkStuff server-side@0.0.1
+221 silly linkStuff server-side@0.0.1 has C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app as its parent node_modules
+222 verbose linkBins server-side@0.0.1
+223 verbose linkMans server-side@0.0.1
+224 verbose rebuildBundles server-side@0.0.1
+225 verbose rebuildBundles [ '.bin',
+225 verbose rebuildBundles   'accepts',
+225 verbose rebuildBundles   'async',
+225 verbose rebuildBundles   'bluebird',
+225 verbose rebuildBundles   'body-parser',
+225 verbose rebuildBundles   'bson',
+225 verbose rebuildBundles   'buffer-crc32',
+225 verbose rebuildBundles   'bytes',
+225 verbose rebuildBundles   'commander',
+225 verbose rebuildBundles   'cookie',
+225 verbose rebuildBundles   'cookie-signature',
+225 verbose rebuildBundles   'cookiejar',
+225 verbose rebuildBundles   'core-util-is',
+225 verbose rebuildBundles   'debug',
+225 verbose rebuildBundles   'diff',
+225 verbose rebuildBundles   'ee-first',
+225 verbose rebuildBundles   'emitter-component',
+225 verbose rebuildBundles   'es6-promise',
+225 verbose rebuildBundles   'escape-html',
+225 verbose rebuildBundles   'expect.js',
+225 verbose rebuildBundles   'express',
+225 verbose rebuildBundles   'extend',
+225 verbose rebuildBundles   'finished',
+225 verbose rebuildBundles   'formidable',
+225 verbose rebuildBundles   'fresh',
+225 verbose rebuildBundles   'fs',
+225 verbose rebuildBundles   'glob',
+225 verbose rebuildBundles   'graceful-fs',
+225 verbose rebuildBundles   'growl',
+225 verbose rebuildBundles   'hooks-fixed',
+225 verbose rebuildBundles   'inherits',
+225 verbose rebuildBundles   'ipaddr.js',
+225 verbose rebuildBundles   'isarray',
+225 verbose rebuildBundles   'jade',
+225 verbose rebuildBundles   'kareem',
+225 verbose rebuildBundles   'kerberos',
+225 verbose rebuildBundles   'lru-cache',
+225 verbose rebuildBundles   'merge-descriptors',
+225 verbose rebuildBundles   'method-override',
+225 verbose rebuildBundles   'methods',
+225 verbose rebuildBundles   'mime',
+225 verbose rebuildBundles   'mime-types',
+225 verbose rebuildBundles   'minimatch',
+225 verbose rebuildBundles   'mkdirp',
+225 verbose rebuildBundles   'mocha',
+225 verbose rebuildBundles   'mongodb',
+225 verbose rebuildBundles   'mongodb-core',
+225 verbose rebuildBundles   'mongoose',
+225 verbose rebuildBundles   'mongoose-auto-increment',
+225 verbose rebuildBundles   'mongoskin',
+225 verbose rebuildBundles   'morgan',
+225 verbose rebuildBundles   'mpath',
+225 verbose rebuildBundles   'mpromise',
+225 verbose rebuildBundles   'mquery',
+225 verbose rebuildBundles   'ms',
+225 verbose rebuildBundles   'multer',
+225 verbose rebuildBundles   'muri',
+225 verbose rebuildBundles   'nan',
+225 verbose rebuildBundles   'negotiator',
+225 verbose rebuildBundles   'parseurl',
+225 verbose rebuildBundles   'path-to-regexp',
+225 verbose rebuildBundles   'proxy-addr',
+225 verbose rebuildBundles   'qs',
+225 verbose rebuildBundles   'range-parser',
+225 verbose rebuildBundles   'raw-body',
+225 verbose rebuildBundles   'readable-stream',
+225 verbose rebuildBundles   'reduce-component',
+225 verbose rebuildBundles   'regexp-clone',
+225 verbose rebuildBundles   'send',
+225 verbose rebuildBundles   'serve-static',
+225 verbose rebuildBundles   'sigmund',
+225 verbose rebuildBundles   'sliced',
+225 verbose rebuildBundles   'string_decoder',
+225 verbose rebuildBundles   'superagent',
+225 verbose rebuildBundles   'type-is',
+225 verbose rebuildBundles   'utils-merge',
+225 verbose rebuildBundles   'vary' ]
+226 verbose rebuild bundle C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\accepts
+227 info build C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\accepts
+228 info preinstall accepts@1.0.7
+229 info linkStuff accepts@1.0.7
+230 silly linkStuff accepts@1.0.7 has C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules as its parent node_modules
+231 verbose linkBins accepts@1.0.7
+232 verbose linkMans accepts@1.0.7
+233 verbose rebuildBundles accepts@1.0.7
+234 info install accepts@1.0.7
+235 info postinstall accepts@1.0.7
+236 verbose rebuild bundle C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\async
+237 info build C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\async
+238 info preinstall async@0.9.0
+239 info linkStuff async@0.9.0
+240 silly linkStuff async@0.9.0 has C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules as its parent node_modules
+241 verbose linkBins async@0.9.0
+242 verbose linkMans async@0.9.0
+243 verbose rebuildBundles async@0.9.0
+244 info install async@0.9.0
+245 info postinstall async@0.9.0
+246 verbose rebuild bundle C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\bluebird
+247 info build C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\bluebird
+248 info preinstall bluebird@2.9.26
+249 info linkStuff bluebird@2.9.26
+250 silly linkStuff bluebird@2.9.26 has C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules as its parent node_modules
+251 verbose linkBins bluebird@2.9.26
+252 verbose linkMans bluebird@2.9.26
+253 verbose rebuildBundles bluebird@2.9.26
+254 info install bluebird@2.9.26
+255 info postinstall bluebird@2.9.26
+256 verbose rebuild bundle C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\bson
+257 info build C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\bson
+258 info preinstall bson@0.4.21
+259 info linkStuff bson@0.4.21
+260 silly linkStuff bson@0.4.21 has C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules as its parent node_modules
+261 verbose linkBins bson@0.4.21
+262 verbose linkMans bson@0.4.21
+263 verbose rebuildBundles bson@0.4.21
+264 info install bson@0.4.21
+265 info postinstall bson@0.4.21
+266 verbose rebuild bundle C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\buffer-crc32
+267 info build C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\buffer-crc32
+268 info preinstall buffer-crc32@0.2.3
+269 info linkStuff buffer-crc32@0.2.3
+270 silly linkStuff buffer-crc32@0.2.3 has C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules as its parent node_modules
+271 verbose linkBins buffer-crc32@0.2.3
+272 verbose linkMans buffer-crc32@0.2.3
+273 verbose rebuildBundles buffer-crc32@0.2.3
+274 info install buffer-crc32@0.2.3
+275 info postinstall buffer-crc32@0.2.3
+276 verbose rebuild bundle C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\bytes
+277 info build C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\bytes
+278 info preinstall bytes@1.0.0
+279 info linkStuff bytes@1.0.0
+280 silly linkStuff bytes@1.0.0 has C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules as its parent node_modules
+281 verbose linkBins bytes@1.0.0
+282 verbose linkMans bytes@1.0.0
+283 verbose rebuildBundles bytes@1.0.0
+284 info install bytes@1.0.0
+285 info postinstall bytes@1.0.0
+286 verbose rebuild bundle C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\commander
+287 info build C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\commander
+288 info preinstall commander@2.0.0
+289 info linkStuff commander@2.0.0
+290 silly linkStuff commander@2.0.0 has C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules as its parent node_modules
+291 verbose linkBins commander@2.0.0
+292 verbose linkMans commander@2.0.0
+293 verbose rebuildBundles commander@2.0.0
+294 info install commander@2.0.0
+295 info postinstall commander@2.0.0
+296 verbose rebuild bundle C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\cookie
+297 info build C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\cookie
+298 info preinstall cookie@0.1.2
+299 info linkStuff cookie@0.1.2
+300 silly linkStuff cookie@0.1.2 has C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules as its parent node_modules
+301 verbose linkBins cookie@0.1.2
+302 verbose linkMans cookie@0.1.2
+303 verbose rebuildBundles cookie@0.1.2
+304 info install cookie@0.1.2
+305 info postinstall cookie@0.1.2
+306 verbose rebuild bundle C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\cookie-signature
+307 info build C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\cookie-signature
+308 info preinstall cookie-signature@1.0.4
+309 info linkStuff cookie-signature@1.0.4
+310 silly linkStuff cookie-signature@1.0.4 has C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules as its parent node_modules
+311 verbose linkBins cookie-signature@1.0.4
+312 verbose linkMans cookie-signature@1.0.4
+313 verbose rebuildBundles cookie-signature@1.0.4
+314 info install cookie-signature@1.0.4
+315 info postinstall cookie-signature@1.0.4
+316 verbose rebuild bundle C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\cookiejar
+317 info build C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\cookiejar
+318 info preinstall cookiejar@1.3.0
+319 info linkStuff cookiejar@1.3.0
+320 silly linkStuff cookiejar@1.3.0 has C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules as its parent node_modules
+321 verbose linkBins cookiejar@1.3.0
+322 verbose linkMans cookiejar@1.3.0
+323 verbose rebuildBundles cookiejar@1.3.0
+324 info install cookiejar@1.3.0
+325 info postinstall cookiejar@1.3.0
+326 verbose rebuild bundle C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\core-util-is
+327 info build C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\core-util-is
+328 info preinstall core-util-is@1.0.2
+329 info linkStuff core-util-is@1.0.2
+330 silly linkStuff core-util-is@1.0.2 has C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules as its parent node_modules
+331 verbose linkBins core-util-is@1.0.2
+332 verbose linkMans core-util-is@1.0.2
+333 verbose rebuildBundles core-util-is@1.0.2
+334 info install core-util-is@1.0.2
+335 info postinstall core-util-is@1.0.2
+336 verbose rebuild bundle C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\debug
+337 info build C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\debug
+338 info preinstall debug@1.0.2
+339 info linkStuff debug@1.0.2
+340 silly linkStuff debug@1.0.2 has C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules as its parent node_modules
+341 verbose linkBins debug@1.0.2
+342 verbose linkMans debug@1.0.2
+343 verbose rebuildBundles debug@1.0.2
+344 info install debug@1.0.2
+345 info postinstall debug@1.0.2
+346 verbose rebuild bundle C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\diff
+347 info build C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\diff
+348 info preinstall diff@1.0.7
+349 info linkStuff diff@1.0.7
+350 silly linkStuff diff@1.0.7 has C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules as its parent node_modules
+351 verbose linkBins diff@1.0.7
+352 verbose linkMans diff@1.0.7
+353 verbose rebuildBundles diff@1.0.7
+354 info install diff@1.0.7
+355 info postinstall diff@1.0.7
+356 verbose rebuild bundle C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\ee-first
+357 info build C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\ee-first
+358 info preinstall ee-first@1.0.3
+359 info linkStuff ee-first@1.0.3
+360 silly linkStuff ee-first@1.0.3 has C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules as its parent node_modules
+361 verbose linkBins ee-first@1.0.3
+362 verbose linkMans ee-first@1.0.3
+363 verbose rebuildBundles ee-first@1.0.3
+364 info install ee-first@1.0.3
+365 info postinstall ee-first@1.0.3
+366 verbose rebuild bundle C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\emitter-component
+367 info build C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\emitter-component
+368 info preinstall emitter-component@1.0.0
+369 info linkStuff emitter-component@1.0.0
+370 silly linkStuff emitter-component@1.0.0 has C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules as its parent node_modules
+371 verbose linkBins emitter-component@1.0.0
+372 verbose linkMans emitter-component@1.0.0
+373 verbose rebuildBundles emitter-component@1.0.0
+374 info install emitter-component@1.0.0
+375 info postinstall emitter-component@1.0.0
+376 verbose rebuild bundle C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\es6-promise
+377 info build C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\es6-promise
+378 info preinstall es6-promise@2.1.1
+379 info linkStuff es6-promise@2.1.1
+380 silly linkStuff es6-promise@2.1.1 has C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules as its parent node_modules
+381 verbose linkBins es6-promise@2.1.1
+382 verbose linkMans es6-promise@2.1.1
+383 verbose rebuildBundles es6-promise@2.1.1
+384 info install es6-promise@2.1.1
+385 info postinstall es6-promise@2.1.1
+386 verbose rebuild bundle C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\escape-html
+387 info build C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\escape-html
+388 info preinstall escape-html@1.0.1
+389 info linkStuff escape-html@1.0.1
+390 silly linkStuff escape-html@1.0.1 has C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules as its parent node_modules
+391 verbose linkBins escape-html@1.0.1
+392 verbose linkMans escape-html@1.0.1
+393 verbose rebuildBundles escape-html@1.0.1
+394 info install escape-html@1.0.1
+395 info postinstall escape-html@1.0.1
+396 verbose rebuild bundle C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\extend
+397 info build C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\extend
+398 info preinstall extend@1.2.1
+399 info linkStuff extend@1.2.1
+400 silly linkStuff extend@1.2.1 has C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules as its parent node_modules
+401 verbose linkBins extend@1.2.1
+402 verbose linkMans extend@1.2.1
+403 verbose rebuildBundles extend@1.2.1
+404 info install extend@1.2.1
+405 info postinstall extend@1.2.1
+406 verbose rebuild bundle C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\finished
+407 info build C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\finished
+408 info preinstall finished@1.2.2
+409 info linkStuff finished@1.2.2
+410 silly linkStuff finished@1.2.2 has C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules as its parent node_modules
+411 verbose linkBins finished@1.2.2
+412 verbose linkMans finished@1.2.2
+413 verbose rebuildBundles finished@1.2.2
+414 info install finished@1.2.2
+415 info postinstall finished@1.2.2
+416 verbose rebuild bundle C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\formidable
+417 info build C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\formidable
+418 info preinstall formidable@1.0.14
+419 info linkStuff formidable@1.0.14
+420 silly linkStuff formidable@1.0.14 has C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules as its parent node_modules
+421 verbose linkBins formidable@1.0.14
+422 verbose linkMans formidable@1.0.14
+423 verbose rebuildBundles formidable@1.0.14
+424 info install formidable@1.0.14
+425 info postinstall formidable@1.0.14
+426 verbose rebuild bundle C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\fresh
+427 info build C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\fresh
+428 info preinstall fresh@0.2.2
+429 info linkStuff fresh@0.2.2
+430 silly linkStuff fresh@0.2.2 has C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules as its parent node_modules
+431 verbose linkBins fresh@0.2.2
+432 verbose linkMans fresh@0.2.2
+433 verbose rebuildBundles fresh@0.2.2
+434 info install fresh@0.2.2
+435 info postinstall fresh@0.2.2
+436 verbose rebuild bundle C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\fs
+437 info build C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\fs
+438 info preinstall fs@0.0.2
+439 info linkStuff fs@0.0.2
+440 silly linkStuff fs@0.0.2 has C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules as its parent node_modules
+441 verbose linkBins fs@0.0.2
+442 verbose linkMans fs@0.0.2
+443 verbose rebuildBundles fs@0.0.2
+444 info install fs@0.0.2
+445 info postinstall fs@0.0.2
+446 verbose rebuild bundle C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\glob
+447 info build C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\glob
+448 info preinstall glob@3.2.3
+449 info linkStuff glob@3.2.3
+450 silly linkStuff glob@3.2.3 has C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules as its parent node_modules
+451 verbose linkBins glob@3.2.3
+452 verbose linkMans glob@3.2.3
+453 verbose rebuildBundles glob@3.2.3
+454 info install glob@3.2.3
+455 info postinstall glob@3.2.3
+456 verbose rebuild bundle C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\graceful-fs
+457 info build C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\graceful-fs
+458 info preinstall graceful-fs@2.0.3
+459 info linkStuff graceful-fs@2.0.3
+460 silly linkStuff graceful-fs@2.0.3 has C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules as its parent node_modules
+461 verbose linkBins graceful-fs@2.0.3
+462 verbose linkMans graceful-fs@2.0.3
+463 verbose rebuildBundles graceful-fs@2.0.3
+464 info install graceful-fs@2.0.3
+465 info postinstall graceful-fs@2.0.3
+466 verbose rebuild bundle C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\growl
+467 info build C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\growl
+468 info preinstall growl@1.7.0
+469 info linkStuff growl@1.7.0
+470 silly linkStuff growl@1.7.0 has C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules as its parent node_modules
+471 verbose linkBins growl@1.7.0
+472 verbose linkMans growl@1.7.0
+473 verbose rebuildBundles growl@1.7.0
+474 info install growl@1.7.0
+475 info postinstall growl@1.7.0
+476 verbose rebuild bundle C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\hooks-fixed
+477 info build C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\hooks-fixed
+478 info preinstall hooks-fixed@1.1.0
+479 info linkStuff hooks-fixed@1.1.0
+480 silly linkStuff hooks-fixed@1.1.0 has C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules as its parent node_modules
+481 verbose linkBins hooks-fixed@1.1.0
+482 verbose linkMans hooks-fixed@1.1.0
+483 verbose rebuildBundles hooks-fixed@1.1.0
+484 info install hooks-fixed@1.1.0
+485 info postinstall hooks-fixed@1.1.0
+486 verbose rebuild bundle C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\inherits
+487 info build C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\inherits
+488 info preinstall inherits@2.0.1
+489 info linkStuff inherits@2.0.1
+490 silly linkStuff inherits@2.0.1 has C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules as its parent node_modules
+491 verbose linkBins inherits@2.0.1
+492 verbose linkMans inherits@2.0.1
+493 verbose rebuildBundles inherits@2.0.1
+494 info install inherits@2.0.1
+495 info postinstall inherits@2.0.1
+496 verbose rebuild bundle C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\ipaddr.js
+497 info build C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\ipaddr.js
+498 info preinstall ipaddr.js@0.1.2
+499 info linkStuff ipaddr.js@0.1.2
+500 silly linkStuff ipaddr.js@0.1.2 has C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules as its parent node_modules
+501 verbose linkBins ipaddr.js@0.1.2
+502 verbose linkMans ipaddr.js@0.1.2
+503 verbose rebuildBundles ipaddr.js@0.1.2
+504 info install ipaddr.js@0.1.2
+505 info postinstall ipaddr.js@0.1.2
+506 verbose rebuild bundle C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\isarray
+507 info build C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\isarray
+508 info preinstall isarray@0.0.1
+509 info linkStuff isarray@0.0.1
+510 silly linkStuff isarray@0.0.1 has C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules as its parent node_modules
+511 verbose linkBins isarray@0.0.1
+512 verbose linkMans isarray@0.0.1
+513 verbose rebuildBundles isarray@0.0.1
+514 info install isarray@0.0.1
+515 info postinstall isarray@0.0.1
+516 verbose rebuild bundle C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\jade
+517 info build C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\jade
+518 info preinstall jade@0.26.3
+519 info linkStuff jade@0.26.3
+520 silly linkStuff jade@0.26.3 has C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules as its parent node_modules
+521 verbose linkBins jade@0.26.3
+522 verbose link bins [ { jade: './bin/jade' },
+522 verbose link bins   'C:\\Users\\Farouk\\Desktop\\workspace\\MultiTrack\\src\\app\\server\\node_modules\\.bin',
+522 verbose link bins   false ]
+523 verbose linkMans jade@0.26.3
+524 verbose rebuildBundles jade@0.26.3
+525 verbose rebuildBundles [ 'commander', 'mkdirp' ]
+526 info install jade@0.26.3
+527 info postinstall jade@0.26.3
+528 verbose rebuild bundle C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\kareem
+529 info build C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\kareem
+530 info preinstall kareem@1.0.1
+531 info linkStuff kareem@1.0.1
+532 silly linkStuff kareem@1.0.1 has C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules as its parent node_modules
+533 verbose linkBins kareem@1.0.1
+534 verbose linkMans kareem@1.0.1
+535 verbose rebuildBundles kareem@1.0.1
+536 info install kareem@1.0.1
+537 info postinstall kareem@1.0.1
+538 verbose rebuild bundle C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\kerberos
+539 info build C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\kerberos
+540 info preinstall kerberos@0.0.17
+541 info linkStuff kerberos@0.0.17
+542 silly linkStuff kerberos@0.0.17 has C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules as its parent node_modules
+543 verbose linkBins kerberos@0.0.17
+544 verbose linkMans kerberos@0.0.17
+545 verbose rebuildBundles kerberos@0.0.17
+546 info install kerberos@0.0.17
+547 verbose unsafe-perm in lifecycle true
+548 info postinstall kerberos@0.0.17
+549 verbose rebuild bundle C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\lru-cache
+550 info build C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\lru-cache
+551 info preinstall lru-cache@2.7.3
+552 info linkStuff lru-cache@2.7.3
+553 silly linkStuff lru-cache@2.7.3 has C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules as its parent node_modules
+554 verbose linkBins lru-cache@2.7.3
+555 verbose linkMans lru-cache@2.7.3
+556 verbose rebuildBundles lru-cache@2.7.3
+557 info install lru-cache@2.7.3
+558 info postinstall lru-cache@2.7.3
+559 verbose rebuild bundle C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\merge-descriptors
+560 info build C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\merge-descriptors
+561 info preinstall merge-descriptors@0.0.2
+562 info linkStuff merge-descriptors@0.0.2
+563 silly linkStuff merge-descriptors@0.0.2 has C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules as its parent node_modules
+564 verbose linkBins merge-descriptors@0.0.2
+565 verbose linkMans merge-descriptors@0.0.2
+566 verbose rebuildBundles merge-descriptors@0.0.2
+567 info install merge-descriptors@0.0.2
+568 info postinstall merge-descriptors@0.0.2
+569 verbose rebuild bundle C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\methods
+570 info build C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\methods
+571 info preinstall methods@1.0.1
+572 info linkStuff methods@1.0.1
+573 silly linkStuff methods@1.0.1 has C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules as its parent node_modules
+574 verbose linkBins methods@1.0.1
+575 verbose linkMans methods@1.0.1
+576 verbose rebuildBundles methods@1.0.1
+577 info install methods@1.0.1
+578 info postinstall methods@1.0.1
+579 verbose rebuild bundle C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\mime
+580 info build C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\mime
+581 info preinstall mime@1.2.11
+582 info linkStuff mime@1.2.11
+583 silly linkStuff mime@1.2.11 has C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules as its parent node_modules
+584 verbose linkBins mime@1.2.11
+585 verbose linkMans mime@1.2.11
+586 verbose rebuildBundles mime@1.2.11
+587 info install mime@1.2.11
+588 info postinstall mime@1.2.11
+589 verbose rebuild bundle C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\mime-types
+590 info build C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\mime-types
+591 info preinstall mime-types@1.0.0
+592 info linkStuff mime-types@1.0.0
+593 silly linkStuff mime-types@1.0.0 has C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules as its parent node_modules
+594 verbose linkBins mime-types@1.0.0
+595 verbose linkMans mime-types@1.0.0
+596 verbose rebuildBundles mime-types@1.0.0
+597 info install mime-types@1.0.0
+598 info postinstall mime-types@1.0.0
+599 verbose rebuild bundle C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\minimatch
+600 info build C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\minimatch
+601 info preinstall minimatch@0.2.14
+602 info linkStuff minimatch@0.2.14
+603 silly linkStuff minimatch@0.2.14 has C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules as its parent node_modules
+604 verbose linkBins minimatch@0.2.14
+605 verbose linkMans minimatch@0.2.14
+606 verbose rebuildBundles minimatch@0.2.14
+607 info install minimatch@0.2.14
+608 info postinstall minimatch@0.2.14
+609 verbose rebuild bundle C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\mkdirp
+610 info build C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\mkdirp
+611 info preinstall mkdirp@0.3.5
+612 info linkStuff mkdirp@0.3.5
+613 silly linkStuff mkdirp@0.3.5 has C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules as its parent node_modules
+614 verbose linkBins mkdirp@0.3.5
+615 verbose linkMans mkdirp@0.3.5
+616 verbose rebuildBundles mkdirp@0.3.5
+617 info install mkdirp@0.3.5
+618 info postinstall mkdirp@0.3.5
+619 verbose rebuild bundle C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\mongodb
+620 info build C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\mongodb
+621 info preinstall mongodb@2.0.46
+622 info linkStuff mongodb@2.0.46
+623 silly linkStuff mongodb@2.0.46 has C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules as its parent node_modules
+624 verbose linkBins mongodb@2.0.46
+625 verbose linkMans mongodb@2.0.46
+626 verbose rebuildBundles mongodb@2.0.46
+627 info install mongodb@2.0.46
+628 info postinstall mongodb@2.0.46
+629 verbose rebuild bundle C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\mongodb-core
+630 info build C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\mongodb-core
+631 info preinstall mongodb-core@1.2.19
+632 info linkStuff mongodb-core@1.2.19
+633 silly linkStuff mongodb-core@1.2.19 has C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules as its parent node_modules
+634 verbose linkBins mongodb-core@1.2.19
+635 verbose linkMans mongodb-core@1.2.19
+636 verbose rebuildBundles mongodb-core@1.2.19
+637 info install mongodb-core@1.2.19
+638 info postinstall mongodb-core@1.2.19
+639 verbose rebuild bundle C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\mongoose-auto-increment
+640 info build C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\mongoose-auto-increment
+641 info preinstall mongoose-auto-increment@5.0.1
+642 info linkStuff mongoose-auto-increment@5.0.1
+643 silly linkStuff mongoose-auto-increment@5.0.1 has C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules as its parent node_modules
+644 verbose linkBins mongoose-auto-increment@5.0.1
+645 verbose linkMans mongoose-auto-increment@5.0.1
+646 verbose rebuildBundles mongoose-auto-increment@5.0.1
+647 verbose rebuildBundles [ 'extend' ]
+648 info install mongoose-auto-increment@5.0.1
+649 info postinstall mongoose-auto-increment@5.0.1
+650 verbose rebuild bundle C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\mpath
+651 info build C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\mpath
+652 info preinstall mpath@0.1.1
+653 info linkStuff mpath@0.1.1
+654 silly linkStuff mpath@0.1.1 has C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules as its parent node_modules
+655 verbose linkBins mpath@0.1.1
+656 verbose linkMans mpath@0.1.1
+657 verbose rebuildBundles mpath@0.1.1
+658 info install mpath@0.1.1
+659 info postinstall mpath@0.1.1
+660 verbose rebuild bundle C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\mpromise
+661 info build C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\mpromise
+662 info preinstall mpromise@0.5.4
+663 info linkStuff mpromise@0.5.4
+664 silly linkStuff mpromise@0.5.4 has C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules as its parent node_modules
+665 verbose linkBins mpromise@0.5.4
+666 verbose linkMans mpromise@0.5.4
+667 verbose rebuildBundles mpromise@0.5.4
+668 info install mpromise@0.5.4
+669 info postinstall mpromise@0.5.4
+670 verbose rebuild bundle C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\mquery
+671 info build C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\mquery
+672 info preinstall mquery@1.6.3
+673 info linkStuff mquery@1.6.3
+674 silly linkStuff mquery@1.6.3 has C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules as its parent node_modules
+675 verbose linkBins mquery@1.6.3
+676 verbose linkMans mquery@1.6.3
+677 verbose rebuildBundles mquery@1.6.3
+678 verbose rebuildBundles [ 'debug', 'ms' ]
+679 verbose rebuild bundle C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\mquery\node_modules\ms
+680 info build C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\mquery\node_modules\ms
+681 info preinstall ms@0.7.1
+682 info linkStuff ms@0.7.1
+683 silly linkStuff ms@0.7.1 has C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\mquery\node_modules as its parent node_modules
+684 verbose linkBins ms@0.7.1
+685 verbose linkMans ms@0.7.1
+686 verbose rebuildBundles ms@0.7.1
+687 info install ms@0.7.1
+688 info postinstall ms@0.7.1
+689 info install mquery@1.6.3
+690 info postinstall mquery@1.6.3
+691 verbose rebuild bundle C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\ms
+692 info build C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\ms
+693 info preinstall ms@0.6.2
+694 info linkStuff ms@0.6.2
+695 silly linkStuff ms@0.6.2 has C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules as its parent node_modules
+696 verbose linkBins ms@0.6.2
+697 verbose linkMans ms@0.6.2
+698 verbose rebuildBundles ms@0.6.2
+699 info install ms@0.6.2
+700 info postinstall ms@0.6.2
+701 verbose rebuild bundle C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\multer
+702 info build C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\multer
+703 info preinstall multer@1.1.0
+704 info linkStuff multer@1.1.0
+705 silly linkStuff multer@1.1.0 has C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules as its parent node_modules
+706 verbose linkBins multer@1.1.0
+707 verbose linkMans multer@1.1.0
+708 verbose rebuildBundles multer@1.1.0
+709 verbose rebuildBundles [ 'append-field',
+709 verbose rebuildBundles   'busboy',
+709 verbose rebuildBundles   'concat-stream',
+709 verbose rebuildBundles   'object-assign',
+709 verbose rebuildBundles   'on-finished',
+709 verbose rebuildBundles   'type-is',
+709 verbose rebuildBundles   'xtend' ]
+710 info install multer@1.1.0
+711 info postinstall multer@1.1.0
+712 verbose rebuild bundle C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\muri
+713 info build C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\muri
+714 info preinstall muri@1.0.0
+715 info linkStuff muri@1.0.0
+716 silly linkStuff muri@1.0.0 has C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules as its parent node_modules
+717 verbose linkBins muri@1.0.0
+718 verbose linkMans muri@1.0.0
+719 verbose rebuildBundles muri@1.0.0
+720 info install muri@1.0.0
+721 info postinstall muri@1.0.0
+722 verbose rebuild bundle C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\nan
+723 info build C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\nan
+724 info preinstall nan@2.0.9
+725 info linkStuff nan@2.0.9
+726 silly linkStuff nan@2.0.9 has C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules as its parent node_modules
+727 verbose linkBins nan@2.0.9
+728 verbose linkMans nan@2.0.9
+729 verbose rebuildBundles nan@2.0.9
+730 info install nan@2.0.9
+731 info postinstall nan@2.0.9
+732 verbose rebuild bundle C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\negotiator
+733 info build C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\negotiator
+734 info preinstall negotiator@0.4.7
+735 info linkStuff negotiator@0.4.7
+736 silly linkStuff negotiator@0.4.7 has C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules as its parent node_modules
+737 verbose linkBins negotiator@0.4.7
+738 verbose linkMans negotiator@0.4.7
+739 verbose rebuildBundles negotiator@0.4.7
+740 info install negotiator@0.4.7
+741 info postinstall negotiator@0.4.7
+742 verbose rebuild bundle C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\parseurl
+743 info build C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\parseurl
+744 info preinstall parseurl@1.0.1
+745 info linkStuff parseurl@1.0.1
+746 silly linkStuff parseurl@1.0.1 has C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules as its parent node_modules
+747 verbose linkBins parseurl@1.0.1
+748 verbose linkMans parseurl@1.0.1
+749 verbose rebuildBundles parseurl@1.0.1
+750 info install parseurl@1.0.1
+751 info postinstall parseurl@1.0.1
+752 verbose rebuild bundle C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\path-to-regexp
+753 info build C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\path-to-regexp
+754 info preinstall path-to-regexp@0.1.2
+755 info linkStuff path-to-regexp@0.1.2
+756 silly linkStuff path-to-regexp@0.1.2 has C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules as its parent node_modules
+757 verbose linkBins path-to-regexp@0.1.2
+758 verbose linkMans path-to-regexp@0.1.2
+759 verbose rebuildBundles path-to-regexp@0.1.2
+760 info install path-to-regexp@0.1.2
+761 info postinstall path-to-regexp@0.1.2
+762 verbose rebuild bundle C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\proxy-addr
+763 info build C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\proxy-addr
+764 info preinstall proxy-addr@1.0.1
+765 info linkStuff proxy-addr@1.0.1
+766 silly linkStuff proxy-addr@1.0.1 has C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules as its parent node_modules
+767 verbose linkBins proxy-addr@1.0.1
+768 verbose linkMans proxy-addr@1.0.1
+769 verbose rebuildBundles proxy-addr@1.0.1
+770 info install proxy-addr@1.0.1
+771 info postinstall proxy-addr@1.0.1
+772 verbose rebuild bundle C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\qs
+773 info build C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\qs
+774 info preinstall qs@0.6.6
+775 info linkStuff qs@0.6.6
+776 silly linkStuff qs@0.6.6 has C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules as its parent node_modules
+777 verbose linkBins qs@0.6.6
+778 verbose linkMans qs@0.6.6
+779 verbose rebuildBundles qs@0.6.6
+780 info install qs@0.6.6
+781 info postinstall qs@0.6.6
+782 verbose rebuild bundle C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\range-parser
+783 info build C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\range-parser
+784 info preinstall range-parser@1.0.0
+785 info linkStuff range-parser@1.0.0
+786 silly linkStuff range-parser@1.0.0 has C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules as its parent node_modules
+787 verbose linkBins range-parser@1.0.0
+788 verbose linkMans range-parser@1.0.0
+789 verbose rebuildBundles range-parser@1.0.0
+790 info install range-parser@1.0.0
+791 info postinstall range-parser@1.0.0
+792 verbose rebuild bundle C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\raw-body
+793 info build C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\raw-body
+794 info preinstall raw-body@1.1.6
+795 info linkStuff raw-body@1.1.6
+796 silly linkStuff raw-body@1.1.6 has C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules as its parent node_modules
+797 verbose linkBins raw-body@1.1.6
+798 verbose linkMans raw-body@1.1.6
+799 verbose rebuildBundles raw-body@1.1.6
+800 info install raw-body@1.1.6
+801 info postinstall raw-body@1.1.6
+802 verbose rebuild bundle C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\readable-stream
+803 info build C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\readable-stream
+804 info preinstall readable-stream@1.0.31
+805 info linkStuff readable-stream@1.0.31
+806 silly linkStuff readable-stream@1.0.31 has C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules as its parent node_modules
+807 verbose linkBins readable-stream@1.0.31
+808 verbose linkMans readable-stream@1.0.31
+809 verbose rebuildBundles readable-stream@1.0.31
+810 info install readable-stream@1.0.31
+811 info postinstall readable-stream@1.0.31
+812 verbose rebuild bundle C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\reduce-component
+813 info build C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\reduce-component
+814 info preinstall reduce-component@1.0.1
+815 info linkStuff reduce-component@1.0.1
+816 silly linkStuff reduce-component@1.0.1 has C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules as its parent node_modules
+817 verbose linkBins reduce-component@1.0.1
+818 verbose linkMans reduce-component@1.0.1
+819 verbose rebuildBundles reduce-component@1.0.1
+820 info install reduce-component@1.0.1
+821 info postinstall reduce-component@1.0.1
+822 verbose rebuild bundle C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\regexp-clone
+823 info build C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\regexp-clone
+824 info preinstall regexp-clone@0.0.1
+825 info linkStuff regexp-clone@0.0.1
+826 silly linkStuff regexp-clone@0.0.1 has C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules as its parent node_modules
+827 verbose linkBins regexp-clone@0.0.1
+828 verbose linkMans regexp-clone@0.0.1
+829 verbose rebuildBundles regexp-clone@0.0.1
+830 info install regexp-clone@0.0.1
+831 info postinstall regexp-clone@0.0.1
+832 verbose rebuild bundle C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\send
+833 info build C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\send
+834 info preinstall send@0.4.3
+835 info linkStuff send@0.4.3
+836 silly linkStuff send@0.4.3 has C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules as its parent node_modules
+837 verbose linkBins send@0.4.3
+838 verbose linkMans send@0.4.3
+839 verbose rebuildBundles send@0.4.3
+840 info install send@0.4.3
+841 info postinstall send@0.4.3
+842 verbose rebuild bundle C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\serve-static
+843 info build C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\serve-static
+844 info preinstall serve-static@1.2.3
+845 info linkStuff serve-static@1.2.3
+846 silly linkStuff serve-static@1.2.3 has C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules as its parent node_modules
+847 verbose linkBins serve-static@1.2.3
+848 verbose linkMans serve-static@1.2.3
+849 verbose rebuildBundles serve-static@1.2.3
+850 info install serve-static@1.2.3
+851 info postinstall serve-static@1.2.3
+852 verbose rebuild bundle C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\sigmund
+853 info build C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\sigmund
+854 info preinstall sigmund@1.0.1
+855 info linkStuff sigmund@1.0.1
+856 silly linkStuff sigmund@1.0.1 has C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules as its parent node_modules
+857 verbose linkBins sigmund@1.0.1
+858 verbose linkMans sigmund@1.0.1
+859 verbose rebuildBundles sigmund@1.0.1
+860 info install sigmund@1.0.1
+861 info postinstall sigmund@1.0.1
+862 verbose rebuild bundle C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\sliced
+863 info build C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\sliced
+864 info preinstall sliced@0.0.5
+865 info linkStuff sliced@0.0.5
+866 silly linkStuff sliced@0.0.5 has C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules as its parent node_modules
+867 verbose linkBins sliced@0.0.5
+868 verbose linkMans sliced@0.0.5
+869 verbose rebuildBundles sliced@0.0.5
+870 info install sliced@0.0.5
+871 info postinstall sliced@0.0.5
+872 verbose rebuild bundle C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\string_decoder
+873 info build C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\string_decoder
+874 info preinstall string_decoder@0.10.31
+875 info linkStuff string_decoder@0.10.31
+876 silly linkStuff string_decoder@0.10.31 has C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules as its parent node_modules
+877 verbose linkBins string_decoder@0.10.31
+878 verbose linkMans string_decoder@0.10.31
+879 verbose rebuildBundles string_decoder@0.10.31
+880 info install string_decoder@0.10.31
+881 info postinstall string_decoder@0.10.31
+882 verbose rebuild bundle C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\type-is
+883 info build C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\type-is
+884 info preinstall type-is@1.2.1
+885 info linkStuff type-is@1.2.1
+886 silly linkStuff type-is@1.2.1 has C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules as its parent node_modules
+887 verbose linkBins type-is@1.2.1
+888 verbose linkMans type-is@1.2.1
+889 verbose rebuildBundles type-is@1.2.1
+890 info install type-is@1.2.1
+891 info postinstall type-is@1.2.1
+892 verbose rebuild bundle C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\utils-merge
+893 info build C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\utils-merge
+894 info preinstall utils-merge@1.0.0
+895 info linkStuff utils-merge@1.0.0
+896 silly linkStuff utils-merge@1.0.0 has C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules as its parent node_modules
+897 verbose linkBins utils-merge@1.0.0
+898 verbose linkMans utils-merge@1.0.0
+899 verbose rebuildBundles utils-merge@1.0.0
+900 info install utils-merge@1.0.0
+901 info postinstall utils-merge@1.0.0
+902 verbose rebuild bundle C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\vary
+903 info build C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\vary
+904 info preinstall vary@0.1.0
+905 info linkStuff vary@0.1.0
+906 silly linkStuff vary@0.1.0 has C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules as its parent node_modules
+907 verbose linkBins vary@0.1.0
+908 verbose linkMans vary@0.1.0
+909 verbose rebuildBundles vary@0.1.0
+910 info install vary@0.1.0
+911 info postinstall vary@0.1.0
+912 info install server-side@0.0.1
+913 info postinstall server-side@0.0.1
+914 info prepublish server-side@0.0.1
+915 verbose validateInstall loading C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\package.json for validation
+916 warn unmet dependency C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\multer requires mkdirp@'^0.5.1' but will load
+916 warn unmet dependency C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server\node_modules\mkdirp,
+916 warn unmet dependency which is version 0.3.5
+917 verbose stack Error: The package mongodb@2.0.46 does not satisfy its siblings' peerDependencies requirements!
+917 verbose stack     at C:\Program Files\nodejs\node_modules\npm\lib\install.js:125:32
+917 verbose stack     at C:\Program Files\nodejs\node_modules\npm\lib\install.js:268:7
+917 verbose stack     at C:\Program Files\nodejs\node_modules\npm\node_modules\read-installed\read-installed.js:142:5
+917 verbose stack     at C:\Program Files\nodejs\node_modules\npm\node_modules\read-installed\read-installed.js:263:14
+917 verbose stack     at cb (C:\Program Files\nodejs\node_modules\npm\node_modules\slide\lib\async-map.js:47:24)
+917 verbose stack     at C:\Program Files\nodejs\node_modules\npm\node_modules\read-installed\read-installed.js:263:14
+917 verbose stack     at cb (C:\Program Files\nodejs\node_modules\npm\node_modules\slide\lib\async-map.js:47:24)
+917 verbose stack     at C:\Program Files\nodejs\node_modules\npm\node_modules\read-installed\read-installed.js:263:14
+917 verbose stack     at cb (C:\Program Files\nodejs\node_modules\npm\node_modules\slide\lib\async-map.js:47:24)
+917 verbose stack     at C:\Program Files\nodejs\node_modules\npm\node_modules\read-installed\read-installed.js:263:14
+918 verbose cwd C:\Users\Farouk\Desktop\workspace\MultiTrack\src\app\server
+919 error Windows_NT 6.1.7601
+920 error argv "C:\\Program Files\\nodejs\\node.exe" "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "install"
+921 error node v4.2.3
+922 error npm  v2.14.7
+923 error code EPEERINVALID
+924 error peerinvalid The package mongodb@2.0.46 does not satisfy its siblings' peerDependencies requirements!
+925 verbose exit [ 1, true ]
