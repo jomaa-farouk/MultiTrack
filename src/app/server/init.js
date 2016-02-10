@@ -48,7 +48,7 @@ var user = new User({
       username:    'admin',
       fullname:    'admin',
       mail:        'admin@admin.com',
-      passwd:      'admin',
+      passwd:      '21232f297a57a5a743894a0e4a801fc3',
       role: 'admin'
     }); 
 
