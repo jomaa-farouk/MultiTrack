@@ -1,8 +1,59 @@
-<div class="container">
-	<h4>Track Creation</h4>
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal">x</button>
+    <h4>Upload new track</h4>
+  </div>
 
+  <div class="modal-body">
 
-	<div class='form-group'>
-<input class='btn btn-primary' type='submit' value='Create'>
+  <form id="myForm" action="/">
+  
+  <div class="form-group required">
+      <label for="title" class="control-label label">Title of the song: </label>
+      <input type="text" class="form-control" id="title" name="trackName" required="" title="songTitle" placeholder="Title of the song"><br>
+  </div>
+
+  <div class="form-group required">
+     <label for="group" class="control-label label">Name of the band/artist: </label>
+     <input type="text" class="form-control" id="group" name="singer" required="" title="groupName" placeholder="Name of the band/artist"><br>
+  </div>
+  
+  <div class="form-group">
+     <label for="album" class="control-label label">Album: </label>
+     <input type="text" class="form-control" id="album" name="album" value="" title="groupName" placeholder="Album"><br>
+  </div>
+  
+
+  <div class="form-group">
+     <label for="type" class="control-label label">Type: </label>
+     <input type="text" class="form-control" id="type" name="type" value="" required="" title="groupName" placeholder="Type"><br>
+  </div>
+
+                <div class="form-group">
+                    <label for="description" class="control-label label">Description : </label>
+                    <div>
+                        <textarea  type="textarea" class="form-control" id="description" name="description" value=""  placeholder="Description"></textarea>
+                    </div>
+                </div>
+
+    <div class="form-group">
+     <label for="dateOfTrack" class="control-label label">Date of the track: </label>
+     <input type="date" class="form-control" id="dateOfTrack" name="dateOfTrack" value=""><br>
+  </div>
+
+        <div type="audio" onchange="" id="filedrag" ondragover="dragOverHandler(event)" ondragleave="dragLeaveHandler(event)" ondrop="dropHandler(event)">
+          Drop files here
+      <ol id="droppedFiles"></ol>
+      </div>    
+      
+      <br>
+      
+      <button type="submit" onclick="saveForm()" class="pull-right btn btn-primary">Upload</button> 
+  </form>
+
 </div>
+
+<div class="modal-footer">
+  <button class="btn btn-info" data-dismiss="modal">Close</button>
 </div>
+	 
+<script type="text/javascript" src="../../../lib/js/track-creation.js"></script>
