@@ -502,6 +502,10 @@ var listOfSoundSamplesURLs = [];
 
                 var content = '<div class="row"><div class="col-md-offset-2">';
 
+                if (selectedTrack.piste[0].pisteMp3 == undefined)
+                selectedTrack.piste = (JSON.parse (selectedTrack.piste[0]));
+                //console.log (selectedTrack.piste+ ' erreur');
+
                 selectedTrack.piste.forEach (function(songName , i) {
 
                     casqueT [i] = 0;

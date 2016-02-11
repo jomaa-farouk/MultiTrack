@@ -39,29 +39,68 @@
       memFiles.push(files[i]);
     }
   }
-    
-    function saveForm(event) {
+
+
+function verifySubmit () {
 
                 var input1 = document.getElementById('title');
                 var validityState_object = input1.validity;
                
                 var input2 = document.getElementById('group');
                 var validityState_object2 = input2.validity;
+                
+                if (files.length == 0) 
+                 {
+                  $('#sp_upload').html('You must drop at least one file');
+                }
+                else {
+                  $('#sp_upload').html('');
+                }
+  
+  if (!validityState_object.valueMissing && !validityState_object2.valueMissing && !(files.length == 0) )   
+  saveForm ();           
+  
+  return false;    
+  
+  }
 
-                if(validityState_object.valueMissing)
-                    input1.setCustomValidity('Please enter a title');
-                else
-                    input1.setCustomValidity('');
+    function saveForm() {
 
-                if(validityState_object2.valueMissing)
-                    input2.setCustomValidity('Please enter the artist name');
-                else
-                    input2.setCustomValidity('');
-                if (files.length == 0) {}
-     
- 
-    if (! (validityState_object.valueMissing || validityState_object2.valueMissing || (files.length == 0) ) ) {             
-     
+      var pistes = [];
+      var s = "";
+      for(var i=0; i < files.length; i++)
+       { 
+        pistes.push (
+         {'pisteMp3' : files[i].name}
+          );
+      }
+       
+var pistesJson = JSON.stringify(pistes) ;
+
+var data = $('#myForm').serializeArray();
+
+data.push({name: 'piste', value: pistesJson});
+
+     $.ajax({
+                url:'/tracks',
+                type:'post',
+                data:data,
+                success:function(response, status, xhr){
+                    if (response.error==null) 
+                    sendFiles (true);    
+                    else 
+                    sendFiles (false);    
+
+                },
+                error:function ( ){
+                  alert ('Track upload fail');
+                }
+            }); 
+  }
+    
+    function sendFiles (success) {
+   
+   if (success) {
     var xhr2 = new XMLHttpRequest();
     var folder = document.getElementById('title').value;
     xhr2.open('GET', '/api/folder/'+folder);
@@ -75,29 +114,22 @@
         for(var i=0; i < files.length; i++)
        { 
         form.append('file',files[i]);
-        console.log (files.length); 
+        console.log (files.length);
        }
         xhr.send(form);
 
-/*       var pistes = [];
-      for(var i=0; i < files.length; i++)
-       { 
-        pistes.push ({
-        'pisteMp3': files[i].name
-            });
-       }
-
-*/              $.ajax({
-                url:'/tracks',
-                type:'post',
-                data:$('#myForm').serialize()/*+"&piste=" + pistes*/,
-                success:function(){
-                    alert("Track uploaded successfully");               
-                }
-            }); 
-        
-window.location.replace("/");
-
+  xhr.onreadystatechange = function() {
+    if (xhr.readyState == XMLHttpRequest.DONE) {
+    alert("Track uploaded successfully");
+    window.location.replace("/");
     }
-  }
+}}
+
+   else
+      { alert("Track title exists already");
+        $('#droppedFiles').html ('');
+        files = []; 
+      }
+     
+     }
   

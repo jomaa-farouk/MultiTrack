@@ -62,9 +62,8 @@
 			
 		$scope.createNewUser = function(){
 			var hash = AuthFactory.crypt($scope.user.passwd);
-			$scope.user.passwd = hash;
 			$scope.user.role = "User";
-			console.log('password hash is ',$scope.user.passwd);
+			//console.log('password hash is ',$scope.user.passwd);
 
 			
 /*			var response = $http.post('/users/', $scope.user);
@@ -84,9 +83,6 @@
                 var validityState_object3 = inputmail.validity;
  				var mail = inputmail.value;
                 var mail_valid = true;
-
-
-console.log( validityState_object.valueMissing);
 
                 if(validityState_object.valueMissing)
                     input.setCustomValidity('You must enter a username');
@@ -116,6 +112,7 @@ console.log( validityState_object.valueMissing);
 
 
 		if (mail_valid && !validityState_object.valueMissing && !validityState_object2.valueMissing) {
+			$scope.user.passwd = hash;
             $http.post('/users' , $scope.user ).then(function (response) {
            if (response.data.error != null) {
           		$scope.showError = true;
@@ -129,24 +126,7 @@ console.log( validityState_object.valueMissing);
 		    }
 			return response.data;
 			});
-			}
-/*if c pas bon
-          		$scope.showError = true;
-				$scope.message = "Error : "+status+ " Existing username '"+$scope.user.username+"' or empty field(s)";
-*/
-            /*success(function(data, status, header, config){
-				console.log($scope.user + " created successfly!");
-				$location.path("/home");
-			}).error(function(data, status, header, config){
-				console.log ('user exist');
-			});
-*/
-/*			response.success(function(data, status, header, config){
-				console.log($scope.user + " created successfly!");
-				$location.path("/home");
-			});
-*/
-			
+			}		
 		};
 
 

@@ -1,44 +1,67 @@
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal">x</button>
-    <h4>Upload new track</h4>
+    <span id="title_upload">Upload new track</h4>
   </div>
 
   <div class="modal-body">
 
-  <form id="myForm" action="/">
-  
+  <form id="myForm" class="form-horizontal col-lg-11" onsubmit="return verifySubmit()">
+    
+      <div class="row">
   <div class="form-group required">
-      <label for="title" class="control-label label">Title of the song: </label>
-      <input type="text" class="form-control" id="title" name="trackName" required="" title="songTitle" placeholder="Title of the song"><br>
+      <label for="title" class="control-label label col-lg-2">Title: </label>
+           <div class="col-lg-10">
+<input type="text" class="form-control" id="title" name="trackName" required="" title="songTitle" placeholder="Title of the song">
+   </div>
   </div>
-
+    </div>
+    
+    <div class="row">
   <div class="form-group required">
-     <label for="group" class="control-label label">Name of the band/artist: </label>
-     <input type="text" class="form-control" id="group" name="singer" required="" title="groupName" placeholder="Name of the band/artist"><br>
+     <label for="group" class="control-label label col-lg-2">Band/Artist: </label>
+     <div class="col-lg-10">
+     <input type="text" class="form-control" id="group" name="singer" required="" title="groupName" placeholder="Name of the band/artist">
+   </div>
   </div>
-  
-  <div class="form-group">
-     <label for="album" class="control-label label">Album: </label>
-     <input type="text" class="form-control" id="album" name="album" value="" title="groupName" placeholder="Album"><br>
-  </div>
-  
-
-  <div class="form-group">
-     <label for="type" class="control-label label">Type: </label>
-     <input type="text" class="form-control" id="type" name="type" value="" required="" title="groupName" placeholder="Type"><br>
   </div>
 
+    <div class="row">
+  <div class="form-group">
+     <label for="album" class="control-label label col-lg-2">Album: </label>
+     <div class="col-lg-10">
+      <input type="text" class="form-control" id="album" name="album" value="" title="groupName" placeholder="Album">
+    </div>
+    </div>
+    </div>
+
+    <div class="row">
+  <div class="form-group">
+     <label for="type" class="control-label label col-lg-2">Type: </label>
+    <div class="col-lg-10">
+     <input type="text" class="form-control" id="type" name="type" value="" title="groupName" placeholder="Type">
+  </div>
+    </div>
+    </div>
+
+    <div class="row">
                 <div class="form-group">
-                    <label for="description" class="control-label label">Description : </label>
-                    <div>
+                    <label for="description" class="control-label label col-lg-2">Description: </label>
+                    <div class="col-lg-10">
                         <textarea  type="textarea" class="form-control" id="description" name="description" value=""  placeholder="Description"></textarea>
                     </div>
                 </div>
+    </div>
 
+    <div class="row">
     <div class="form-group">
-     <label for="dateOfTrack" class="control-label label">Date of the track: </label>
-     <input type="date" class="form-control" id="dateOfTrack" name="dateOfTrack" value=""><br>
+     <label for="dateOfTrack" class="control-label label col-lg-2">Date: </label>
+         <div class="col-lg-5">
+     <input type="date" class="form-control" id="dateOfTrack" name="dateOfTrack" value="">
   </div>
+    </div>
+    </div>
+
+  <div id="sp_upload"></div>
 
         <div type="audio" onchange="" id="filedrag" ondragover="dragOverHandler(event)" ondragleave="dragLeaveHandler(event)" ondrop="dropHandler(event)">
           Drop files here
@@ -47,7 +70,7 @@
       
       <br>
       
-      <button type="submit" onclick="saveForm()" class="pull-right btn btn-primary">Upload</button> 
+      <button type="submit" onsubmit="saveForm()" class="pull-right btn btn-primary">Upload</button> 
   </form>
 
 </div>
@@ -57,3 +80,4 @@
 </div>
 	 
 <script type="text/javascript" src="../../../lib/js/track-creation.js"></script>
+  
