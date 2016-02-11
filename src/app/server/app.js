@@ -42,10 +42,13 @@ console.log('Magic happens on port 8080');
 
 // First example router
 app.get('/', function(req, res) {
- 
+
   res.sendFile("index.html");
 });
 
+
+
+//get track or impulse
 
 app.get('/track/:directory/sound/:file', function(req, res) {
 
@@ -82,23 +85,23 @@ var upload = multer({ storage : storage});
 
 
 app.post('/api/file', upload.array ('file') ,function(req, res) {
-res.status(204).end();
+  res.status(204).end();
 });
 
 
 app.get('/api/folder/:folder',  function (req, res) {
-  
+
   var myPath = path.resolve(__dirname, '..', '..', '..' , 'resource' , 'multitrack', req.params.folder);
 
   if (!fs.existsSync(myPath)){
     fs.mkdirSync(myPath);
   }
 
- folder_name = myPath;
+  folder_name = myPath;
 
- res.status(204).end();
+  res.status(204).end();
 
- });
+});
 
 
 
