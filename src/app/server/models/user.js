@@ -33,7 +33,7 @@ var User = new Schema({
 	  require : true
   },
   role: {
-    type: String, // "admin" or "simpleUser"
+    type: String, // "Admin" or "simpleUser"
     require: true
   }
 });
