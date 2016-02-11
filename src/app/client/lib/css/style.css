@@ -368,3 +368,24 @@ summary:before{
    color:red;
 }
 
+#sp_upload {
+    font-size: 1.2em; 
+    font-family: "Comic Sans MS", cursive, sans-serif ;
+    color: red; 
+}
+
+
+::-webkit-datetime-edit { padding: 1em; }
+::-webkit-datetime-edit-text { color: red; padding: 0 0.3em; }
+::-webkit-datetime-edit-month-field { color: blue; }
+::-webkit-datetime-edit-day-field { color: green; }
+::-webkit-datetime-edit-year-field { color: purple; }
+::-webkit-inner-spin-button { display: none; }
+::-webkit-calendar-picker-indicator { background: orange; }
+
+
+#title_upload {
+    font-size: 1.3em; 
+    font-family: "Comic Sans MS", cursive, sans-serif ;
+    color: #7D1935; 
+}
