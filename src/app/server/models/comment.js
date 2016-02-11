@@ -9,7 +9,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var autoIncrement = require('mongoose-auto-increment');
 
-var connection = mongoose.createConnection("mongodb://localhost/MutliTrackDB");
+var connection = mongoose.createConnection("mongodb://localhost/MultiTrackDB");
 autoIncrement.initialize(connection);
 
 
